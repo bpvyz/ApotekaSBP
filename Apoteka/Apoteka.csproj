@@ -104,6 +104,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataLayer.cs" />
+    <Compile Include="DTOManager.cs" />
+    <Compile Include="DTOs.cs" />
     <Compile Include="Entiteti\Bolest.cs" />
     <Compile Include="Entiteti\Farmaceut.cs" />
     <Compile Include="Entiteti\GrupaLekova.cs" />
