@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Apoteka.Entiteti
 {
-    internal class LekLeci
+    public class LekLeci
     {
+        public virtual Lek Lek { get; protected set; }
+        public virtual Bolest Bolest { get; protected set; }
     }
 }

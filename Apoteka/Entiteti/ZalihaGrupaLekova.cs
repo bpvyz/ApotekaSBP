@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Apoteka.Entiteti
 {
-    internal class ZalihaGrupaLekova
+    public class ZalihaGrupaLekova
     {
+        public virtual ProdajnoMesto ProdajnoMesto { get; protected set; }
+        public virtual GrupaLekova GrupaLekova { get; protected set; }
+        public virtual int Kolicina { get; set; }
     }
 }

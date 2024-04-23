@@ -12,15 +12,19 @@ namespace Apoteka.Entiteti
         public virtual string SifraLekara { get; set; }
         public virtual string Tip { get; set; }
         public virtual string OblikPakovanja { get; set; }
-        public virtual int KolicinaLeka { get; set; }
+        public virtual int Kolicina { get; set; }
         public virtual DateTime DatumIzdavanja { get; set; }
-        public virtual DateTime DatumRealizacije { get; set; }
-        public virtual ProdajnoMesto RealizovanNa { get; set; }
-        public virtual Farmaceut RealizovaoFarmaceut { get; set; }
-        public virtual Lek IzdatZaLek { get; set; }
+        public virtual DateTime? DatumRealizacije { get; set; }
+        public virtual ProdajnoMesto ProdajnoMesto { get; set; }
+        public virtual Farmaceut Farmaceut { get; set; }
+        public virtual Lek Lek { get; set; }
         public Recept()
         {
-
+            DatumIzdavanja = DateTime.Now;
+            DatumRealizacije = DateTime.Now;
+            ProdajnoMesto = new ProdajnoMesto();
+            Farmaceut = new Farmaceut();
+            Lek = new Lek();
         }
 
     }

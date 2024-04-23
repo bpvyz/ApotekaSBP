@@ -8,6 +8,7 @@ namespace Apoteka.Entiteti
 {
     public class LekKontraindikacija
     {
-
+        public virtual Lek Lek { get; protected set; }
+        public virtual Bolest Bolest { get; protected set; }
     }
 }
