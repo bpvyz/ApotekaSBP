@@ -53,52 +53,49 @@ namespace Apoteka
 
     public class FarmaceutBasic : ZaposleniBasic
     {
-        public virtual string ZaposleniId { get; set; }
-
         public DateTime DatumDiplomiranja { get; set; }
 
         public DateTime DatumObnoveLicence { get; set; }
 
         public virtual IList<ReceptBasic> Recepti { get; set; }
 
-        public virtual ZaposleniBasic Zaposleni { get; set; }
-
+     
         public FarmaceutBasic()
         {
             Recepti = new List<ReceptBasic>();
-            Zaposleni = new ZaposleniBasic(); // da se proveri
-
+      
         }
 
-        public FarmaceutBasic(string id, DateTime datumDiplomiranja, DateTime datumObnoveLicence)
+        public FarmaceutBasic(string JedinstveniBroj, string Ime, string Prezime, DateTime DatumRodjenja, string Adresa, string BrojTelefona,
+            DateTime datumDiplomiranja, DateTime datumObnoveLicence, ProdajnoMestoBasic prodajnoMesto) : 
+            base(JedinstveniBroj, Ime, Prezime, DatumRodjenja, Adresa, BrojTelefona, prodajnoMesto)
+
         {
-            this.ZaposleniId = id;
+
             this.DatumDiplomiranja = datumDiplomiranja;
             this.DatumObnoveLicence = datumObnoveLicence;
-
         }
 
     }
     public class FarmaceutPregled : ZaposleniPregled
     {
-        public virtual string ZaposleniId { get; set; }
-        public DateTime DatumDiplomiranja { get; set; }
+         public DateTime DatumDiplomiranja { get; set; }
 
         public DateTime DatumObnoveLicence { get; set; }
-
-        public virtual ZaposleniPregled Zaposleni { get; set; }
 
         public FarmaceutPregled()
         {
 
         }
 
-        public FarmaceutPregled(string id, DateTime datumDiplomiranja, DateTime datumObnoveLicence)
+        public FarmaceutPregled(string JedinstveniBroj, string Ime, string Prezime, DateTime DatumRodjenja, string Adresa, string BrojTelefona,
+            DateTime datumDiplomiranja, DateTime datumObnoveLicence, ProdajnoMestoPregled prodajnoMesto) : 
+            base(JedinstveniBroj, Ime, Prezime, DatumRodjenja, Adresa, BrojTelefona, prodajnoMesto)
+
         {
-            this.ZaposleniId = id;
+
             this.DatumDiplomiranja = datumDiplomiranja;
             this.DatumObnoveLicence = datumObnoveLicence;
-
         }
 
 
@@ -524,7 +521,7 @@ namespace Apoteka
         }
 
 
-        public ZaposleniBasic(string jedinstveniBroj, string ime, string prezime, DateTime datum, string adresa, string brojTelefona,ProdajnoMestoBasic prodajnoMesto )
+        public ZaposleniBasic(string jedinstveniBroj, string ime, string prezime, DateTime datum, string adresa, string brojTelefona, ProdajnoMestoBasic prodajnoMesto )
         {
             this.JedinstveniBroj = jedinstveniBroj;
             this.Ime = ime;

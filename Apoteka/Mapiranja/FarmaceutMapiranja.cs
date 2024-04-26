@@ -8,16 +8,17 @@ using System.Threading.Tasks;
 
 namespace Apoteka.Mapiranja
 {
-    public class FarmaceutMapiranja : ClassMap<Farmaceut>
+    public class FarmaceutMapiranja : SubclassMap<Farmaceut>
     {
         public FarmaceutMapiranja()
         {
+            //proveriti za svaki slucaj
             Table("FARMACEUT");
 
-            Id(x => x.ZaposleniId).Column("ZAPOSLENI_ID").GeneratedBy.Assigned();
+            KeyColumn("ZAPOSLENI_ID");
+
             Map(x => x.DatumDiplomiranja).Column("DATUM_DIPLOMIRANJA").Not.Nullable();
             Map(x => x.DatumObnoveLicence).Column("DATUM_OBNOVE_LICENCE").Not.Nullable();
-            References(x => x.Zaposleni).Column("ZAPOSLENI_ID").Not.Nullable().Unique();
             HasMany(x => x.Recepti).KeyColumn("FARMACEUT_ID").Cascade.All();
         }
     }
