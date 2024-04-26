@@ -8,8 +8,9 @@ namespace Apoteka.Entiteti
 {
     public class Farmaceut : Zaposleni
     {
-        public DateTime DatumDiplomiranja { get; set; }
-        public DateTime DatumObnoveLicence { get; set; }
+        public virtual string ZaposleniId { get; set; }
+        public virtual DateTime DatumDiplomiranja { get; set; }
+        public virtual DateTime DatumObnoveLicence { get; set; }
         public virtual IList<Recept> Recepti { get; set; }
         public Farmaceut()
         {
