@@ -20,6 +20,7 @@ namespace Apoteka.Entiteti
         {
             Zaposleni = new List<Zaposleni>();
             ZaliheGrupaLekova = new List<ZalihaGrupaLekova>();
+            Recepti = new List<Recept>();
         }
     }
 }

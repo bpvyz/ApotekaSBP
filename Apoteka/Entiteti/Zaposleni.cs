@@ -18,7 +18,7 @@ namespace Apoteka.Entiteti
 
         public Zaposleni() 
         { 
-
+            //inicijalizacija za prodajno mesto???
         }
     }
 }
