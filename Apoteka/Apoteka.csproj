@@ -41,14 +41,14 @@
     <Reference Include="FluentNHibernate, Version=3.3.0.0, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentNHibernate.3.3.0\lib\net461\FluentNHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="Iesi.Collections, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Iesi.Collections.4.0.4\lib\net461\Iesi.Collections.dll</HintPath>
+    <Reference Include="Iesi.Collections, Version=4.1.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.4.1.1\lib\net462\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
-    <Reference Include="NHibernate, Version=5.3.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <HintPath>..\packages\NHibernate.5.3.3\lib\net461\NHibernate.dll</HintPath>
+    <Reference Include="NHibernate, Version=5.5.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.5.5.1\lib\net461\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="Oracle.ManagedDataAccess, Version=4.122.21.1, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
       <HintPath>..\packages\Oracle.ManagedDataAccess.21.14.0\lib\net462\Oracle.ManagedDataAccess.dll</HintPath>
@@ -117,11 +117,107 @@
     <Compile Include="Entiteti\Recept.cs" />
     <Compile Include="Entiteti\ZalihaGrupaLekova.cs" />
     <Compile Include="Entiteti\Zaposleni.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Forme\DodajBolestForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Forme\DodajBolestForm.Designer.cs">
+      <DependentUpon>DodajBolestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forme\DodajLekForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forme\DodajLekForm.Designer.cs">
+      <DependentUpon>DodajLekForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forme\DodajProdajnoMestoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forme\DodajProdajnoMestoForm.Designer.cs">
+      <DependentUpon>DodajProdajnoMestoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forme\DodajZaposlenogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forme\DodajZaposlenogForm.Designer.cs">
+      <DependentUpon>DodajZaposlenogForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forme\FarmaceutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forme\FarmaceutForm.Designer.cs">
+      <DependentUpon>FarmaceutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forme\IndikacijeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forme\IndikacijeForm.Designer.cs">
+      <DependentUpon>IndikacijeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forme\IzdatiReceptiForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forme\IzdatiReceptiForm.Designer.cs">
+      <DependentUpon>IzdatiReceptiForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forme\IzmeniBolestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forme\IzmeniBolestForm.Designer.cs">
+      <DependentUpon>IzmeniBolestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forme\IzmeniLekForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forme\IzmeniLekForm.Designer.cs">
+      <DependentUpon>IzmeniLekForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forme\IzmeniProdajnoMestoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forme\IzmeniProdajnoMestoForm.Designer.cs">
+      <DependentUpon>IzmeniProdajnoMestoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forme\IzmeniZaposlenogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forme\IzmeniZaposlenogForm.Designer.cs">
+      <DependentUpon>IzmeniZaposlenogForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forme\KontraindikacijeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forme\KontraindikacijeForm.Designer.cs">
+      <DependentUpon>KontraindikacijeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forme\SveBolestiForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forme\SveBolestiForm.Designer.cs">
+      <DependentUpon>SveBolestiForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forme\SviZaposleniForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forme\SviZaposleniForm.Designer.cs">
+      <DependentUpon>SviZaposleniForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forme\ZaliheLekovaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forme\ZaliheLekovaForm.Designer.cs">
+      <DependentUpon>ZaliheLekovaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forme\LekoviForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forme\LekoviForm.Designer.cs">
+      <DependentUpon>LekoviForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Mapiranja\BolestMapiranja.cs" />
     <Compile Include="Mapiranja\FarmaceutMapiranja.cs" />
@@ -134,8 +230,74 @@
     <Compile Include="Mapiranja\ReceptMapiranja.cs" />
     <Compile Include="Mapiranja\ZalihaGrupaLekovaMapiranja.cs" />
     <Compile Include="Mapiranja\ZaposleniMapiranja.cs" />
+    <Compile Include="Forme\ProdajnaMestaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forme\ProdajnaMestaForm.Designer.cs">
+      <DependentUpon>ProdajnaMestaForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Forme\ZaposleniForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forme\ZaposleniForm.Designer.cs">
+      <DependentUpon>ZaposleniForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forme\DodajBolestForm.resx">
+      <DependentUpon>DodajBolestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forme\DodajLekForm.resx">
+      <DependentUpon>DodajLekForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forme\DodajProdajnoMestoForm.resx">
+      <DependentUpon>DodajProdajnoMestoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forme\DodajZaposlenogForm.resx">
+      <DependentUpon>DodajZaposlenogForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forme\FarmaceutForm.resx">
+      <DependentUpon>FarmaceutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forme\IndikacijeForm.resx">
+      <DependentUpon>IndikacijeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forme\IzdatiReceptiForm.resx">
+      <DependentUpon>IzdatiReceptiForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forme\IzmeniBolestForm.resx">
+      <DependentUpon>IzmeniBolestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forme\IzmeniLekForm.resx">
+      <DependentUpon>IzmeniLekForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forme\IzmeniProdajnoMestoForm.resx">
+      <DependentUpon>IzmeniProdajnoMestoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forme\IzmeniZaposlenogForm.resx">
+      <DependentUpon>IzmeniZaposlenogForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forme\KontraindikacijeForm.resx">
+      <DependentUpon>KontraindikacijeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forme\SveBolestiForm.resx">
+      <DependentUpon>SveBolestiForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forme\SviZaposleniForm.resx">
+      <DependentUpon>SviZaposleniForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forme\ZaliheLekovaForm.resx">
+      <DependentUpon>ZaliheLekovaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forme\LekoviForm.resx">
+      <DependentUpon>LekoviForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forme\ProdajnaMestaForm.resx">
+      <DependentUpon>ProdajnaMestaForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -145,6 +307,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forme\ZaposleniForm.resx">
+      <DependentUpon>ZaposleniForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Oracle.DataAccess.Common.Configuration.Section.xsd">
       <SubType>Designer</SubType>
     </None>

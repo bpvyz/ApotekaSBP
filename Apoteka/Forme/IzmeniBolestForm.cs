@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Apoteka
+namespace Apoteka.Forme
 {
-    public partial class Form1 : Form
+    public partial class IzmeniBolestForm : Form
     {
-        public Form1()
+        public IzmeniBolestForm()
         {
             InitializeComponent();
         }
