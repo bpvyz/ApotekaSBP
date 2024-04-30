@@ -164,7 +164,32 @@ namespace Apoteka
             #endregion
 
         }
+        #region ZalihaGrupaLekova
+        public static List<ZalihaGrupaLekovaPregled> vratiZaliheGrupeLekova(string id)
+        {
+            List<ZalihaGrupaLekovaPregled> zalihe = new List<ZalihaGrupaLekovaPregled>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
 
-        
+                IEnumerable<Apoteka.Entiteti.ZalihaGrupaLekova> sveZalihe = from o in s.Query<Apoteka.Entiteti.ZalihaGrupaLekova>()
+                                                                       where o.ProdajnoMesto.JedinstveniBroj == id
+                                                                       select o;
+
+                foreach (Apoteka.Entiteti.ZalihaGrupaLekova z in sveZalihe)
+                {
+                    zalihe.Add(new ZalihaGrupaLekovaPregled(z.ProdajnoMesto, z.GrupaLekova, z.Kolicina));
+                }
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+
+            return zalihe;
+        }
+        #endregion
     }
 }

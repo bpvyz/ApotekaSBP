@@ -484,8 +484,8 @@ namespace Apoteka
 
     public class ZalihaGrupaLekovaPregled
     {
-        public virtual ProdajnoMestoPregled ProdajnoMesto { get; protected set; }
-        public virtual GrupaLekovaPregled GrupaLekova { get; protected set; }
+        public virtual ProdajnoMesto ProdajnoMesto { get; protected set; }
+        public virtual GrupaLekova GrupaLekova { get; protected set; }
         public virtual int Kolicina { get; set; }
 
         public ZalihaGrupaLekovaPregled()
@@ -493,12 +493,14 @@ namespace Apoteka
 
         }
 
-        public ZalihaGrupaLekovaPregled(ProdajnoMestoPregled prodajno, GrupaLekovaPregled grupa, int kolicina)
+        public ZalihaGrupaLekovaPregled(ProdajnoMesto prodajnomesto, GrupaLekova grupa, int kolicina)
         {
-            this.ProdajnoMesto = prodajno;
+            this.ProdajnoMesto = prodajnomesto;
             this.GrupaLekova = grupa;
             this.Kolicina = kolicina;
         }
+
+
     }
     #endregion
 

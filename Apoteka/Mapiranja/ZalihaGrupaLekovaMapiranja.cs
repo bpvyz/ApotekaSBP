@@ -17,6 +17,11 @@ namespace Apoteka.Mapiranja
             CompositeId()
             .KeyReference(x => x.ProdajnoMesto, "PRODAJNO_MESTO_ID")
             .KeyReference(x => x.GrupaLekova, "GRUPA_LEKOVA_ID");
+            References(x => x.ProdajnoMesto)
+                .Fetch.Select(); // Eagerly load ProdajnoMesto
+
+            References(x => x.GrupaLekova)
+                .Fetch.Select(); // Eagerly load GrupaLekova
             Map(x => x.Kolicina).Column("KOLICINA").Not.Nullable();
         }
     }
