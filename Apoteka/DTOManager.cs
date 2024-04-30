@@ -48,7 +48,7 @@ namespace Apoteka
                 ISession s = DataLayer.GetSession();
 
                 IEnumerable<Apoteka.Entiteti.Zaposleni> sviZaposleni = from o in s.Query<Apoteka.Entiteti.Zaposleni>()
-                                                                               select o;
+                                                                       select o;
 
                 foreach (Apoteka.Entiteti.Zaposleni z in sviZaposleni)
                 {
@@ -74,7 +74,7 @@ namespace Apoteka
                 ISession s = DataLayer.GetSession();
 
                 IEnumerable<Apoteka.Entiteti.Lek> sviLekovi = from o in s.Query<Apoteka.Entiteti.Lek>()
-                                                                       select o;
+                                                              select o;
 
                 foreach (Apoteka.Entiteti.Lek l in sviLekovi)
                 {
@@ -93,6 +93,32 @@ namespace Apoteka
             return lekovi;
         }
         #endregion
+        #region Bolest
+        public static List<BolestPregled> vratiSveBolesti()
+        {
+            List<BolestPregled> bolesti = new List<BolestPregled>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
 
+                IEnumerable<Apoteka.Entiteti.Bolest> sveBolesti = from o in s.Query<Apoteka.Entiteti.Bolest>()
+                                                                  select o;
+
+                foreach (Apoteka.Entiteti.Bolest b in sveBolesti)
+                {
+                    bolesti.Add(new BolestPregled(b.Id, b.Naziv));
+                }
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+
+            return bolesti;
+            #endregion
+
+        }
     }
 }

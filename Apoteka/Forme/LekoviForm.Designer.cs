@@ -119,7 +119,7 @@
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.button4);
-            this.groupBox1.Location = new System.Drawing.Point(492, 12);
+            this.groupBox1.Location = new System.Drawing.Point(880, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(200, 164);
             this.groupBox1.TabIndex = 12;
@@ -129,7 +129,7 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.button3);
-            this.groupBox2.Location = new System.Drawing.Point(492, 182);
+            this.groupBox2.Location = new System.Drawing.Point(880, 182);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(200, 69);
             this.groupBox2.TabIndex = 13;
@@ -139,7 +139,7 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.button5);
-            this.groupBox3.Location = new System.Drawing.Point(492, 257);
+            this.groupBox3.Location = new System.Drawing.Point(880, 257);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(200, 69);
             this.groupBox3.TabIndex = 14;
@@ -149,7 +149,7 @@
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.button6);
-            this.groupBox4.Location = new System.Drawing.Point(492, 332);
+            this.groupBox4.Location = new System.Drawing.Point(880, 332);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(200, 69);
             this.groupBox4.TabIndex = 15;
@@ -161,7 +161,7 @@
             this.groupBox5.Controls.Add(this.dataGridView1);
             this.groupBox5.Location = new System.Drawing.Point(12, 12);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(474, 389);
+            this.groupBox5.Size = new System.Drawing.Size(862, 389);
             this.groupBox5.TabIndex = 16;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Spisak svih lekova";
@@ -182,7 +182,7 @@
             this.dataGridView1.RowHeadersWidth = 72;
             this.dataGridView1.RowTemplate.Height = 31;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(464, 364);
+            this.dataGridView1.Size = new System.Drawing.Size(852, 364);
             this.dataGridView1.TabIndex = 1;
             // 
             // LekoviForm
@@ -190,7 +190,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MediumAquamarine;
-            this.ClientSize = new System.Drawing.Size(704, 409);
+            this.ClientSize = new System.Drawing.Size(1092, 409);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);

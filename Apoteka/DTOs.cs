@@ -204,7 +204,6 @@ namespace Apoteka
         public virtual bool IzdajeSeNaRecept { get; set; }
         public virtual float ProcenatParticipacije { get; set; }
         public virtual float Cena { get; set; }
-        public virtual GrupaLekovaPregled GrupaLekova { get; set; }
 
 
         public LekPregled()
