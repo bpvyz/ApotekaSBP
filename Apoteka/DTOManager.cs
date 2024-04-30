@@ -178,7 +178,7 @@ namespace Apoteka
 
                 foreach (Apoteka.Entiteti.ZalihaGrupaLekova z in sveZalihe)
                 {
-                    zalihe.Add(new ZalihaGrupaLekovaPregled(z.ProdajnoMesto, z.GrupaLekova, z.Kolicina));
+                   zalihe.Add(new ZalihaGrupaLekovaPregled(/*z.ProdajnoMesto, z.GrupaLekova, */z.Kolicina));
                 }
 
                 s.Close();

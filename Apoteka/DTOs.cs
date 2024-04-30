@@ -13,8 +13,8 @@ namespace Apoteka
         public int BolestId { get; set; }
         public string Naziv { get; set; }
 
-        public virtual IList<LekLeciBasic> LekLeci { get; set; }
-        public virtual IList<LekKontraindikacijaBasic> LekKontraindikacija { get; set; }
+        public IList<LekLeciBasic> LekLeci { get; set; }
+        public IList<LekKontraindikacijaBasic> LekKontraindikacija { get; set; }
 
         public BolestBasic(int bolId, string Naziv)
         {
@@ -57,7 +57,7 @@ namespace Apoteka
 
         public DateTime DatumObnoveLicence { get; set; }
 
-        public virtual IList<ReceptBasic> Recepti { get; set; }
+        public IList<ReceptBasic> Recepti { get; set; }
 
      
         public FarmaceutBasic()
@@ -107,12 +107,12 @@ namespace Apoteka
 
     public class GrupaLekovaBasic
     {
-        public virtual int Id { get; protected set; }
-        public virtual string Naziv { get; set; }
+        public int Id { get; protected set; }
+        public string Naziv { get; set; }
 
-        public virtual IList<LekBasic> Lekovi { get; set; }
+        public IList<LekBasic> Lekovi { get; set; }
 
-        public virtual IList<ZalihaGrupaLekovaBasic> ZaliheGrupaLekova { get; set; }
+        public IList<ZalihaGrupaLekovaBasic> ZaliheGrupaLekova { get; set; }
 
         public GrupaLekovaBasic()
         {
@@ -132,8 +132,8 @@ namespace Apoteka
 
     public class GrupaLekovaPregled
     {
-        public virtual int Id { get; protected set; }
-        public virtual string Naziv { get; set; }
+        public int Id { get; protected set; }
+        public string Naziv { get; set; }
 
 
 
@@ -155,19 +155,19 @@ namespace Apoteka
 
     public class LekBasic
     {
-        public virtual string KomercijalniNaziv { get; set; }
-        public virtual string HemijskiNaziv { get; set; }
-        public virtual string NacinDoziranjaOdrasli { get; set; }
-        public virtual string NacinDoziranjaDeca { get; set; }
-        public virtual string NacinDoziranjaTrudnice { get; set; }
-        public virtual bool IzdajeSeNaRecept { get; set; }
-        public virtual float ProcenatParticipacije { get; set; }
-        public virtual float Cena { get; set; }
-        public virtual IList<PakovanjeBasic> Pakovanja { get; set; }
-        public virtual IList<LekLeciBasic> Leci { get; set; }
-        public virtual IList<LekKontraindikacijaBasic> Kontraindikacije { get; set; }
-        public virtual GrupaLekovaBasic GrupaLekova { get; set; }
-        public virtual IList<ReceptBasic> Recepti { get; set; }
+        public string KomercijalniNaziv { get; set; }
+        public string HemijskiNaziv { get; set; }
+        public string NacinDoziranjaOdrasli { get; set; }
+        public string NacinDoziranjaDeca { get; set; }
+        public string NacinDoziranjaTrudnice { get; set; }
+        public bool IzdajeSeNaRecept { get; set; }
+        public float ProcenatParticipacije { get; set; }
+        public float Cena { get; set; }
+        public IList<PakovanjeBasic> Pakovanja { get; set; }
+        public IList<LekLeciBasic> Leci { get; set; }
+        public IList<LekKontraindikacijaBasic> Kontraindikacije { get; set; }
+        public GrupaLekovaBasic GrupaLekova { get; set; }
+        public IList<ReceptBasic> Recepti { get; set; }
 
 
         public LekBasic()
@@ -196,14 +196,14 @@ namespace Apoteka
     }
     public class LekPregled
     {
-        public virtual string KomercijalniNaziv { get; set; }
-        public virtual string HemijskiNaziv { get; set; }
-        public virtual string NacinDoziranjaOdrasli { get; set; }
-        public virtual string NacinDoziranjaDeca { get; set; }
-        public virtual string NacinDoziranjaTrudnice { get; set; }
-        public virtual bool IzdajeSeNaRecept { get; set; }
-        public virtual float ProcenatParticipacije { get; set; }
-        public virtual float Cena { get; set; }
+        public string KomercijalniNaziv { get; set; }
+        public string HemijskiNaziv { get; set; }
+        public string NacinDoziranjaOdrasli { get; set; }
+        public string NacinDoziranjaDeca { get; set; }
+        public string NacinDoziranjaTrudnice { get; set; }
+        public bool IzdajeSeNaRecept { get; set; }
+        public float ProcenatParticipacije { get; set; }
+        public float Cena { get; set; }
 
 
         public LekPregled()
@@ -227,8 +227,8 @@ namespace Apoteka
     #region LekKontradikcija
     public class LekKontraindikacijaBasic
     {
-        public virtual LekBasic Lek { get; protected set; }
-        public virtual BolestBasic Bolest { get; protected set; }
+        public LekBasic Lek { get; protected set; }
+        public BolestBasic Bolest { get; protected set; }
 
         public LekKontraindikacijaBasic()
         { }
@@ -242,8 +242,8 @@ namespace Apoteka
     }
     public class LekKontradikcijaPregled
     {
-        public virtual LekPregled Lek { get; protected set; }
-        public virtual BolestPregled Bolest { get; protected set; }
+        public LekPregled Lek { get; protected set; }
+        public BolestPregled Bolest { get; protected set; }
 
         public LekKontradikcijaPregled()
         { }
@@ -261,8 +261,8 @@ namespace Apoteka
 
     public class LekLeciBasic
     {
-        public virtual LekBasic Lek { get; protected set; }
-        public virtual BolestBasic Bolest { get; protected set; }
+        public LekBasic Lek { get; protected set; }
+        public BolestBasic Bolest { get; protected set; }
 
         public LekLeciBasic() { }
 
@@ -274,8 +274,8 @@ namespace Apoteka
     }
     public class LekLeciPregled
     {
-        public virtual LekPregled Lek { get; protected set; }
-        public virtual BolestPregled Bolest { get; protected set; }
+        public LekPregled Lek { get; protected set; }
+        public BolestPregled Bolest { get; protected set; }
 
         public LekLeciPregled() { }
 
@@ -292,11 +292,11 @@ namespace Apoteka
 
     public class PakovanjeBasic
     {
-        public virtual int Id { get; protected set; }
-        public virtual string Oblik { get; set; }
-        public virtual int Kolicina { get; set; }
-        public virtual string Sastav { get; set; }
-        public virtual LekBasic Lek { get; set; }
+        public int Id { get; protected set; }
+        public string Oblik { get; set; }
+        public int Kolicina { get; set; }
+        public string Sastav { get; set; }
+        public LekBasic Lek { get; set; }
 
         public PakovanjeBasic()
         {
@@ -314,11 +314,11 @@ namespace Apoteka
     }
     public class PakovanjePregled
     {
-        public virtual int Id { get; protected set; }
-        public virtual string Oblik { get; set; }
-        public virtual int Kolicina { get; set; }
-        public virtual string Sastav { get; set; }
-        public virtual LekPregled Lek { get; set; }
+        public int Id { get; protected set; }
+        public string Oblik { get; set; }
+        public int Kolicina { get; set; }
+        public string Sastav { get; set; }
+        public LekPregled Lek { get; set; }
 
         public PakovanjePregled()
         {
@@ -339,13 +339,13 @@ namespace Apoteka
     #region ProdajnoMesto
     public class ProdajnoMestoBasic
     {
-        public virtual string JedinstveniBroj { get; set; }
-        public virtual string Naziv { get; set; }
-        public virtual string Adresa { get; set; }
-        public virtual string Mesto { get; set; }
-        public virtual IList<ZaposleniBasic> Zaposleni { get; set; }
-        public virtual IList<ReceptBasic> Recepti { get; set; }
-        public virtual IList<ZalihaGrupaLekovaBasic> ZaliheGrupaLekova { get; set; }
+        public string JedinstveniBroj { get; set; }
+        public string Naziv { get; set; }
+        public string Adresa { get; set; }
+        public string Mesto { get; set; }
+        public IList<ZaposleniBasic> Zaposleni { get; set; }
+        public IList<ReceptBasic> Recepti { get; set; }
+        public IList<ZalihaGrupaLekovaBasic> ZaliheGrupaLekova { get; set; }
 
         public ProdajnoMestoBasic()
         {
@@ -364,10 +364,10 @@ namespace Apoteka
     }
     public class ProdajnoMestoPregled
     {
-        public virtual string JedinstveniBroj { get; set; }
-        public virtual string Naziv { get; set; }
-        public virtual string Adresa { get; set; }
-        public virtual string Mesto { get; set; }
+        public string JedinstveniBroj { get; set; }
+        public string Naziv { get; set; }
+        public string Adresa { get; set; }
+        public string Mesto { get; set; }
 
 
         public ProdajnoMestoPregled()
@@ -389,16 +389,16 @@ namespace Apoteka
     #region Recept
     public class ReceptBasic
     {
-        public virtual string SerijskiBroj { get; set; }
-        public virtual string SifraLekara { get; set; }
-        public virtual string Tip { get; set; }
-        public virtual string OblikPakovanja { get; set; }
-        public virtual int Kolicina { get; set; }
-        public virtual DateTime DatumIzdavanja { get; set; }
-        public virtual DateTime? DatumRealizacije { get; set; }
-        public virtual ProdajnoMestoBasic ProdajnoMesto { get; set; }
-        public virtual FarmaceutBasic Farmaceut { get; set; }
-        public virtual LekBasic Lek { get; set; }
+        public string SerijskiBroj { get; set; }
+        public string SifraLekara { get; set; }
+        public string Tip { get; set; }
+        public string OblikPakovanja { get; set; }
+        public int Kolicina { get; set; }
+        public DateTime DatumIzdavanja { get; set; }
+        public DateTime? DatumRealizacije { get; set; }
+        public ProdajnoMestoBasic ProdajnoMesto { get; set; }
+        public FarmaceutBasic Farmaceut { get; set; }
+        public LekBasic Lek { get; set; }
         public ReceptBasic()
         {
             DatumIzdavanja = DateTime.Now;
@@ -429,16 +429,16 @@ namespace Apoteka
 
     public class ReceptPregled
     {
-        public virtual string SerijskiBroj { get; set; }
-        public virtual string SifraLekara { get; set; }
-        public virtual string Tip { get; set; }
-        public virtual string OblikPakovanja { get; set; }
-        public virtual int Kolicina { get; set; }
-        public virtual DateTime DatumIzdavanja { get; set; }
-        public virtual DateTime? DatumRealizacije { get; set; }
-        public virtual ProdajnoMestoPregled ProdajnoMesto { get; set; }
-        public virtual FarmaceutPregled Farmaceut { get; set; }
-        public virtual LekPregled Lek { get; set; }
+        public string SerijskiBroj { get; set; }
+        public string SifraLekara { get; set; }
+        public string Tip { get; set; }
+        public string OblikPakovanja { get; set; }
+        public int Kolicina { get; set; }
+        public DateTime DatumIzdavanja { get; set; }
+        public DateTime? DatumRealizacije { get; set; }
+        public ProdajnoMestoPregled ProdajnoMesto { get; set; }
+        public FarmaceutPregled Farmaceut { get; set; }
+        public LekPregled Lek { get; set; }
 
 
         public ReceptPregled()
@@ -465,16 +465,16 @@ namespace Apoteka
     #region ZalihaGrupaLekova
     public class ZalihaGrupaLekovaBasic
     {
-        public virtual ProdajnoMestoBasic ProdajnoMesto { get; protected set; }
-        public virtual GrupaLekovaBasic GrupaLekova { get; protected set; }
-        public virtual int Kolicina { get; set; }
+        public ProdajnoMestoBasic ProdajnoMesto { get; protected set; }
+        public GrupaLekovaBasic GrupaLekova { get; protected set; }
+        public int Kolicina { get; set; }
 
         public ZalihaGrupaLekovaBasic()
         {
 
         }
 
-        public ZalihaGrupaLekovaBasic (ProdajnoMestoBasic prodajno, GrupaLekovaBasic grupa,int kolicina)
+        public ZalihaGrupaLekovaBasic (ProdajnoMestoBasic prodajno, GrupaLekovaBasic grupa, int kolicina)
         {
             this.ProdajnoMesto = prodajno;
             this.GrupaLekova = grupa;
@@ -484,19 +484,21 @@ namespace Apoteka
 
     public class ZalihaGrupaLekovaPregled
     {
-        public virtual ProdajnoMesto ProdajnoMesto { get; protected set; }
-        public virtual GrupaLekova GrupaLekova { get; protected set; }
-        public virtual int Kolicina { get; set; }
+        public ProdajnoMestoBasic ProdajnoMesto { get; protected set; }
+        public GrupaLekovaBasic GrupaLekova { get; protected set; }
+        public int Kolicina { get; set; }
 
         public ZalihaGrupaLekovaPregled()
         {
 
         }
 
-        public ZalihaGrupaLekovaPregled(ProdajnoMesto prodajnomesto, GrupaLekova grupa, int kolicina)
+        public ZalihaGrupaLekovaPregled(int kolicina)
         {
+            /*
             this.ProdajnoMesto = prodajnomesto;
-            this.GrupaLekova = grupa;
+            this.GrupaLekova = grupalekova;
+            */
             this.Kolicina = kolicina;
         }
 
@@ -507,13 +509,13 @@ namespace Apoteka
     #region Zaposleni
     public class ZaposleniBasic
     {
-        public virtual string JedinstveniBroj { get; set; }
-        public virtual string Ime { get; set; }
-        public virtual string Prezime { get; set; }
-        public virtual DateTime DatumRodjenja { get; set; }
-        public virtual string Adresa { get; set; }
-        public virtual string BrojTelefona { get; set; }
-        public virtual ProdajnoMestoBasic ProdajnoMesto { get; set; }
+        public string JedinstveniBroj { get; set; }
+        public string Ime { get; set; }
+        public string Prezime { get; set; }
+        public DateTime DatumRodjenja { get; set; }
+        public string Adresa { get; set; }
+        public string BrojTelefona { get; set; }
+        public ProdajnoMestoBasic ProdajnoMesto { get; set; }
 
         public ZaposleniBasic()
         {
@@ -533,12 +535,12 @@ namespace Apoteka
     }
     public class ZaposleniPregled
     {
-        public virtual string JedinstveniBroj { get; set; }
-        public virtual string Ime { get; set; }
-        public virtual string Prezime { get; set; }
-        public virtual DateTime DatumRodjenja { get; set; }
-        public virtual string Adresa { get; set; }
-        public virtual string BrojTelefona { get; set; }
+        public string JedinstveniBroj { get; set; }
+        public string Ime { get; set; }
+        public string Prezime { get; set; }
+        public DateTime DatumRodjenja { get; set; }
+        public string Adresa { get; set; }
+        public string BrojTelefona { get; set; }
 
         public ZaposleniPregled()
         {
