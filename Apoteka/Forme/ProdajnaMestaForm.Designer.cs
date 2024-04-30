@@ -122,6 +122,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Name = "ProdajnaMestaForm";
             this.Text = "ProdajnaMestaForm";
+            this.Load += new System.EventHandler(this.ProdajnaMestaForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 

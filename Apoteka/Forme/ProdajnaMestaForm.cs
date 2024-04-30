@@ -52,5 +52,16 @@ namespace Apoteka
         {
             // TODO: Obrisi prodajno mesto
         }
+
+        private void ProdajnaMestaForm_Load(object sender, EventArgs e)
+        {
+            popuniPodacima();
+        }
+
+        public void popuniPodacima()
+        {
+            List<ProdajnoMestoPregled> podaci = DTOManager.vratiSvaProdajnaMesta();
+            dataGridView1.DataSource = podaci;
+        }
     }
 }

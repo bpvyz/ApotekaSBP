@@ -4,7 +4,7 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using Apoteka.Mapiranja;
 
-namespace Prodavnica
+namespace Apoteka
 {
     class DataLayer
     {
@@ -45,7 +45,7 @@ namespace Prodavnica
             }
             catch (Exception ec)
             {
-                System.Windows.Forms.MessageBox.Show(ec.Message);
+                System.Windows.Forms.MessageBox.Show(ec.ToString());
                 return null;
             }
 
