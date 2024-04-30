@@ -64,7 +64,35 @@ namespace Apoteka
 
             return zaposleni;
         }
-
         #endregion
+        #region Lekovi
+        public static List<LekPregled> vratiSveLekove()
+        {
+            List<LekPregled> lekovi = new List<LekPregled>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                IEnumerable<Apoteka.Entiteti.Lek> sviLekovi = from o in s.Query<Apoteka.Entiteti.Lek>()
+                                                                       select o;
+
+                foreach (Apoteka.Entiteti.Lek l in sviLekovi)
+                {
+                    lekovi.Add(new LekPregled(l.KomercijalniNaziv, l.HemijskiNaziv,
+                        l.NacinDoziranjaOdrasli, l.NacinDoziranjaDeca, l.NacinDoziranjaTrudnice,
+                        l.IzdajeSeNaRecept, l.ProcenatParticipacije, l.Cena));
+                }
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+
+            return lekovi;
+        }
+        #endregion
+
     }
 }

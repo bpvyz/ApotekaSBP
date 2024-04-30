@@ -211,7 +211,7 @@ namespace Apoteka
         {
 
         }
-        public LekPregled(string kom, string hem, string odrasli, string deca, string trudnice, bool naRecept, float participacija, float cena, GrupaLekovaPregled glp)
+        public LekPregled(string kom, string hem, string odrasli, string deca, string trudnice, bool naRecept, float participacija, float cena)
         {
             this.KomercijalniNaziv = kom;
             this.HemijskiNaziv = hem;
@@ -221,7 +221,6 @@ namespace Apoteka
             this.IzdajeSeNaRecept = naRecept;
             this.ProcenatParticipacije = participacija;
             this.Cena = cena;
-            this.GrupaLekova = glp;
         }
     }
     #endregion
