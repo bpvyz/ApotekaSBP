@@ -34,5 +34,10 @@ namespace Apoteka
             IzdatiReceptiForm forma = new IzdatiReceptiForm();
             forma.ShowDialog();
         }
+
+        private void FarmaceutForm_Load(object sender, EventArgs e)
+        {
+            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+        }
     }
 }

@@ -34,5 +34,10 @@ namespace Apoteka.Forme
             IzmeniPakovanjeForm forma = new IzmeniPakovanjeForm();
             forma.ShowDialog();
         }
+
+        private void PakovanjaForm_Load(object sender, EventArgs e)
+        {
+            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+        }
     }
 }

@@ -36,9 +36,10 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(560, 12);
+            this.button4.Location = new System.Drawing.Point(305, 6);
+            this.button4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(228, 81);
+            this.button4.Size = new System.Drawing.Size(124, 44);
             this.button4.TabIndex = 10;
             this.button4.Text = "Izdaj recept";
             this.button4.UseVisualStyleBackColor = true;
@@ -47,18 +48,20 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 12);
+            this.dataGridView1.Location = new System.Drawing.Point(7, 6);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 72;
             this.dataGridView1.RowTemplate.Height = 31;
-            this.dataGridView1.Size = new System.Drawing.Size(542, 342);
+            this.dataGridView1.Size = new System.Drawing.Size(296, 185);
             this.dataGridView1.TabIndex = 6;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(560, 99);
+            this.button1.Location = new System.Drawing.Point(305, 54);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(228, 81);
+            this.button1.Size = new System.Drawing.Size(124, 44);
             this.button1.TabIndex = 11;
             this.button1.Text = "Pregledaj recepte";
             this.button1.UseVisualStyleBackColor = true;
@@ -66,14 +69,17 @@
             // 
             // FarmaceutForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 363);
+            this.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.ClientSize = new System.Drawing.Size(436, 197);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.dataGridView1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FarmaceutForm";
             this.Text = "FarmaceutForm";
+            this.Load += new System.EventHandler(this.FarmaceutForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 

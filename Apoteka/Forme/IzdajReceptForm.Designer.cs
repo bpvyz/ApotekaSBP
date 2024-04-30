@@ -50,44 +50,49 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(492, 85);
+            this.label3.Location = new System.Drawing.Point(268, 46);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(152, 25);
+            this.label3.Size = new System.Drawing.Size(84, 13);
             this.label3.TabIndex = 54;
             this.label3.Text = "Oblik pakovanja";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(172, 85);
+            this.label2.Location = new System.Drawing.Point(94, 46);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(40, 25);
+            this.label2.Size = new System.Drawing.Size(22, 13);
             this.label2.TabIndex = 52;
             this.label2.Text = "Tip";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(138, 10);
+            this.label1.Location = new System.Drawing.Point(75, 5);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(110, 25);
+            this.label1.Size = new System.Drawing.Size(60, 13);
             this.label1.TabIndex = 50;
             this.label1.Text = "Šifra lekara";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(452, 181);
+            this.button1.Location = new System.Drawing.Point(247, 98);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(228, 81);
+            this.button1.Size = new System.Drawing.Size(124, 44);
             this.button1.TabIndex = 48;
             this.button1.Text = "Dodaj";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(12, 38);
+            this.textBox4.Location = new System.Drawing.Point(7, 21);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(371, 29);
+            this.textBox4.Size = new System.Drawing.Size(204, 20);
             this.textBox4.TabIndex = 57;
             // 
             // comboBox1
@@ -96,9 +101,10 @@
             this.comboBox1.Items.AddRange(new object[] {
             "Standardni",
             "Hitni"});
-            this.comboBox1.Location = new System.Drawing.Point(12, 113);
+            this.comboBox1.Location = new System.Drawing.Point(7, 61);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(371, 32);
+            this.comboBox1.Size = new System.Drawing.Size(204, 21);
             this.comboBox1.TabIndex = 58;
             // 
             // comboBox2
@@ -109,65 +115,73 @@
             "Sirup",
             "Prašak",
             "Injekcija"});
-            this.comboBox2.Location = new System.Drawing.Point(389, 113);
+            this.comboBox2.Location = new System.Drawing.Point(212, 61);
+            this.comboBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(371, 32);
+            this.comboBox2.Size = new System.Drawing.Size(204, 21);
             this.comboBox2.TabIndex = 59;
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(389, 38);
+            this.numericUpDown1.Location = new System.Drawing.Point(212, 21);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(371, 29);
+            this.numericUpDown1.Size = new System.Drawing.Size(202, 20);
             this.numericUpDown1.TabIndex = 60;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(526, 10);
+            this.label5.Location = new System.Drawing.Point(287, 5);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(81, 25);
+            this.label5.Size = new System.Drawing.Size(44, 13);
             this.label5.TabIndex = 61;
             this.label5.Text = "Količina";
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(766, 38);
+            this.dateTimePicker1.Location = new System.Drawing.Point(418, 21);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(371, 29);
+            this.dateTimePicker1.Size = new System.Drawing.Size(204, 20);
             this.dateTimePicker1.TabIndex = 62;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(874, 9);
+            this.label6.Location = new System.Drawing.Point(477, 5);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(157, 25);
+            this.label6.Size = new System.Drawing.Size(86, 13);
             this.label6.TabIndex = 63;
             this.label6.Text = "Datum izdavanja";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(874, 153);
+            this.label7.Location = new System.Drawing.Point(477, 83);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(160, 25);
+            this.label7.Size = new System.Drawing.Size(87, 13);
             this.label7.TabIndex = 65;
             this.label7.Text = "Datum realizacije";
             // 
             // dateTimePicker2
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(766, 181);
+            this.dateTimePicker2.Location = new System.Drawing.Point(418, 98);
+            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(371, 29);
+            this.dateTimePicker2.Size = new System.Drawing.Size(204, 20);
             this.dateTimePicker2.TabIndex = 64;
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(879, 113);
+            this.checkBox1.Location = new System.Drawing.Point(479, 61);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(134, 29);
+            this.checkBox1.Size = new System.Drawing.Size(79, 17);
             this.checkBox1.TabIndex = 66;
             this.checkBox1.Text = "Realizovan";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -175,9 +189,10 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(153, 153);
+            this.label4.Location = new System.Drawing.Point(83, 83);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(85, 25);
+            this.label4.Size = new System.Drawing.Size(47, 13);
             this.label4.TabIndex = 67;
             this.label4.Text = "Ime leka";
             // 
@@ -189,16 +204,18 @@
             "Sirup",
             "Prašak",
             "Injekcija"});
-            this.comboBox3.Location = new System.Drawing.Point(12, 182);
+            this.comboBox3.Location = new System.Drawing.Point(7, 99);
+            this.comboBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(371, 32);
+            this.comboBox3.Size = new System.Drawing.Size(204, 21);
             this.comboBox3.TabIndex = 68;
             // 
             // IzdajReceptForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1148, 277);
+            this.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.ClientSize = new System.Drawing.Size(626, 150);
             this.Controls.Add(this.comboBox3);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.checkBox1);
@@ -215,8 +232,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "IzdajReceptForm";
             this.Text = "IzdajReceptForm";
+            this.Load += new System.EventHandler(this.IzdajReceptForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

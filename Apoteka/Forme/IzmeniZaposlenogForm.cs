@@ -16,5 +16,10 @@ namespace Apoteka.Forme
         {
             InitializeComponent();
         }
+
+        private void IzmeniZaposlenogForm_Load(object sender, EventArgs e)
+        {
+            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+        }
     }
 }

@@ -52,5 +52,10 @@ namespace Apoteka
         {
             // TODO: Obrisi lek
         }
+
+        private void LekoviForm_Load(object sender, EventArgs e)
+        {
+            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+        }
     }
 }

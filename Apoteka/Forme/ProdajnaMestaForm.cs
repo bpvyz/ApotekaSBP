@@ -55,6 +55,7 @@ namespace Apoteka
 
         private void ProdajnaMestaForm_Load(object sender, EventArgs e)
         {
+            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath); 
             popuniPodacima();
         }
 

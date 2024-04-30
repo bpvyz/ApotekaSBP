@@ -33,5 +33,10 @@ namespace Apoteka.Forme
         {
             // TODO: Obrisi kontraindikaciju
         }
+
+        private void KontraindikacijeForm_Load(object sender, EventArgs e)
+        {
+            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+        }
     }
 }

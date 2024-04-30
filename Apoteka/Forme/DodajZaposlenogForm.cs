@@ -20,5 +20,10 @@ namespace Apoteka.Forme
         private void textBox7_TextChanged(object sender, EventArgs e)
         {
                     }
+
+        private void DodajZaposlenogForm_Load(object sender, EventArgs e)
+        {
+            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+        }
     }
 }

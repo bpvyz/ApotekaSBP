@@ -22,5 +22,10 @@ namespace Apoteka.Forme
             IzmeniReceptForm forma = new IzmeniReceptForm();
             forma.ShowDialog();
         }
+
+        private void IzdatiReceptiForm_Load(object sender, EventArgs e)
+        {
+            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+        }
     }
 }

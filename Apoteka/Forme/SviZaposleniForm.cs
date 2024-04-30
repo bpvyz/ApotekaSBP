@@ -21,5 +21,10 @@ namespace Apoteka.Forme
         {
             //TODO: Obrisi zaposlenog iz svih
         }
+
+        private void SviZaposleniForm_Load(object sender, EventArgs e)
+        {
+            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+        }
     }
 }

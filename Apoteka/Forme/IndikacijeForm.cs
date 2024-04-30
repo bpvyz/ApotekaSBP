@@ -38,5 +38,10 @@ namespace Apoteka.Forme
             IzmeniIndikacijuForm forma = new IzmeniIndikacijuForm();
             forma.ShowDialog();
         }
+
+        private void IndikacijeForm_Load(object sender, EventArgs e)
+        {
+            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+        }
     }
 }

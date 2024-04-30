@@ -40,5 +40,10 @@ namespace Apoteka
         {
             //TODO: Obrisi zaposlenog
         }
+
+        private void ZaposleniForm_Load(object sender, EventArgs e)
+        {
+            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+        }
     }
 }

@@ -33,5 +33,10 @@ namespace Apoteka.Forme
         {
             //TODO: Obrisi bolest iz svih
         }
+
+        private void SveBolestiForm_Load(object sender, EventArgs e)
+        {
+            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+        }
     }
 }
