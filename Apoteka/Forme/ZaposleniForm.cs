@@ -38,7 +38,7 @@ namespace Apoteka
 
         private void btnFarmaceut_Click(object sender, EventArgs e)
         {
-            FarmaceutForm forma = new FarmaceutForm();
+            FarmaceutForm forma = new FarmaceutForm(prodajnomesto);
             forma.ShowDialog();
         }
 

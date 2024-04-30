@@ -191,5 +191,62 @@ namespace Apoteka
             return zalihe;
         }
         #endregion
+        #region Recept
+        public static List<ReceptPregled> vratiRecepteProdajnogMesta(string id)
+        {
+            //TODO: Napraviti da vraca PRODAJNO_MESTO_ID, FARMACEUT_ID i LEK_ID
+            List<ReceptPregled> recepti = new List<ReceptPregled>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                IEnumerable<Apoteka.Entiteti.Recept> sviRecepti = from o in s.Query<Apoteka.Entiteti.Recept>()
+                                                                            where o.ProdajnoMesto.JedinstveniBroj == id
+                                                                            select o;
+
+                foreach (Apoteka.Entiteti.Recept r in sviRecepti)
+                {
+                    recepti.Add(new ReceptPregled(r.SerijskiBroj, r.SifraLekara, r.Tip, r.OblikPakovanja, r.Kolicina,
+                        r.DatumIzdavanja, r.DatumRealizacije));
+                }
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+
+            return recepti;
+        }
+        #endregion
+        #region Farmaceut
+        public static List<FarmaceutPregled> vratiFarmaceuteProdajnogMesta(string id)
+        {
+            List<FarmaceutPregled> farmaceuti = new List<FarmaceutPregled>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                IEnumerable<Apoteka.Entiteti.Farmaceut> sviFarmaceuti = from o in s.Query<Apoteka.Entiteti.Farmaceut>()
+                                                                       where o.ProdajnoMesto.JedinstveniBroj == id
+                                                                       select o;
+
+                foreach (Apoteka.Entiteti.Farmaceut f in sviFarmaceuti)
+                {
+                    farmaceuti.Add(new FarmaceutPregled(f.JedinstveniBroj, f.Ime, f.Prezime, f.DatumRodjenja, f.Adresa,
+                        f.BrojTelefona, f.DatumDiplomiranja, f.DatumObnoveLicence));
+                }
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+
+            return farmaceuti;
+        }
+        #endregion
     }
 }

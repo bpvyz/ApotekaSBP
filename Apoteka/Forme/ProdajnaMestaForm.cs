@@ -49,7 +49,7 @@ namespace Apoteka
         {
             if (dataGridView1.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Izaberite prodajno mesto cije zaposlene zelite da vidite!");
+                MessageBox.Show("Izaberite prodajno mesto cije zalihe zelite da vidite!");
                 return;
             }
             DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
@@ -62,7 +62,16 @@ namespace Apoteka
 
         private void btnIzdatiRecepti_Click(object sender, EventArgs e)
         {
-            IzdatiReceptiForm forma = new IzdatiReceptiForm();
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Izaberite prodajno mesto cije recepte zelite da vidite!");
+                return;
+            }
+            DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+            string idProdajnogMesta = selectedRow.Cells[0].Value.ToString();
+
+            ProdajnoMestoBasic p = DTOManager.vratiProdajnoMesto(idProdajnogMesta);
+            IzdatiReceptiForm forma = new IzdatiReceptiForm(p);
             forma.ShowDialog();
         }
 

@@ -1,4 +1,5 @@
-﻿using Apoteka.Forme;
+﻿using Apoteka.Entiteti;
+using Apoteka.Forme;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,9 +14,16 @@ namespace Apoteka
 {
     public partial class FarmaceutForm : Form
     {
+        ProdajnoMestoBasic prodajnomesto;
         public FarmaceutForm()
         {
             InitializeComponent();
+        }
+
+        public FarmaceutForm(ProdajnoMestoBasic p)
+        {
+            InitializeComponent();
+            prodajnomesto = p;
         }
 
         private void btnObrisiFarmaceuta_Click(object sender, EventArgs e)
@@ -38,6 +46,12 @@ namespace Apoteka
         private void FarmaceutForm_Load(object sender, EventArgs e)
         {
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+            popuniPodacima();
+        }
+        public void popuniPodacima()
+        {
+            List<FarmaceutPregled> podaci = DTOManager.vratiFarmaceuteProdajnogMesta(prodajnomesto.JedinstveniBroj);
+            dataGridView1.DataSource = podaci;
         }
     }
 }

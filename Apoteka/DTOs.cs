@@ -429,7 +429,7 @@ namespace Apoteka
 
     public class ReceptPregled
     {
-        public string SerijskiBroj { get; set; }
+        public int SerijskiBroj { get; set; }
         public string SifraLekara { get; set; }
         public string Tip { get; set; }
         public string OblikPakovanja { get; set; }
@@ -447,7 +447,7 @@ namespace Apoteka
         }
 
 
-        public ReceptPregled(string sbroj, string sifra, string tip, string oblik,
+        public ReceptPregled(int sbroj, string sifra, string tip, string oblik,
             int kolicina, DateTime izdavanje, DateTime? realizacija)
         {
             this.SerijskiBroj = sbroj;

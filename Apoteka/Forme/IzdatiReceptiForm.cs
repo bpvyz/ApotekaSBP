@@ -12,9 +12,16 @@ namespace Apoteka.Forme
 {
     public partial class IzdatiReceptiForm : Form
     {
+        ProdajnoMestoBasic prodajnomesto;
         public IzdatiReceptiForm()
         {
             InitializeComponent();
+        }
+
+        public IzdatiReceptiForm(ProdajnoMestoBasic p)
+        {
+            InitializeComponent();
+            prodajnomesto = p;
         }
 
         private void btnIzmeniRecept_Click(object sender, EventArgs e)
@@ -26,6 +33,12 @@ namespace Apoteka.Forme
         private void IzdatiReceptiForm_Load(object sender, EventArgs e)
         {
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+            popuniPodacima();
+        }
+        public void popuniPodacima()
+        {
+            List<ReceptPregled> podaci = DTOManager.vratiRecepteProdajnogMesta(prodajnomesto.JedinstveniBroj);
+            dataGridView1.DataSource = podaci;
         }
     }
 }
