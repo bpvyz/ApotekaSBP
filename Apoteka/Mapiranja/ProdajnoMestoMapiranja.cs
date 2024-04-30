@@ -18,7 +18,7 @@ namespace Apoteka.Mapiranja
             Map(x => x.Naziv).Column("NAZIV").Not.Nullable();
             Map(x => x.Adresa).Column("ADRESA").Not.Nullable();
             Map(x => x.Mesto).Column("MESTO").Not.Nullable();
-            HasMany(x => x.Zaposleni).KeyColumn("PRODAJNO_MESTO_ID").Cascade.All();
+            HasMany(x => x.Zaposleni).KeyColumn("PRODAJNO_MESTO").Cascade.All();
             HasMany(x => x.Recepti).KeyColumn("PRODAJNO_MESTO_ID").Cascade.All();
             HasMany(x => x.ZaliheGrupaLekova).KeyColumn("PRODAJNO_MESTO_ID").Inverse().Cascade.All();
         }

@@ -98,7 +98,7 @@
             this.button3.TabIndex = 3;
             this.button3.Text = "Uvid u zaposlene";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.btnProdajnaMesta_Click);
+            this.button3.Click += new System.EventHandler(this.btnZaposleni_Click);
             // 
             // button4
             // 

@@ -30,9 +30,18 @@ namespace Apoteka
             forma.ShowDialog();
         }
 
-        private void btnProdajnaMesta_Click(object sender, EventArgs e)
+        private void btnZaposleni_Click(object sender, EventArgs e)
         {
-            ZaposleniForm forma = new ZaposleniForm();
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Izaberite prodajno mesto cije zaposlene zelite da vidite!");
+                return;
+            }
+            DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+            string idProdajnogMesta = selectedRow.Cells[0].Value.ToString();
+
+            ProdajnoMestoBasic p = DTOManager.vratiProdajnoMesto(idProdajnogMesta);
+            ZaposleniForm forma = new ZaposleniForm(p);
             forma.ShowDialog();
         }
 

@@ -36,6 +36,25 @@ namespace Apoteka
 
             return prodajnamesta;
         }
+        public static ProdajnoMestoBasic vratiProdajnoMesto(string idProdajnogMesta)
+        {
+            ProdajnoMestoBasic pb = new ProdajnoMestoBasic();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Apoteka.Entiteti.ProdajnoMesto o = s.Load<Apoteka.Entiteti.ProdajnoMesto>(idProdajnogMesta);
+                pb = new ProdajnoMestoBasic(o.JedinstveniBroj, o.Naziv, o.Adresa, o.Mesto);
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+
+            return pb;
+        }
 
         #endregion
         #region Zaposleni
@@ -48,6 +67,31 @@ namespace Apoteka
                 ISession s = DataLayer.GetSession();
 
                 IEnumerable<Apoteka.Entiteti.Zaposleni> sviZaposleni = from o in s.Query<Apoteka.Entiteti.Zaposleni>()
+                                                                       select o;
+
+                foreach (Apoteka.Entiteti.Zaposleni z in sviZaposleni)
+                {
+                    zaposleni.Add(new ZaposleniPregled(z.JedinstveniBroj, z.Ime, z.Prezime, z.DatumRodjenja, z.Adresa, z.BrojTelefona));
+                }
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+
+            return zaposleni;
+        }
+        public static List<ZaposleniPregled> vratiZaposleneProdajnogMesta(string id)
+        {
+            List<ZaposleniPregled> zaposleni = new List<ZaposleniPregled>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                IEnumerable<Apoteka.Entiteti.Zaposleni> sviZaposleni = from o in s.Query<Apoteka.Entiteti.Zaposleni>()
+                                                                       where o.ProdajnoMesto.JedinstveniBroj == id
                                                                        select o;
 
                 foreach (Apoteka.Entiteti.Zaposleni z in sviZaposleni)
@@ -120,5 +164,7 @@ namespace Apoteka
             #endregion
 
         }
+
+        
     }
 }

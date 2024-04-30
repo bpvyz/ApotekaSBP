@@ -13,9 +13,15 @@ namespace Apoteka
 {
     public partial class ZaposleniForm : Form
     {
+        ProdajnoMestoBasic prodajnomesto;
         public ZaposleniForm()
         {
             InitializeComponent();
+        }
+        public ZaposleniForm(ProdajnoMestoBasic p)
+        {
+            InitializeComponent();
+            prodajnomesto = p;
         }
 
         private void btnDodajZaposlenog_Click(object sender, EventArgs e)
@@ -44,6 +50,12 @@ namespace Apoteka
         private void ZaposleniForm_Load(object sender, EventArgs e)
         {
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+            popuniPodacima();
+        }
+        public void popuniPodacima()
+        {
+            List<ZaposleniPregled> podaci = DTOManager.vratiZaposleneProdajnogMesta(prodajnomesto.JedinstveniBroj);
+            dataGridView1.DataSource = podaci;
         }
     }
 }
