@@ -100,5 +100,29 @@ namespace Apoteka
         SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset,
         SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset);
         }
+        //TODO: Zavrsi ovo...
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Control | Keys.Escape))
+            {
+                button7.PerformClick();
+            }
+       
+            if (keyData == (Keys.Control | Keys.F1))
+            {
+                button8.PerformClick();
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Maximized;
+        }
     }
 }
