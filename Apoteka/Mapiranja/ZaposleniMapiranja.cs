@@ -20,7 +20,7 @@ namespace Apoteka.Mapiranja
             Map(x => x.DatumRodjenja).Column("DATUM_RODJENJA").Not.Nullable();
             Map(x => x.Adresa).Column("ADRESA").Not.Nullable();
             Map(x => x.BrojTelefona).Column("BROJ_TELEFONA");
-            References(x => x.ProdajnoMesto).Column("PRODAJNO_MESTO_ID").Not.Nullable();
+            References(x => x.ProdajnoMesto).Column("PRODAJNO_MESTO").Not.Nullable();
         }
     }
 }

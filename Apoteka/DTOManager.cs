@@ -36,6 +36,35 @@ namespace Apoteka
 
             return prodajnamesta;
         }
+
+        #endregion
+        #region Zaposleni
+
+        public static List<ZaposleniPregled> vratiSveZaposlene()
+        {
+            List<ZaposleniPregled> zaposleni = new List<ZaposleniPregled>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                IEnumerable<Apoteka.Entiteti.Zaposleni> sviZaposleni = from o in s.Query<Apoteka.Entiteti.Zaposleni>()
+                                                                               select o;
+
+                foreach (Apoteka.Entiteti.Zaposleni z in sviZaposleni)
+                {
+                    zaposleni.Add(new ZaposleniPregled(z.JedinstveniBroj, z.Ime, z.Prezime, z.DatumRodjenja, z.Adresa, z.BrojTelefona));
+                }
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+
+            return zaposleni;
+        }
+
         #endregion
     }
 }

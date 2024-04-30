@@ -25,6 +25,12 @@ namespace Apoteka.Forme
         private void SviZaposleniForm_Load(object sender, EventArgs e)
         {
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+            popuniPodacima();
+        }
+        public void popuniPodacima()
+        {
+            List<ZaposleniPregled> podaci = DTOManager.vratiSveZaposlene();
+            dataGridView1.DataSource = podaci;
         }
     }
 }

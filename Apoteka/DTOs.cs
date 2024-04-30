@@ -67,8 +67,8 @@ namespace Apoteka
         }
 
         public FarmaceutBasic(string JedinstveniBroj, string Ime, string Prezime, DateTime DatumRodjenja, string Adresa, string BrojTelefona,
-            DateTime datumDiplomiranja, DateTime datumObnoveLicence, ProdajnoMestoBasic prodajnoMesto) : 
-            base(JedinstveniBroj, Ime, Prezime, DatumRodjenja, Adresa, BrojTelefona, prodajnoMesto)
+            DateTime datumDiplomiranja, DateTime datumObnoveLicence) : 
+            base(JedinstveniBroj, Ime, Prezime, DatumRodjenja, Adresa, BrojTelefona)
 
         {
 
@@ -89,8 +89,8 @@ namespace Apoteka
         }
 
         public FarmaceutPregled(string JedinstveniBroj, string Ime, string Prezime, DateTime DatumRodjenja, string Adresa, string BrojTelefona,
-            DateTime datumDiplomiranja, DateTime datumObnoveLicence, ProdajnoMestoPregled prodajnoMesto) : 
-            base(JedinstveniBroj, Ime, Prezime, DatumRodjenja, Adresa, BrojTelefona, prodajnoMesto)
+            DateTime datumDiplomiranja, DateTime datumObnoveLicence) : 
+            base(JedinstveniBroj, Ime, Prezime, DatumRodjenja, Adresa, BrojTelefona)
 
         {
 
@@ -517,11 +517,11 @@ namespace Apoteka
 
         public ZaposleniBasic()
         {
-            
+            ProdajnoMesto = new ProdajnoMestoBasic();
         }
 
 
-        public ZaposleniBasic(string jedinstveniBroj, string ime, string prezime, DateTime datum, string adresa, string brojTelefona, ProdajnoMestoBasic prodajnoMesto )
+        public ZaposleniBasic(string jedinstveniBroj, string ime, string prezime, DateTime datum, string adresa, string brojTelefona)
         {
             this.JedinstveniBroj = jedinstveniBroj;
             this.Ime = ime;
@@ -529,8 +529,6 @@ namespace Apoteka
             this.DatumRodjenja = datum;
             this.Adresa = adresa;
             this.BrojTelefona = brojTelefona;
-            this.ProdajnoMesto = prodajnoMesto;
-
         }
     }
     public class ZaposleniPregled
@@ -541,7 +539,6 @@ namespace Apoteka
         public virtual DateTime DatumRodjenja { get; set; }
         public virtual string Adresa { get; set; }
         public virtual string BrojTelefona { get; set; }
-        public virtual ProdajnoMestoPregled ProdajnoMesto { get; set; }
 
         public ZaposleniPregled()
         {
@@ -549,7 +546,7 @@ namespace Apoteka
         }
 
 
-        public ZaposleniPregled(string jedinstveniBroj, string ime, string prezime, DateTime datum, string adresa, string brojTelefona, ProdajnoMestoPregled prodajnoMesto)
+        public ZaposleniPregled(string jedinstveniBroj, string ime, string prezime, DateTime datum, string adresa, string brojTelefona)
         {
             this.JedinstveniBroj = jedinstveniBroj;
             this.Ime = ime;
@@ -557,11 +554,7 @@ namespace Apoteka
             this.DatumRodjenja = datum;
             this.Adresa = adresa;
             this.BrojTelefona = brojTelefona;
-            this.ProdajnoMesto = prodajnoMesto;
-
         }
-
-
     }
     #endregion
 }
