@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Apoteka.Forme;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,6 +21,18 @@ namespace Apoteka
         private void btnObrisiFarmaceuta_Click(object sender, EventArgs e)
         {
             // TODO: Obrisi farmaceuta
+        }
+
+        private void btnIzdajRecept_Click(object sender, EventArgs e)
+        {
+            IzdajReceptForm forma = new IzdajReceptForm();
+            forma.ShowDialog();
+        }
+
+        private void btnIzdatiRecepti_Click(object sender, EventArgs e)
+        {
+            IzdatiReceptiForm forma = new IzdatiReceptiForm();
+            forma.ShowDialog();
         }
     }
 }

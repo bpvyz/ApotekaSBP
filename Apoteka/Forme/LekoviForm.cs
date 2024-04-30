@@ -44,7 +44,8 @@ namespace Apoteka
 
         private void btnPakovanja_Click(object sender, EventArgs e)
         {
-            // TODO: Pakovanja
+            PakovanjaForm forma = new PakovanjaForm();
+            forma.ShowDialog();
         }
 
         private void btnObrisiLek_Click(object sender, EventArgs e)

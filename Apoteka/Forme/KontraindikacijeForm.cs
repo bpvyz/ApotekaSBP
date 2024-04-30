@@ -19,12 +19,14 @@ namespace Apoteka.Forme
 
         private void btnDodajKontraindikaciju_Click(object sender, EventArgs e)
         {
-            // TODO: Dodaj kontraindikaciju
+            DodajKontraindikacijuForm forma = new DodajKontraindikacijuForm();
+            forma.ShowDialog();
         }
 
         private void btnIzmeniKontraindikaciju_Click(object sender, EventArgs e)
         {
-            // TODO: Izmeni kontraindikaciju
+            IzmeniKontraindikacijuForm forma = new IzmeniKontraindikacijuForm();
+            forma.ShowDialog();
         }
 
         private void btnObrisiKontraindikaciju_Click(object sender, EventArgs e)

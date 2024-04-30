@@ -30,9 +30,10 @@ namespace Apoteka
             forma.ShowDialog();
         }
 
-        private void btnPregledFarmaceuta_Click(object sender, EventArgs e)
+        private void btnFarmaceut_Click(object sender, EventArgs e)
         {
-            //TODO: Pregled farmaceuta
+            FarmaceutForm forma = new FarmaceutForm();
+            forma.ShowDialog();
         }
 
         private void btnObrisiZaposlenog_Click(object sender, EventArgs e)

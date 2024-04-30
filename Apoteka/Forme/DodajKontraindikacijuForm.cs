@@ -10,17 +10,11 @@ using System.Windows.Forms;
 
 namespace Apoteka.Forme
 {
-    public partial class IzdatiReceptiForm : Form
+    public partial class DodajKontraindikacijuForm : Form
     {
-        public IzdatiReceptiForm()
+        public DodajKontraindikacijuForm()
         {
             InitializeComponent();
-        }
-
-        private void btnIzmeniRecept_Click(object sender, EventArgs e)
-        {
-            IzmeniReceptForm forma = new IzmeniReceptForm();
-            forma.ShowDialog();
         }
     }
 }

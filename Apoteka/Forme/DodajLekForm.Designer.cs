@@ -46,6 +46,8 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
@@ -62,7 +64,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(482, 368);
+            this.checkBox1.Location = new System.Drawing.Point(863, 271);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(202, 29);
             this.checkBox1.TabIndex = 40;
@@ -103,7 +105,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(90, 341);
+            this.button1.Location = new System.Drawing.Point(482, 250);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(228, 81);
             this.button1.TabIndex = 35;
@@ -113,7 +115,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(178, 260);
+            this.label4.Location = new System.Drawing.Point(936, 110);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(60, 25);
             this.label4.TabIndex = 34;
@@ -154,7 +156,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(109, 185);
+            this.label3.Location = new System.Drawing.Point(858, 28);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(197, 25);
             this.label3.TabIndex = 33;
@@ -162,14 +164,14 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(24, 215);
+            this.numericUpDown1.Location = new System.Drawing.Point(782, 57);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(371, 29);
             this.numericUpDown1.TabIndex = 46;
             // 
             // numericUpDown2
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(24, 287);
+            this.numericUpDown2.Location = new System.Drawing.Point(782, 137);
             this.numericUpDown2.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -189,7 +191,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(518, 260);
+            this.label8.Location = new System.Drawing.Point(146, 185);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(128, 25);
             this.label8.TabIndex = 49;
@@ -203,16 +205,40 @@
             "Analgetici",
             "Antipiretici",
             "Diuretici"});
-            this.comboBox1.Location = new System.Drawing.Point(405, 286);
+            this.comboBox1.Location = new System.Drawing.Point(24, 212);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(367, 32);
+            this.comboBox1.Size = new System.Drawing.Size(371, 32);
             this.comboBox1.TabIndex = 50;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(874, 185);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(181, 25);
+            this.label9.TabIndex = 51;
+            this.label9.Text = "ID prodajnog mesta";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "Antibiotici",
+            "Analgetici",
+            "Antipiretici",
+            "Diuretici"});
+            this.comboBox2.Location = new System.Drawing.Point(782, 215);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(371, 32);
+            this.comboBox2.TabIndex = 52;
             // 
             // DodajLekForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1173, 338);
+            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.textBox3);
@@ -259,5 +285,7 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox comboBox2;
     }
 }

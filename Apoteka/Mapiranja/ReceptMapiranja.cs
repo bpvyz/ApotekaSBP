@@ -14,7 +14,7 @@ namespace Apoteka.Mapiranja
         {
             Table("RECEPT");
 
-            Id(x => x.SerijskiBroj).Column("SERIJSKI_BROJ").GeneratedBy.Assigned();
+            Id(x => x.SerijskiBroj).Column("SERIJSKI_BROJ").GeneratedBy.Identity();
             Map(x => x.SifraLekara).Column("SIFRA_LEKARA").Not.Nullable();
             Map(x => x.Tip).Column("TIP").Not.Nullable();
             Map(x => x.OblikPakovanja).Column("OBLIK_PAKOVANJA").Not.Nullable();

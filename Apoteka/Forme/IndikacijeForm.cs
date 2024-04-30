@@ -19,7 +19,8 @@ namespace Apoteka.Forme
 
         private void btnDodajIndikaciju_Click(object sender, EventArgs e)
         {
-            // TODO: Dodaj indikaciju
+            DodajIndikacijuForm forma = new DodajIndikacijuForm();
+            forma.ShowDialog();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -34,7 +35,8 @@ namespace Apoteka.Forme
 
         private void btnIzmeniIndikaciju_Click(object sender, EventArgs e)
         {
-            // TODO: Izmeni indikaciju
+            IzmeniIndikacijuForm forma = new IzmeniIndikacijuForm();
+            forma.ShowDialog();
         }
     }
 }

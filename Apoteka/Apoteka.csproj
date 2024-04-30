@@ -123,11 +123,29 @@
     <Compile Include="Forme\DodajBolestForm.Designer.cs">
       <DependentUpon>DodajBolestForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forme\DodajIndikacijuForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forme\DodajIndikacijuForm.Designer.cs">
+      <DependentUpon>DodajIndikacijuForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forme\DodajKontraindikacijuForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forme\DodajKontraindikacijuForm.Designer.cs">
+      <DependentUpon>DodajKontraindikacijuForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forme\DodajLekForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forme\DodajLekForm.Designer.cs">
       <DependentUpon>DodajLekForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forme\DodajPakovanjeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forme\DodajPakovanjeForm.Designer.cs">
+      <DependentUpon>DodajPakovanjeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forme\DodajProdajnoMestoForm.cs">
       <SubType>Form</SubType>
@@ -153,6 +171,12 @@
     <Compile Include="Forme\IndikacijeForm.Designer.cs">
       <DependentUpon>IndikacijeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forme\IzdajReceptForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forme\IzdajReceptForm.Designer.cs">
+      <DependentUpon>IzdajReceptForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forme\IzdatiReceptiForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,17 +189,41 @@
     <Compile Include="Forme\IzmeniBolestForm.Designer.cs">
       <DependentUpon>IzmeniBolestForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forme\IzmeniIndikacijuForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forme\IzmeniIndikacijuForm.Designer.cs">
+      <DependentUpon>IzmeniIndikacijuForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forme\IzmeniKontraindikacijuForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forme\IzmeniKontraindikacijuForm.Designer.cs">
+      <DependentUpon>IzmeniKontraindikacijuForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forme\IzmeniLekForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forme\IzmeniLekForm.Designer.cs">
       <DependentUpon>IzmeniLekForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forme\IzmeniPakovanjeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forme\IzmeniPakovanjeForm.Designer.cs">
+      <DependentUpon>IzmeniPakovanjeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forme\IzmeniProdajnoMestoForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forme\IzmeniProdajnoMestoForm.Designer.cs">
       <DependentUpon>IzmeniProdajnoMestoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forme\IzmeniReceptForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forme\IzmeniReceptForm.Designer.cs">
+      <DependentUpon>IzmeniReceptForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forme\IzmeniZaposlenogForm.cs">
       <SubType>Form</SubType>
@@ -188,6 +236,12 @@
     </Compile>
     <Compile Include="Forme\KontraindikacijeForm.Designer.cs">
       <DependentUpon>KontraindikacijeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forme\PakovanjaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forme\PakovanjaForm.Designer.cs">
+      <DependentUpon>PakovanjaForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forme\SveBolestiForm.cs">
       <SubType>Form</SubType>
@@ -247,8 +301,17 @@
     <EmbeddedResource Include="Forme\DodajBolestForm.resx">
       <DependentUpon>DodajBolestForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forme\DodajIndikacijuForm.resx">
+      <DependentUpon>DodajIndikacijuForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forme\DodajKontraindikacijuForm.resx">
+      <DependentUpon>DodajKontraindikacijuForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forme\DodajLekForm.resx">
       <DependentUpon>DodajLekForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forme\DodajPakovanjeForm.resx">
+      <DependentUpon>DodajPakovanjeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forme\DodajProdajnoMestoForm.resx">
       <DependentUpon>DodajProdajnoMestoForm.cs</DependentUpon>
@@ -262,23 +325,41 @@
     <EmbeddedResource Include="Forme\IndikacijeForm.resx">
       <DependentUpon>IndikacijeForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forme\IzdajReceptForm.resx">
+      <DependentUpon>IzdajReceptForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forme\IzdatiReceptiForm.resx">
       <DependentUpon>IzdatiReceptiForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forme\IzmeniBolestForm.resx">
       <DependentUpon>IzmeniBolestForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forme\IzmeniIndikacijuForm.resx">
+      <DependentUpon>IzmeniIndikacijuForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forme\IzmeniKontraindikacijuForm.resx">
+      <DependentUpon>IzmeniKontraindikacijuForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forme\IzmeniLekForm.resx">
       <DependentUpon>IzmeniLekForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forme\IzmeniPakovanjeForm.resx">
+      <DependentUpon>IzmeniPakovanjeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forme\IzmeniProdajnoMestoForm.resx">
       <DependentUpon>IzmeniProdajnoMestoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forme\IzmeniReceptForm.resx">
+      <DependentUpon>IzmeniReceptForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forme\IzmeniZaposlenogForm.resx">
       <DependentUpon>IzmeniZaposlenogForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forme\KontraindikacijeForm.resx">
       <DependentUpon>KontraindikacijeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forme\PakovanjaForm.resx">
+      <DependentUpon>PakovanjaForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forme\SveBolestiForm.resx">
       <DependentUpon>SveBolestiForm.cs</DependentUpon>

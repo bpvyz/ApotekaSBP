@@ -8,7 +8,7 @@ namespace Apoteka.Entiteti
 {
     public class Recept
     {
-        public virtual string SerijskiBroj { get; set; }
+        public virtual int SerijskiBroj { get; set; }
         public virtual string SifraLekara { get; set; }
         public virtual string Tip { get; set; }
         public virtual string OblikPakovanja { get; set; }

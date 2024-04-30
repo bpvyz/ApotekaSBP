@@ -20,6 +20,7 @@ namespace Apoteka.Entiteti
         public virtual IList<LekLeci> Leci { get; set; }
         public virtual IList<LekKontraindikacija> Kontraindikacije { get; set; }
         public virtual GrupaLekova GrupaLekova { get; set; }
+        public virtual ProdajnoMesto ProdajnoMesto { get; set; }
         public virtual IList<Recept> Recepti { get; set; }
         public Lek() 
         {
@@ -27,6 +28,7 @@ namespace Apoteka.Entiteti
             Leci = new List<LekLeci>();
             Kontraindikacije = new List<LekKontraindikacija>();
             GrupaLekova = new GrupaLekova();
+            ProdajnoMesto = new ProdajnoMesto();
             Recepti = new List<Recept>();
         }
     }
