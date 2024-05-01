@@ -224,6 +224,9 @@ namespace Apoteka
     }
     #endregion
 
+
+
+
     #region LekKontradikcija
     public class LekKontraindikacijaBasic
     {
@@ -276,12 +279,12 @@ namespace Apoteka
     }
     public class LekLeciPregled
     {
-        public LekPregled Lek { get; protected set; }
-        public BolestPregled Bolest { get; protected set; }
+        public Lek Lek { get; protected set; }
+        public Bolest Bolest { get; protected set; }
 
         public LekLeciPregled() { }
 
-        public LekLeciPregled(LekPregled lek, BolestPregled bolest)
+        public LekLeciPregled(Lek lek, Bolest bolest)
         {
             this.Lek = lek;
             this.Bolest = bolest;

@@ -32,7 +32,16 @@ namespace Apoteka
 
         private void btnIndikacije_Click(object sender, EventArgs e)
         {
-            IndikacijeForm forma = new IndikacijeForm();
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Izaberite lek čije indikacije želite da vidite!");
+                return;
+            }
+            DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+            string idLeka = selectedRow.Cells[0].Value.ToString();
+
+            LekBasic l = DTOManager.vratiLek(idLeka);
+            IndikacijeForm forma = new IndikacijeForm(l);
             forma.ShowDialog();
         }
 

@@ -273,6 +273,38 @@ namespace Apoteka
 
 
 
+
+        #region Indikacije
+        public static List<LekLeciPregled> vratiIndikacijeZaLek(string id)
+        {
+            List<LekLeciPregled> indikacije = new List<LekLeciPregled>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                IEnumerable<Apoteka.Entiteti.LekLeci> sveIndikacije = from o in s.Query<Apoteka.Entiteti.LekLeci>()
+                                                                                        where o.Lek.KomercijalniNaziv == id
+                                                                                        select o;
+
+                //upit treba da bude select o.Bolest.Naziv, i da se za selektovan lek, prikazuju bolesti za koje je taj lek kontraindikacija
+
+                foreach (Apoteka.Entiteti.LekLeci ll in sveIndikacije)
+                {
+                    indikacije.Add(new LekLeciPregled(ll.Lek, ll.Bolest));
+                }
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+
+            return indikacije;
+        }
+        #endregion
+
+
         #region Kontraindikacije
         public static List<LekKontraindikacijaPregled> vratiKontraindikacijeZaLek(string id)
         {
@@ -283,7 +315,9 @@ namespace Apoteka
 
                 IEnumerable<Apoteka.Entiteti.LekKontraindikacija> sveKontraindikacije = from o in s.Query<Apoteka.Entiteti.LekKontraindikacija>()
                                                                         where o.Lek.KomercijalniNaziv == id
-                                                                        select o;
+                                                                        select o; 
+
+                //upit treba da bude select o.Bolest.Naziv, i da se za selektovan lek, prikazuju bolesti za koje je taj lek kontraindikacija
 
                 foreach (Apoteka.Entiteti.LekKontraindikacija lk in sveKontraindikacije)
                 {
