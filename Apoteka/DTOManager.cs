@@ -248,5 +248,59 @@ namespace Apoteka
             return farmaceuti;
         }
         #endregion
+
+        #region Lek
+        public static LekBasic vratiLek(string idLeka)
+        {
+            LekBasic l = new LekBasic();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Apoteka.Entiteti.Lek o = s.Load<Apoteka.Entiteti.Lek>(idLeka);
+                l = new LekBasic(l.KomercijalniNaziv, l.HemijskiNaziv, l.NacinDoziranjaOdrasli, l.NacinDoziranjaDeca, l.NacinDoziranjaTrudnice, l.IzdajeSeNaRecept, l.ProcenatParticipacije, l.Cena);
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+
+            return l;
+        }
+        #endregion
+
+
+
+        #region Kontraindikacije
+        public static List<LekKontraindikacijaPregled> vratiKontraindikacijeZaLek(string id)
+        {
+            List<LekKontraindikacijaPregled> kontraindikacije = new List<LekKontraindikacijaPregled>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                IEnumerable<Apoteka.Entiteti.LekKontraindikacija> sveKontraindikacije = from o in s.Query<Apoteka.Entiteti.LekKontraindikacija>()
+                                                                        where o.Lek.KomercijalniNaziv == id
+                                                                        select o;
+
+                foreach (Apoteka.Entiteti.LekKontraindikacija lk in sveKontraindikacije)
+                {
+                    kontraindikacije.Add(new LekKontraindikacijaPregled(lk.Lek,lk.Bolest));
+                }
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+
+            return kontraindikacije;
+        }
+        #endregion
+
+
     }
 }

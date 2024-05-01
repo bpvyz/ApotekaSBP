@@ -240,15 +240,17 @@ namespace Apoteka
         }
 
     }
-    public class LekKontradikcijaPregled
+    public class LekKontraindikacijaPregled
     {
-        public LekPregled Lek { get; protected set; }
-        public BolestPregled Bolest { get; protected set; }
+        public Lek Lek { get; protected set; }
+        public Bolest Bolest { get; protected set; }
 
-        public LekKontradikcijaPregled()
-        { }
+        public LekKontraindikacijaPregled()
+        { 
+            
+        }
 
-        public LekKontradikcijaPregled(LekPregled lek, BolestPregled bolest)
+        public LekKontraindikacijaPregled(Lek lek, Bolest bolest)
         {
             this.Lek = lek;
             this.Bolest = bolest;

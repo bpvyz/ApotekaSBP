@@ -13,11 +13,11 @@ namespace Apoteka
 {
     public partial class LekoviForm : Form
     {
+        
         public LekoviForm()
         {
             InitializeComponent();
         }
-
         private void btnDodajLek_Click(object sender, EventArgs e)
         {
             DodajLekForm forma = new DodajLekForm();
@@ -38,7 +38,16 @@ namespace Apoteka
 
         private void btnKontraindikacije_Click(object sender, EventArgs e)
         {
-            KontraindikacijeForm forma = new KontraindikacijeForm();
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Izaberite lek čije kontraindikacije želite da vidite!");
+                return;
+            }
+            DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+            string idLeka = selectedRow.Cells[0].Value.ToString();
+
+            LekBasic l = DTOManager.vratiLek(idLeka);
+            KontraindikacijeForm forma = new KontraindikacijeForm(l);
             forma.ShowDialog();
         }
 

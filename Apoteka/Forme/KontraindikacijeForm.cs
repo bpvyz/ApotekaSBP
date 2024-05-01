@@ -12,9 +12,15 @@ namespace Apoteka.Forme
 {
     public partial class KontraindikacijeForm : Form
     {
+        LekBasic lek;
         public KontraindikacijeForm()
         {
             InitializeComponent();
+        }
+        public KontraindikacijeForm(LekBasic lek)
+        {
+            InitializeComponent();
+            this.lek = lek;
         }
 
         private void btnDodajKontraindikaciju_Click(object sender, EventArgs e)
@@ -37,6 +43,13 @@ namespace Apoteka.Forme
         private void KontraindikacijeForm_Load(object sender, EventArgs e)
         {
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+            popuniPodacima();
+        }
+        public void popuniPodacima()
+        {
+            List<LekKontraindikacijaPregled> podaci = DTOManager.vratiKontraindikacijeZaLek(lek.KomercijalniNaziv);
+            dataGridView1.DataSource = podaci;
+
         }
     }
 }
