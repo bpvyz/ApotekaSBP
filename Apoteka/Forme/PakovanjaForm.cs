@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Apoteka.Entiteti;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,14 @@ namespace Apoteka.Forme
 {
     public partial class PakovanjaForm : Form
     {
+        LekBasic lek;
         public PakovanjaForm()
         {
             InitializeComponent();
+        }
+        public PakovanjaForm(LekBasic lek)
+        {
+        this.lek = lek;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -38,6 +44,12 @@ namespace Apoteka.Forme
         private void PakovanjaForm_Load(object sender, EventArgs e)
         {
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+            popuniPodacima();
+        }
+        public void popuniPodacima()
+        {
+            List<PakovanjaPregled> podaci = DTOManager.vratiPakovanjaZaLek(lek.KomercijalniNaziv);
+            dataGridView1.DataSource = podaci;
         }
     }
 }

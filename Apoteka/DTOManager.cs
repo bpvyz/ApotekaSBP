@@ -286,7 +286,7 @@ namespace Apoteka
                                                                                         where o.Lek.KomercijalniNaziv == id
                                                                                         select o;
 
-                //upit treba da bude select o.Bolest.Naziv, i da se za selektovan lek, prikazuju bolesti za koje je taj lek kontraindikacija
+            
 
                 foreach (Apoteka.Entiteti.LekLeci ll in sveIndikacije)
                 {
@@ -334,6 +334,38 @@ namespace Apoteka
             return kontraindikacije;
         }
         #endregion
+
+
+        #region Pakovanja
+        public static List<PakovanjaPregled> vratiPakovanjaZaLek(string id)
+        {
+            List<PakovanjaPregled> pakovanja = new List<PakovanjaPregled>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                IEnumerable<Apoteka.Entiteti.Pakovanje> svaPakovanja = from o in s.Query<Apoteka.Entiteti.Pakovanje>()
+                                                                                        where o.Lek.KomercijalniNaziv == id
+                                                                                        select o;
+
+            
+
+                foreach (Apoteka.Entiteti.Pakovanje pak in svaPakovanja)
+                {
+                    pakovanja.Add(new PakovanjaPregled(pak.Id, pak.Oblik,pak.Kolicina,pak.Sastav,pak.Lek));
+                }
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+
+            return pakovanja;
+        }
+        #endregion
+
 
 
     }

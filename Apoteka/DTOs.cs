@@ -163,7 +163,7 @@ namespace Apoteka
         public bool IzdajeSeNaRecept { get; set; }
         public float ProcenatParticipacije { get; set; }
         public float Cena { get; set; }
-        public IList<PakovanjeBasic> Pakovanja { get; set; }
+        public IList<PakovanjaBasic> Pakovanja { get; set; }
         public IList<LekLeciBasic> Leci { get; set; }
         public IList<LekKontraindikacijaBasic> Kontraindikacije { get; set; }
         public GrupaLekovaBasic GrupaLekova { get; set; }
@@ -172,7 +172,7 @@ namespace Apoteka
 
         public LekBasic()
         {
-            Pakovanja = new List<PakovanjeBasic>();
+            Pakovanja = new List<PakovanjaBasic>();
             Leci = new List<LekLeciBasic>();
             Kontraindikacije = new List<LekKontraindikacijaBasic>();
             GrupaLekova = new GrupaLekovaBasic(); //da se proveri
@@ -295,7 +295,7 @@ namespace Apoteka
 
     #region Pakovanje
 
-    public class PakovanjeBasic
+    public class PakovanjaBasic
     {
         public int Id { get; protected set; }
         public string Oblik { get; set; }
@@ -303,12 +303,12 @@ namespace Apoteka
         public string Sastav { get; set; }
         public LekBasic Lek { get; set; }
 
-        public PakovanjeBasic()
+        public PakovanjaBasic()
         {
             Lek = new LekBasic(); //da se proveri
         }
 
-        public PakovanjeBasic(int id, string oblik, int kolicina, string sastav, LekBasic lek)
+        public PakovanjaBasic(int id, string oblik, int kolicina, string sastav, LekBasic lek)
         {
             this.Id = id;
             this.Oblik = oblik;
@@ -317,20 +317,20 @@ namespace Apoteka
             this.Kolicina = kolicina;
         }
     }
-    public class PakovanjePregled
+    public class PakovanjaPregled
     {
         public int Id { get; protected set; }
         public string Oblik { get; set; }
         public int Kolicina { get; set; }
         public string Sastav { get; set; }
-        public LekPregled Lek { get; set; }
+        public Lek Lek { get; set; }
 
-        public PakovanjePregled()
+        public PakovanjaPregled()
         {
-            Lek = new LekPregled(); // da se proveri
+            Lek = new Lek();
         }
 
-        public PakovanjePregled(int id, string oblik, int kolicina, string sastav, LekPregled lek)
+        public PakovanjaPregled(int id, string oblik, int kolicina, string sastav, Lek lek)
         {
             this.Id = id;
             this.Oblik = oblik;

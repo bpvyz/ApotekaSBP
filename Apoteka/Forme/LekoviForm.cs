@@ -62,7 +62,16 @@ namespace Apoteka
 
         private void btnPakovanja_Click(object sender, EventArgs e)
         {
-            PakovanjaForm forma = new PakovanjaForm();
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Izaberite lek čije pakovanja želite da vidite!");
+                return;
+            }
+            DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+            string idLeka = selectedRow.Cells[0].Value.ToString();
+
+            LekBasic l = DTOManager.vratiLek(idLeka);
+            PakovanjaForm forma = new PakovanjaForm(l);
             forma.ShowDialog();
         }
 
