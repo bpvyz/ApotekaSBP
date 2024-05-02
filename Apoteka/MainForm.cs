@@ -53,9 +53,7 @@ namespace Apoteka
             toolTip1.SetToolTip(button5, "Informacije o prodajnim mestima,\n zaposlenima, \nzalihama lekova i izdatim receptima na datom\n prodajnom mestu sa mogućnošću izmena.");
             toolTip2.SetToolTip(button6, "Spisak svih zaposlenih sa mogućnošću brisanja.");
             toolTip3.SetToolTip(button7, "Spisak svih lekova,\nnjihovih indikacija, kontraindikacija i pakovanja,\nsa mogućnošću izmena.");
-            toolTip4.SetToolTip(button8, "blablalbalbablablalbalbablablalbalbablablalbalbablablalbalbablablalbalbablablalbalba\n" +
-                "blablalbalbablablalbalbablablalbalbablablalbalbablablalbalbablablalbalbablablalbalbablablalbalba\n" +
-                "blablalbalbablablalbalbablablalbalbablablalbalba");
+            toolTip4.SetToolTip(button8, "Spisak svih bolesti, sa mogućnošću izmena.");
         }
 
         private void button1_Paint(object sender, PaintEventArgs e)

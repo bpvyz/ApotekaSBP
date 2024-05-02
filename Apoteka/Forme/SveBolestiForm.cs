@@ -32,6 +32,7 @@ namespace Apoteka.Forme
         private void btnObrisiBolest_Click(object sender, EventArgs e)
         {
             //TODO: Obrisi bolest iz svih
+            //Za diskusiju, s obzirom da obrisi bolest nema bas smisla...
         }
 
         private void SveBolestiForm_Load(object sender, EventArgs e)
