@@ -94,7 +94,7 @@ namespace Apoteka
 
         private void button1_Paint(object sender, PaintEventArgs e)
         {
-            ControlPaint.DrawBorder(e.Graphics, button1.ClientRectangle,
+        ControlPaint.DrawBorder(e.Graphics, button1.ClientRectangle,
         SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset,
         SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset,
         SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset,
@@ -103,12 +103,12 @@ namespace Apoteka
         //TODO: Zavrsi ovo...
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (keyData == (Keys.Control | Keys.Escape))
+            if (keyData == (Keys.Escape))
             {
                 button7.PerformClick();
             }
        
-            if (keyData == (Keys.Control | Keys.F1))
+            if (keyData == (Keys.F1))
             {
                 button8.PerformClick();
             }
@@ -122,7 +122,17 @@ namespace Apoteka
 
         private void button8_Click(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Maximized;
+            if(this.WindowState  == FormWindowState.Normal)
+            {
+                this.WindowState = FormWindowState.Maximized;
+                this.button8.Text = "Smanji prozor <F1>";
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Normal;
+                this.button8.Text = "Proširi prozor <F1>";
+            }
+
         }
     }
 }

@@ -44,5 +44,46 @@ namespace Apoteka.Forme
             List<BolestPregled> podaci = DTOManager.vratiSveBolesti();
             dataGridView1.DataSource = podaci;
         }
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Escape))
+            {
+                button7.PerformClick();
+            }
+
+            if (keyData == (Keys.F1))
+            {
+                button8.PerformClick();
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void button5_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, button5.ClientRectangle,
+        SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset,
+        SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset,
+        SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset,
+        SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset);
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Normal)
+            {
+                this.WindowState = FormWindowState.Maximized;
+                this.button8.Text = "Smanji prozor <F1>";
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Normal;
+                this.button8.Text = "Proširi prozor <F1>";
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
