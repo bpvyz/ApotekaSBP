@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NHibernate;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,10 +18,10 @@ namespace Apoteka.Forme
         {
             InitializeComponent();
         }
-        public IndikacijeForm(LekBasic lek)
+        public IndikacijeForm(LekBasic Lek)
         {
             InitializeComponent();
-            this.lek = lek;
+            this.lek = Lek;
         }
         private void btnDodajIndikaciju_Click(object sender, EventArgs e)
         {
@@ -51,9 +52,19 @@ namespace Apoteka.Forme
         }
         public void popuniPodacima()
         {
-            List<LekLeciPregled> podaci = DTOManager.vratiIndikacijeZaLek(lek.KomercijalniNaziv);
-            dataGridView1.DataSource = podaci;
+            List<BolestPregled> podaci = DTOManager.vratiIndikacijeZaLek(lek.KomercijalniNaziv);
 
+            dataGridView1.Columns.Clear(); // Clear any existing columns
+
+
+            // Create a column for the Bolest property
+            DataGridViewTextBoxColumn bolestColumn = new DataGridViewTextBoxColumn();
+            bolestColumn.DataPropertyName = "Naziv";
+            bolestColumn.HeaderText = "Bolest";
+            dataGridView1.Columns.Add(bolestColumn);
+
+            dataGridView1.AutoGenerateColumns = false; // Disable automatic column generation
+            dataGridView1.DataSource = podaci;
         }
     }
 }

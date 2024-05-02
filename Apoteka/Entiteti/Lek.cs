@@ -31,5 +31,10 @@ namespace Apoteka.Entiteti
             ProdajnoMesto = new ProdajnoMesto();
             Recepti = new List<Recept>();
         }
+
+        public override string ToString()
+        {
+            return $"{KomercijalniNaziv}";
+        }
     }
 }

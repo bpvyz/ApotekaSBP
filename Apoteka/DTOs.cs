@@ -32,16 +32,14 @@ namespace Apoteka
 
     public class BolestPregled
     {
-        public int BolestId { get; set; }
         public string Naziv { get; set; }
 
         public BolestPregled()
         {
         }
 
-        public BolestPregled(int bolId, string Naziv)
+        public BolestPregled(string Naziv)
         {
-            this.BolestId = bolId;
             this.Naziv = Naziv;
         }
 
@@ -266,30 +264,43 @@ namespace Apoteka
 
     public class LekLeciBasic
     {
+        public LekLeciId Id;
         public LekBasic Lek { get; protected set; }
         public BolestBasic Bolest { get; protected set; }
 
         public LekLeciBasic() { }
 
-        public LekLeciBasic(LekBasic lekBasic, BolestBasic bolest)
+        public LekLeciBasic(LekLeciId id, LekBasic lekBasic, BolestBasic bolest)
         {
+            this.Id = id;
             this.Lek = lekBasic;
             this.Bolest = bolest;
         }
     }
     public class LekLeciPregled
     {
+        public LekLeciId Id;
         public Lek Lek { get; protected set; }
         public Bolest Bolest { get; protected set; }
 
-        public LekLeciPregled() { }
-
-        public LekLeciPregled(Lek lek, Bolest bolest)
+        public string LekKomercijalniNaziv
         {
-            this.Lek = lek;
-            this.Bolest = bolest;
+            get { return Lek.KomercijalniNaziv; }
         }
 
+        public string BolestNaziv
+        {
+            get { return Bolest.Naziv; }
+        }
+
+        public LekLeciPregled() { }
+
+        public LekLeciPregled(LekLeciId id, Lek lek, Bolest bolest)
+        {
+            Id = id;
+            Lek = lek;
+            Bolest = bolest;
+        }
     }
     #endregion
 
@@ -564,4 +575,5 @@ namespace Apoteka
         }
     }
     #endregion
+
 }

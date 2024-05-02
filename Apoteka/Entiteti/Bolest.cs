@@ -12,10 +12,16 @@ namespace Apoteka.Entiteti
         public virtual string Naziv { get; set; }
         public virtual IList<LekLeci> LekLeci { get; set; }
         public virtual IList<LekKontraindikacija> LekKontraindikacija { get; set; }
+
         public Bolest() 
         { 
             LekLeci = new List<LekLeci>();
             LekKontraindikacija = new List<LekKontraindikacija>();
+        }
+
+        public override string ToString()
+        {
+            return Naziv;
         }
     }
 }

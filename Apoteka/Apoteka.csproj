@@ -115,6 +115,7 @@
     <Compile Include="Entiteti\Lek.cs" />
     <Compile Include="Entiteti\LekKontraindikacija.cs" />
     <Compile Include="Entiteti\LekLeci.cs" />
+    <Compile Include="Entiteti\LekLeciId.cs" />
     <Compile Include="Entiteti\Pakovanje.cs" />
     <Compile Include="Entiteti\ProdajnoMesto.cs" />
     <Compile Include="Entiteti\Recept.cs" />

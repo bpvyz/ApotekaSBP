@@ -150,7 +150,7 @@ namespace Apoteka
 
                 foreach (Apoteka.Entiteti.Bolest b in sveBolesti)
                 {
-                    bolesti.Add(new BolestPregled(b.Id, b.Naziv));
+                    bolesti.Add(new BolestPregled(b.Naziv));
                 }
 
                 s.Close();
@@ -258,7 +258,7 @@ namespace Apoteka
                 ISession s = DataLayer.GetSession();
 
                 Apoteka.Entiteti.Lek o = s.Load<Apoteka.Entiteti.Lek>(idLeka);
-                l = new LekBasic(l.KomercijalniNaziv, l.HemijskiNaziv, l.NacinDoziranjaOdrasli, l.NacinDoziranjaDeca, l.NacinDoziranjaTrudnice, l.IzdajeSeNaRecept, l.ProcenatParticipacije, l.Cena);
+                l = new LekBasic(o.KomercijalniNaziv, o.HemijskiNaziv, o.NacinDoziranjaOdrasli, o.NacinDoziranjaDeca, o.NacinDoziranjaTrudnice, o.IzdajeSeNaRecept, o.ProcenatParticipacije, o.Cena);
 
                 s.Close();
             }
@@ -275,22 +275,22 @@ namespace Apoteka
 
 
         #region Indikacije
-        public static List<LekLeciPregled> vratiIndikacijeZaLek(string id)
+        public static List<BolestPregled> vratiIndikacijeZaLek(string id)
         {
-            List<LekLeciPregled> indikacije = new List<LekLeciPregled>();
+            List<BolestPregled> indikacije = new List<BolestPregled>();
             try
             {
                 ISession s = DataLayer.GetSession();
 
                 IEnumerable<Apoteka.Entiteti.LekLeci> sveIndikacije = from o in s.Query<Apoteka.Entiteti.LekLeci>()
-                                                                                        where o.Lek.KomercijalniNaziv == id
+                                                                                        where o.Id.LekLeci.KomercijalniNaziv == id
                                                                                         select o;
 
             
 
                 foreach (Apoteka.Entiteti.LekLeci ll in sveIndikacije)
                 {
-                    indikacije.Add(new LekLeciPregled(ll.Lek, ll.Bolest));
+                    indikacije.Add(new BolestPregled(ll.Id.LeciBolest.Naziv));
                 }
 
                 s.Close();

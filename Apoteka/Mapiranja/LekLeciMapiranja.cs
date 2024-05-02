@@ -14,9 +14,12 @@ namespace Apoteka.Mapiranja
         {
             Table("LEK_LECI");
 
-            CompositeId()
-            .KeyReference(x => x.Lek, "LEK_ID")
-            .KeyReference(x => x.Bolest, "BOLEST_ID");
+            CompositeId(x => x.Id)
+                .KeyReference(x => x.LekLeci, "LEK_ID")
+                .KeyReference(x => x.LeciBolest, "BOLEST_ID");
+
         }
     }
+
+
 }
