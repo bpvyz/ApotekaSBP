@@ -228,14 +228,16 @@ namespace Apoteka
     #region LekKontradikcija
     public class LekKontraindikacijaBasic
     {
+        public LekKontraindikacijaId Id { get; set; }
         public LekBasic Lek { get; protected set; }
         public BolestBasic Bolest { get; protected set; }
 
         public LekKontraindikacijaBasic()
         { }
 
-        public LekKontraindikacijaBasic(LekBasic lek, BolestBasic bolest)
+        public LekKontraindikacijaBasic(LekKontraindikacijaId id, LekBasic lek, BolestBasic bolest)
         {
+            this.Id = id;
             this.Lek = lek;
             this.Bolest = bolest;
         }
@@ -243,6 +245,7 @@ namespace Apoteka
     }
     public class LekKontraindikacijaPregled
     {
+        public LekKontraindikacijaId Id { get; set; }
         public Lek Lek { get; protected set; }
         public Bolest Bolest { get; protected set; }
 
@@ -251,8 +254,9 @@ namespace Apoteka
             
         }
 
-        public LekKontraindikacijaPregled(Lek lek, Bolest bolest)
+        public LekKontraindikacijaPregled(LekKontraindikacijaId id, Lek lek, Bolest bolest)
         {
+            this.Id = id;
             this.Lek = lek;
             this.Bolest = bolest;
         }
@@ -282,16 +286,6 @@ namespace Apoteka
         public LekLeciId Id;
         public Lek Lek { get; protected set; }
         public Bolest Bolest { get; protected set; }
-
-        public string LekKomercijalniNaziv
-        {
-            get { return Lek.KomercijalniNaziv; }
-        }
-
-        public string BolestNaziv
-        {
-            get { return Bolest.Naziv; }
-        }
 
         public LekLeciPregled() { }
 

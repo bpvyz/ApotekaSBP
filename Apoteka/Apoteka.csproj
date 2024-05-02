@@ -114,6 +114,7 @@
     <Compile Include="Entiteti\GrupaLekova.cs" />
     <Compile Include="Entiteti\Lek.cs" />
     <Compile Include="Entiteti\LekKontraindikacija.cs" />
+    <Compile Include="Entiteti\LekKontraindikacijaId.cs" />
     <Compile Include="Entiteti\LekLeci.cs" />
     <Compile Include="Entiteti\LekLeciId.cs" />
     <Compile Include="Entiteti\Pakovanje.cs" />

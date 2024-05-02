@@ -47,7 +47,18 @@ namespace Apoteka.Forme
         }
         public void popuniPodacima()
         {
-            List<LekKontraindikacijaPregled> podaci = DTOManager.vratiKontraindikacijeZaLek(lek.KomercijalniNaziv);
+            List<BolestPregled> podaci = DTOManager.vratiKontraindikacijeZaLek(lek.KomercijalniNaziv);
+
+            dataGridView1.Columns.Clear(); // Clear any existing columns
+
+
+            // Create a column for the Bolest property
+            DataGridViewTextBoxColumn bolestColumn = new DataGridViewTextBoxColumn();
+            bolestColumn.DataPropertyName = "Naziv";
+            bolestColumn.HeaderText = "Bolest";
+            dataGridView1.Columns.Add(bolestColumn);
+
+            dataGridView1.AutoGenerateColumns = false; // Disable automatic column generation
             dataGridView1.DataSource = podaci;
 
         }

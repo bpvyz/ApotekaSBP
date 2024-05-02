@@ -306,22 +306,20 @@ namespace Apoteka
 
 
         #region Kontraindikacije
-        public static List<LekKontraindikacijaPregled> vratiKontraindikacijeZaLek(string id)
+        public static List<BolestPregled> vratiKontraindikacijeZaLek(string id)
         {
-            List<LekKontraindikacijaPregled> kontraindikacije = new List<LekKontraindikacijaPregled>();
+            List<BolestPregled> kontraindikacije = new List<BolestPregled>();
             try
             {
                 ISession s = DataLayer.GetSession();
 
                 IEnumerable<Apoteka.Entiteti.LekKontraindikacija> sveKontraindikacije = from o in s.Query<Apoteka.Entiteti.LekKontraindikacija>()
-                                                                        where o.Lek.KomercijalniNaziv == id
+                                                                        where o.Id.LekIzaziva.KomercijalniNaziv == id
                                                                         select o; 
-
-                //upit treba da bude select o.Bolest.Naziv, i da se za selektovan lek, prikazuju bolesti za koje je taj lek kontraindikacija
 
                 foreach (Apoteka.Entiteti.LekKontraindikacija lk in sveKontraindikacije)
                 {
-                    kontraindikacije.Add(new LekKontraindikacijaPregled(lk.Lek,lk.Bolest));
+                    kontraindikacije.Add(new BolestPregled(lk.Id.IzazivaBolest.Naziv));
                 }
 
                 s.Close();
