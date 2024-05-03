@@ -16,7 +16,7 @@ namespace Apoteka.Mapiranja
 
             Id(x => x.Id).Column("ID").GeneratedBy.Identity();
             Map(x => x.Oblik).Column("OBLIK").Not.Nullable();
-            Map(x => x.Kolicina).Column("KOLICINA_LEKA").Not.Nullable();
+            Map(x => x.Kolicina).Column("KOLICINA").Not.Nullable();
             Map(x => x.Sastav).Column("SASTAV");
             References(x => x.Lek).Column("LEK_ID").Not.Nullable();
         }
