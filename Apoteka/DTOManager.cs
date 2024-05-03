@@ -388,6 +388,26 @@ namespace Apoteka
                 //handle exceptions
             }
         }
+
+        public static PakovanjaBasic vratiPakovanje(int idPakovanja)
+        {
+            PakovanjaBasic pb = new PakovanjaBasic();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Apoteka.Entiteti.Pakovanje p = s.Load<Apoteka.Entiteti.Pakovanje>(idPakovanja);
+                pb = new PakovanjaBasic(p.Id, p.Oblik, p.Kolicina, p.Sastav);
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+
+            return pb;
+        }
         #endregion
 
 

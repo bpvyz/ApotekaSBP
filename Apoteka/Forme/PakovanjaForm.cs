@@ -38,7 +38,10 @@ namespace Apoteka.Forme
 
         private void btnIzmeniPakovanje_Click(object sender, EventArgs e)
         {
-            IzmeniPakovanjeForm forma = new IzmeniPakovanjeForm();
+            int idPakovanja = (int)dataGridView1.SelectedRows[0].Cells["Id"].Value;
+            PakovanjaBasic pak = DTOManager.vratiPakovanje(idPakovanja);
+
+            IzmeniPakovanjeForm forma = new IzmeniPakovanjeForm(pak);
             forma.ShowDialog();
         }
 

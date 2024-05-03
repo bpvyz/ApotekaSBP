@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Apoteka.Entiteti;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,14 +13,28 @@ namespace Apoteka.Forme
 {
     public partial class IzmeniPakovanjeForm : Form
     {
+        PakovanjaBasic pakovanje;
         public IzmeniPakovanjeForm()
         {
             InitializeComponent();
         }
 
+        public IzmeniPakovanjeForm(PakovanjaBasic pak)
+        {
+            InitializeComponent();
+            this.pakovanje = pak;
+        }
+
         private void IzmeniPakovanjeForm_Load(object sender, EventArgs e)
         {
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+            popuniPodacima();
+        }
+        public void popuniPodacima()
+        {
+            comboBox1.SelectedItem = pakovanje.Oblik;
+            textBox2.Text = pakovanje.Sastav;
+            numericUpDown1.Value = pakovanje.Kolicina;
         }
 
         private void btnIzmeniPakovanje_Click(object sender, EventArgs e)
