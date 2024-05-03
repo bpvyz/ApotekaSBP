@@ -21,5 +21,49 @@ namespace Apoteka.Forme
         {
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
         }
+
+        private void btnIzmeniPakovanje_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnIzmeniPakovanje_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, button6.ClientRectangle,
+        SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset,
+        SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset,
+        SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset,
+        SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset);
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

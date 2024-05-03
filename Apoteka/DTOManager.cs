@@ -350,7 +350,7 @@ namespace Apoteka
 
                 foreach (Apoteka.Entiteti.Pakovanje pak in svaPakovanja)
                 {
-                    pakovanja.Add(new PakovanjaPregled(pak.Id, pak.Oblik,pak.Kolicina,pak.Sastav,pak.Lek));
+                    pakovanja.Add(new PakovanjaPregled(pak.Id, pak.Oblik,pak.Kolicina,pak.Sastav));
                 }
 
                 s.Close();
@@ -361,6 +361,32 @@ namespace Apoteka
             }
 
             return pakovanja;
+        }
+
+        public static void dodajPakovanje(PakovanjaBasic pakovanje)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Apoteka.Entiteti.Pakovanje p = new Apoteka.Entiteti.Pakovanje();
+                p.Sastav = pakovanje.Sastav;
+                p.Kolicina = pakovanje.Kolicina;
+                p.Oblik = pakovanje.Oblik;
+                Apoteka.Entiteti.Lek l = s.Load<Apoteka.Entiteti.Lek>(pakovanje.Lek.KomercijalniNaziv);
+                p.Lek = l;
+
+
+                s.Save(p);
+
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
         }
         #endregion
 

@@ -31,7 +31,7 @@ namespace Apoteka.Forme
 
         private void btnDodajPakovanje_Click(object sender, EventArgs e)
         {
-            DodajPakovanjeForm forma = new DodajPakovanjeForm();
+            DodajPakovanjeForm forma = new DodajPakovanjeForm(lek);
             forma.ShowDialog();
             //TODO: Resiti problem kako identifikovati koja zaliha grupa lekova pripada kojem prodajnom mestu
         }

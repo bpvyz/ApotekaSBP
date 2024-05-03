@@ -21,5 +21,10 @@ namespace Apoteka.Forme
         {
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

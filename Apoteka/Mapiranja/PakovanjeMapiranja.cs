@@ -14,7 +14,7 @@ namespace Apoteka.Mapiranja
         {
             Table("PAKOVANJE");
 
-            Id(x => x.Id).Column("ID").GeneratedBy.Identity();
+            Id(x => x.Id, "ID").GeneratedBy.TriggerIdentity();
             Map(x => x.Oblik).Column("OBLIK").Not.Nullable();
             Map(x => x.Kolicina).Column("KOLICINA").Not.Nullable();
             Map(x => x.Sastav).Column("SASTAV");
