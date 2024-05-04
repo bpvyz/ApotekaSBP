@@ -22,6 +22,7 @@ namespace Apoteka
         {
             DodajLekForm forma = new DodajLekForm();
             forma.ShowDialog();
+            this.popuniPodacima();
         }
 
         private void btnIzmeniLek_Click(object sender, EventArgs e)
@@ -30,6 +31,7 @@ namespace Apoteka
             LekBasic lek = DTOManager.vratiLek(idLeka);
             IzmeniLekForm forma = new IzmeniLekForm(lek);
             forma.ShowDialog();
+            this.popuniPodacima();
         }
 
         private void btnIndikacije_Click(object sender, EventArgs e)
@@ -45,6 +47,7 @@ namespace Apoteka
             LekBasic l = DTOManager.vratiLek(idLeka);
             IndikacijeForm forma = new IndikacijeForm(l);
             forma.ShowDialog();
+
         }
 
         private void btnKontraindikacije_Click(object sender, EventArgs e)
@@ -60,6 +63,7 @@ namespace Apoteka
             LekBasic l = DTOManager.vratiLek(idLeka);
             KontraindikacijeForm forma = new KontraindikacijeForm(l);
             forma.ShowDialog();
+
         }
 
         private void btnPakovanja_Click(object sender, EventArgs e)
@@ -79,7 +83,28 @@ namespace Apoteka
 
         private void btnObrisiLek_Click(object sender, EventArgs e)
         {
-            // TODO: Obrisi lek
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Izaberite lek koje želite da obrišete!");
+                return;
+            }
+
+            string idLeka = (string)dataGridView1.SelectedRows[0].Cells["KomercijalniNaziv"].Value;
+            string poruka = "Da li želite da obrišete izabrani lek?";
+            string title = "Pitanje";
+            MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
+            DialogResult result = MessageBox.Show(poruka, title, buttons);
+
+            if (result == DialogResult.OK)
+            {
+                DTOManager.obrisiLek(idLeka);
+                MessageBox.Show("Brisanje leka je uspešno obavljeno!");
+                this.popuniPodacima();
+            }
+            else
+            {
+
+            }
         }
 
         private void LekoviForm_Load(object sender, EventArgs e)

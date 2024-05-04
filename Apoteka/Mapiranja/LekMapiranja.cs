@@ -24,7 +24,7 @@ namespace Apoteka.Mapiranja
             Map(x => x.Cena).Column("CENA").Not.Nullable();
             References(x => x.GrupaLekova).Column("GRUPA_LEKOVA_ID").Not.Nullable();
             References(x => x.ProdajnoMesto).Column("PRODAJNO_MESTO_ID").Not.Nullable();
-            HasMany(x => x.Pakovanja).KeyColumn("LEK_ID").Cascade.All();
+            HasMany(x => x.Pakovanja).KeyColumn("LEK_ID").Cascade.AllDeleteOrphan().Inverse();
             HasMany(x => x.Recepti).KeyColumn("LEK_ID").Cascade.All();
             HasMany(x => x.Leci).KeyColumn("LEK_ID").Inverse().Cascade.All();
             HasMany(x => x.Kontraindikacije).KeyColumn("LEK_ID").Inverse().Cascade.All();

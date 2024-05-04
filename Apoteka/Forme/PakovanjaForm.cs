@@ -26,13 +26,35 @@ namespace Apoteka.Forme
 
         private void btnObrisiPakovanje_Click(object sender, EventArgs e)
         {
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Izaberite pakovanje koje želite da obrišete!");
+                return;
+            }
 
+            int idPakovanja = (int)dataGridView1.SelectedRows[0].Cells["Id"].Value;
+            string poruka = "Da li želite da obrišete izabrano pakovanje?";
+            string title = "Pitanje";
+            MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
+            DialogResult result = MessageBox.Show(poruka, title, buttons);
+
+            if (result == DialogResult.OK)
+            {
+                DTOManager.obrisiPakovanje(idPakovanja);
+                MessageBox.Show("Brisanje pakovanja je uspešno obavljeno!");
+                this.popuniPodacima();
+            }
+            else
+            {
+
+            }
         }
 
         private void btnDodajPakovanje_Click(object sender, EventArgs e)
         {
             DodajPakovanjeForm forma = new DodajPakovanjeForm(lek);
             forma.ShowDialog();
+            this.popuniPodacima();
             //TODO: Resiti problem kako identifikovati koja zaliha grupa lekova pripada kojem prodajnom mestu
         }
 
@@ -43,6 +65,7 @@ namespace Apoteka.Forme
 
             IzmeniPakovanjeForm forma = new IzmeniPakovanjeForm(pak);
             forma.ShowDialog();
+            this.popuniPodacima();
         }
 
         private void PakovanjaForm_Load(object sender, EventArgs e)

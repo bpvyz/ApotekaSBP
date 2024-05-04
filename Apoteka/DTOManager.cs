@@ -543,6 +543,48 @@ namespace Apoteka
                 //handle exceptions
             }
         }
+
+        public static void obrisiPakovanje(int idPakovanja)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Pakovanje pakovanje = s.Load<Pakovanje>(idPakovanja);
+
+                s.Delete(pakovanje);
+                s.Flush();
+
+
+
+                s.Close();
+
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+        }
+
+        public static void obrisiLek(string idLeka)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Lek lek = s.Load<Lek>(idLeka);
+
+                s.Delete(lek);
+                s.Flush();
+
+                s.Close();
+
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+        }
         #endregion
 
 
