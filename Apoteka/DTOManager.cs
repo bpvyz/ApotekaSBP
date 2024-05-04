@@ -627,6 +627,26 @@ namespace Apoteka
                 //handle exceptions
             }
         }
+
+        public static void obrisiBolest(int idBolesti)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Bolest bolest = s.Load<Bolest>(idBolesti);
+
+                s.Delete(bolest);
+                s.Flush();
+
+                s.Close();
+
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+        }
         #endregion
 
 

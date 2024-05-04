@@ -41,8 +41,28 @@ namespace Apoteka.Forme
 
         private void btnObrisiBolest_Click(object sender, EventArgs e)
         {
-            //TODO: Obrisi bolest iz svih
-            //Za diskusiju, s obzirom da obrisi bolest nema bas smisla...
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Izaberite bolest koju želite da obrišete!");
+                return;
+            }
+
+            int idBolesti = (int)dataGridView1.SelectedRows[0].Cells["Id"].Value;
+            string poruka = "Da li želite da obrišete izabranu bolest?";
+            string title = "Pitanje";
+            MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
+            DialogResult result = MessageBox.Show(poruka, title, buttons);
+
+            if (result == DialogResult.OK)
+            {
+                DTOManager.obrisiBolest(idBolesti);
+                MessageBox.Show("Brisanje bolesti je uspešno obavljeno!");
+                this.popuniPodacima();
+            }
+            else
+            {
+
+            }
         }
 
         private void SveBolestiForm_Load(object sender, EventArgs e)
