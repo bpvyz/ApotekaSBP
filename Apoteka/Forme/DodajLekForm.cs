@@ -23,16 +23,16 @@ namespace Apoteka.Forme
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
             List<GrupaLekovaPregled> grupe = DTOManager.vratiSveGrupeLekova();
             List<ProdajnoMestoPregled> prodajnamesta = DTOManager.vratiSvaProdajnaMesta();
+            comboBox1.DisplayMember = "Naziv";
+            comboBox2.DisplayMember = "JedinstveniBroj";
             foreach(GrupaLekovaPregled grupa in grupe)
             {
-                comboBox1.Items.Add(grupa.Id);
+                comboBox1.Items.Add(grupa);
             }
             foreach (ProdajnoMestoPregled prodajnomesto in prodajnamesta)
             {
-                comboBox2.Items.Add(prodajnomesto.JedinstveniBroj);
+                comboBox2.Items.Add(prodajnomesto);
             }
-            toolTip1.OwnerDraw = true;
-            toolTip1.SetToolTip(comboBox1, "1 - Antibiotici\n2 - Analgetici\n3 - Antipiretici\n4 - Diuretici");
         }
 
         private void btnDodajLek_Click(object sender, EventArgs e)
@@ -46,34 +46,13 @@ namespace Apoteka.Forme
             lek.NacinDoziranjaTrudnice = textBox3.Text;
             lek.NacinDoziranjaOdrasli = textBox5.Text;
             lek.NacinDoziranjaDeca = textBox6.Text;
-            int gl = (int)comboBox1.SelectedItem;
-            string pm = comboBox2.SelectedItem.ToString();
+            GrupaLekovaPregled gl = (GrupaLekovaPregled)comboBox1.SelectedItem;
+            ProdajnoMestoPregled pm = (ProdajnoMestoPregled)comboBox2.SelectedItem;
 
             DTOManager.dodajLek(lek, gl, pm);
 
             MessageBox.Show("Uspešno ste dodali novi lek!");
-        }
-
-        private void toolTip1_Draw(object sender, DrawToolTipEventArgs e)
-        {
-            e.DrawBackground();
-
-            e.Graphics.FillRectangle(Brushes.DarkGreen, e.Bounds);
-
-            e.DrawBorder();
-
-            using (StringFormat sf = new StringFormat())
-            {
-                sf.Alignment = StringAlignment.Center;
-                sf.LineAlignment = StringAlignment.Center;
-                sf.HotkeyPrefix = System.Drawing.Text.HotkeyPrefix.None;
-                sf.FormatFlags = StringFormatFlags.NoWrap;
-                using (Font f = new Font("Tahoma", 9))
-                {
-                    e.Graphics.DrawString(e.ToolTipText, f,
-                        Brushes.White, e.Bounds, sf);
-                }
-            }
+            this.Close();
         }
 
         private void button6_Paint(object sender, PaintEventArgs e)

@@ -40,6 +40,7 @@ namespace Apoteka.Forme
             DTOManager.dodajBolest(bolest);
 
             MessageBox.Show("Uspešno ste dodali novu bolest!");
+            this.Close();
         }
     }
 }

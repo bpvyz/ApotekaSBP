@@ -54,7 +54,7 @@ namespace Apoteka.Forme
         {
             List<BolestPregled> podaci = DTOManager.vratiIndikacijeZaLek(lek.KomercijalniNaziv);
 
-            dataGridView1.Columns.Clear(); // Clear any existing columns
+            dataGridView1.Columns.Clear();
 
 
             // Create a column for the Bolest property
@@ -63,7 +63,7 @@ namespace Apoteka.Forme
             bolestColumn.HeaderText = "Bolest";
             dataGridView1.Columns.Add(bolestColumn);
 
-            dataGridView1.AutoGenerateColumns = false; // Disable automatic column generation
+            dataGridView1.AutoGenerateColumns = false;
             dataGridView1.DataSource = podaci;
         }
     }

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.label7 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -49,7 +48,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.button6 = new System.Windows.Forms.Button();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
@@ -274,10 +272,6 @@
             this.button6.Click += new System.EventHandler(this.btnDodajLek_Click);
             this.button6.Paint += new System.Windows.Forms.PaintEventHandler(this.button6_Paint);
             // 
-            // toolTip1
-            // 
-            this.toolTip1.Draw += new System.Windows.Forms.DrawToolTipEventHandler(this.toolTip1_Draw);
-            // 
             // DodajLekForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -336,6 +330,5 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

@@ -456,7 +456,7 @@ namespace Apoteka
             return grupe;
         }
 
-        public static void dodajLek(LekBasic lek, int grupalekova, string prodajnomesto)
+        public static void dodajLek(LekBasic lek, GrupaLekovaPregled grupalekova, ProdajnoMestoPregled prodajnomesto)
         {
             try
             {
@@ -471,9 +471,8 @@ namespace Apoteka
                 l.HemijskiNaziv = lek.HemijskiNaziv;
                 l.KomercijalniNaziv = lek.KomercijalniNaziv;
                 l.IzdajeSeNaRecept = lek.IzdajeSeNaRecept;
-                //TODO: Popraviti ovo
-                Apoteka.Entiteti.GrupaLekova gl = s.Load<Apoteka.Entiteti.GrupaLekova>(grupalekova);
-                Apoteka.Entiteti.ProdajnoMesto pm = s.Load<Apoteka.Entiteti.ProdajnoMesto>(prodajnomesto);
+                Apoteka.Entiteti.GrupaLekova gl = s.Load<Apoteka.Entiteti.GrupaLekova>(grupalekova.Id);
+                Apoteka.Entiteti.ProdajnoMesto pm = s.Load<Apoteka.Entiteti.ProdajnoMesto>(prodajnomesto.JedinstveniBroj);
                 l.GrupaLekova = gl;
                 l.ProdajnoMesto = pm;
 
