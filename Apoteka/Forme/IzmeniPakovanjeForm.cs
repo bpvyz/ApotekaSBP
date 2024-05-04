@@ -39,7 +39,12 @@ namespace Apoteka.Forme
 
         private void btnIzmeniPakovanje_Click(object sender, EventArgs e)
         {
-
+            pakovanje.Oblik = (string)comboBox1.SelectedItem;
+            pakovanje.Kolicina = (int)numericUpDown1.Value;
+            pakovanje.Sastav = textBox2.Text;
+            DTOManager.IzmeniPakovanje(pakovanje);
+            MessageBox.Show("Uspešno ste izmenili pakovanje!");
+            this.Close();
         }
 
         private void btnIzmeniPakovanje_Paint(object sender, PaintEventArgs e)

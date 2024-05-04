@@ -489,6 +489,60 @@ namespace Apoteka
                 //handle exceptions
             }
         }
+
+        public static void IzmeniPakovanje(PakovanjaBasic pakovanje)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Apoteka.Entiteti.Pakovanje p = s.Load<Pakovanje>(pakovanje.Id);
+
+                p.Sastav = pakovanje.Sastav;
+                p.Kolicina = pakovanje.Kolicina;
+                p.Oblik = pakovanje.Oblik;
+
+
+
+                s.SaveOrUpdate(p);
+
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+        }
+
+        public static void IzmeniLek(LekBasic lek)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Apoteka.Entiteti.Lek l = s.Load<Lek>(lek.KomercijalniNaziv);
+
+                l.HemijskiNaziv = lek.HemijskiNaziv;
+                l.ProcenatParticipacije = lek.ProcenatParticipacije;
+                l.Cena = lek.Cena;
+                l.NacinDoziranjaDeca = lek.NacinDoziranjaDeca;
+                l.NacinDoziranjaOdrasli = lek.NacinDoziranjaOdrasli;
+                l.NacinDoziranjaTrudnice = lek.NacinDoziranjaTrudnice;
+                l.IzdajeSeNaRecept = lek.IzdajeSeNaRecept;
+
+                s.SaveOrUpdate(l);
+
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+        }
         #endregion
 
 

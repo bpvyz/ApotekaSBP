@@ -75,5 +75,14 @@ namespace Apoteka.Forme
                 }
             }
         }
+
+        private void button6_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, button6.ClientRectangle,
+       SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset,
+       SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset,
+       SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset,
+       SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset);
+        }
     }
 }

@@ -174,7 +174,7 @@ namespace Apoteka
             Pakovanja = new List<PakovanjaBasic>();
             Leci = new List<LekLeciBasic>();
             Kontraindikacije = new List<LekKontraindikacijaBasic>();
-            GrupaLekova = new GrupaLekovaBasic(); //da se proveri
+            GrupaLekova = new GrupaLekovaBasic();
             Recepti = new List<ReceptBasic>();
             ProdajnoMesto = new ProdajnoMestoBasic();
         }

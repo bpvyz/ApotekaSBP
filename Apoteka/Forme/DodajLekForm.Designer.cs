@@ -270,6 +270,7 @@
             this.button6.Text = "Dodaj lek";
             this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.btnDodajLek_Click);
+            this.button6.Paint += new System.Windows.Forms.PaintEventHandler(this.button6_Paint);
             // 
             // toolTip1
             // 
