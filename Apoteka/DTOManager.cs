@@ -151,7 +151,7 @@ namespace Apoteka
 
                 foreach (Apoteka.Entiteti.Bolest b in sveBolesti)
                 {
-                    bolesti.Add(new BolestPregled(b.Naziv));
+                    bolesti.Add(new BolestPregled(b.Id, b.Naziv));
                 }
 
                 s.Close();
@@ -291,7 +291,7 @@ namespace Apoteka
 
                 foreach (Apoteka.Entiteti.LekLeci ll in sveIndikacije)
                 {
-                    indikacije.Add(new BolestPregled(ll.Id.LeciBolest.Naziv));
+                    indikacije.Add(new BolestPregled(ll.Id.LeciBolest.Id, ll.Id.LeciBolest.Naziv));
                 }
 
                 s.Close();
@@ -320,7 +320,7 @@ namespace Apoteka
 
                 foreach (Apoteka.Entiteti.LekKontraindikacija lk in sveKontraindikacije)
                 {
-                    kontraindikacije.Add(new BolestPregled(lk.Id.IzazivaBolest.Naziv));
+                    kontraindikacije.Add(new BolestPregled(lk.Id.IzazivaBolest.Id, lk.Id.IzazivaBolest.Naziv));
                 }
 
                 s.Close();
@@ -579,6 +579,48 @@ namespace Apoteka
 
                 s.Close();
 
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+        }
+
+        public static BolestBasic vratiBolest(int idBolesti)
+        {
+            BolestBasic b = new BolestBasic();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Apoteka.Entiteti.Bolest bb = s.Load<Apoteka.Entiteti.Bolest>(idBolesti);
+                b = new BolestBasic(bb.Id, bb.Naziv);
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+
+            return b;
+        }
+
+        public static void IzmeniBolest(BolestBasic bolest)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Apoteka.Entiteti.Bolest b = s.Load<Bolest>(bolest.BolestId);
+
+                b.Naziv = bolest.Naziv;
+
+                s.SaveOrUpdate(b);
+
+                s.Flush();
+
+                s.Close();
             }
             catch (Exception ec)
             {

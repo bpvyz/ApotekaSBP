@@ -21,12 +21,22 @@ namespace Apoteka.Forme
         {
             DodajBolestForm forma = new DodajBolestForm();
             forma.ShowDialog();
+            popuniPodacima();
         }
 
         private void btnIzmeniBolest_Click(object sender, EventArgs e)
         {
-            IzmeniBolestForm forma = new IzmeniBolestForm();
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Izaberite lek koje želite da izmenite!");
+                return;
+            }
+
+            int idBolesti = (int)dataGridView1.SelectedRows[0].Cells["Id"].Value;
+            BolestBasic bolest = DTOManager.vratiBolest(idBolesti);
+            IzmeniBolestForm forma = new IzmeniBolestForm(bolest);
             forma.ShowDialog();
+            popuniPodacima();
         }
 
         private void btnObrisiBolest_Click(object sender, EventArgs e)

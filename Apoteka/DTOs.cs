@@ -32,14 +32,16 @@ namespace Apoteka
 
     public class BolestPregled
     {
+        public int Id { get; set; }
         public string Naziv { get; set; }
 
         public BolestPregled()
         {
         }
 
-        public BolestPregled(string Naziv)
+        public BolestPregled(int Id, string Naziv)
         {
+            this.Id = Id;
             this.Naziv = Naziv;
         }
 
