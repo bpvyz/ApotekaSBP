@@ -21,5 +21,25 @@ namespace Apoteka.Forme
         {
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
         }
+
+        private void button6_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, button6.ClientRectangle,
+   SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset,
+   SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset,
+   SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset,
+   SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset);
+
+        }
+
+        private void btnDodajBolest_Click(object sender, EventArgs e)
+        {
+            BolestBasic bolest = new BolestBasic();
+            bolest.Naziv = textBox1.Text;
+
+            DTOManager.dodajBolest(bolest);
+
+            MessageBox.Show("Uspešno ste dodali novu bolest!");
+        }
     }
 }

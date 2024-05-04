@@ -39,7 +39,7 @@ namespace Apoteka.Forme
 
             DTOManager.dodajPakovanje(pakovanje);
 
-            MessageBox.Show("Uspesno ste dodali novo pakovanje!");
+            MessageBox.Show("Uspešno ste dodali novo pakovanje!");
         }
 
         private void button6_Paint(object sender, PaintEventArgs e)

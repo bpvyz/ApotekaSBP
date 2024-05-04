@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NHibernate;
 using NHibernate.Linq;
+using Apoteka.Entiteti;
 
 namespace Apoteka
 {
@@ -407,6 +408,86 @@ namespace Apoteka
             }
 
             return pb;
+        }
+
+        public static void dodajBolest(BolestBasic bolest)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Apoteka.Entiteti.Bolest b = new Apoteka.Entiteti.Bolest();
+                b.Naziv = bolest.Naziv;
+
+                s.Save(b);
+
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+        }
+
+        public static List<GrupaLekovaPregled> vratiSveGrupeLekova()
+        {
+            List<GrupaLekovaPregled> grupe = new List<GrupaLekovaPregled>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                IEnumerable<Apoteka.Entiteti.GrupaLekova> sveGrupe = from o in s.Query<Apoteka.Entiteti.GrupaLekova>()
+                                                                            select o;
+
+                foreach (Apoteka.Entiteti.GrupaLekova g in sveGrupe)
+                {
+                    grupe.Add(new GrupaLekovaPregled(g.Id, g.Naziv));
+                }
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+
+            return grupe;
+        }
+
+        public static void dodajLek(LekBasic lek, int grupalekova, string prodajnomesto)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Apoteka.Entiteti.Lek l = new Apoteka.Entiteti.Lek();
+                l.Cena = lek.Cena;
+                l.ProcenatParticipacije = lek.ProcenatParticipacije;
+                l.NacinDoziranjaTrudnice = lek.NacinDoziranjaTrudnice;
+                l.NacinDoziranjaOdrasli = lek.NacinDoziranjaOdrasli;
+                l.NacinDoziranjaDeca = lek.NacinDoziranjaDeca;
+                l.HemijskiNaziv = lek.HemijskiNaziv;
+                l.KomercijalniNaziv = lek.KomercijalniNaziv;
+                l.IzdajeSeNaRecept = lek.IzdajeSeNaRecept;
+                //TODO: Popraviti ovo
+                Apoteka.Entiteti.GrupaLekova gl = s.Load<Apoteka.Entiteti.GrupaLekova>(grupalekova);
+                Apoteka.Entiteti.ProdajnoMesto pm = s.Load<Apoteka.Entiteti.ProdajnoMesto>(prodajnomesto);
+                l.GrupaLekova = gl;
+                l.ProdajnoMesto = pm;
+
+
+                s.Save(l);
+
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
         }
         #endregion
 

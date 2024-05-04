@@ -164,6 +164,7 @@ namespace Apoteka
         public IList<PakovanjaBasic> Pakovanja { get; set; }
         public IList<LekLeciBasic> Leci { get; set; }
         public IList<LekKontraindikacijaBasic> Kontraindikacije { get; set; }
+        public ProdajnoMestoBasic ProdajnoMesto { get; set; }
         public GrupaLekovaBasic GrupaLekova { get; set; }
         public IList<ReceptBasic> Recepti { get; set; }
 
@@ -175,6 +176,7 @@ namespace Apoteka
             Kontraindikacije = new List<LekKontraindikacijaBasic>();
             GrupaLekova = new GrupaLekovaBasic(); //da se proveri
             Recepti = new List<ReceptBasic>();
+            ProdajnoMesto = new ProdajnoMestoBasic();
         }
 
         public LekBasic(string kom, string hem, string odrasli, string deca, string trudnice, bool naRecept, float participacija, float cena)
