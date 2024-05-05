@@ -29,6 +29,10 @@ namespace Apoteka.Forme
         private void DodajZaposlenogForm_Load(object sender, EventArgs e)
         {
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+            dateTimePicker1.Hide();
+            dateTimePicker2.Hide();
+            label7.Hide();
+            label8.Hide();
         }
 
         private void btnDodajZaposlenog_Click(object sender, EventArgs e)
@@ -61,8 +65,34 @@ namespace Apoteka.Forme
                 MessageBox.Show("Uspešno ste dodali novog zaposlenog!");
             }
 
-            
             this.Close();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if(dateTimePicker1.Visible)
+            {
+                label7.Hide();
+                label8.Hide();
+                dateTimePicker1.Hide();
+                dateTimePicker2.Hide();
+            }
+            else 
+            {
+                label7.Show();
+                label8.Show();
+                dateTimePicker1.Show();
+                dateTimePicker2.Show();
+            }       
+        }
+
+        private void button1_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, button1.ClientRectangle,
+        SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset,
+        SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset,
+        SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset,
+        SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset);
         }
     }
 }

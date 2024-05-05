@@ -1,10 +1,12 @@
-﻿using Apoteka.Forme;
+﻿using Apoteka.Entiteti;
+using Apoteka.Forme;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -33,8 +35,19 @@ namespace Apoteka
 
         private void btnIzmeniZaposlenog_Click(object sender, EventArgs e)
         {
-            IzmeniZaposlenogForm forma = new IzmeniZaposlenogForm();
-            forma.ShowDialog();
+            string idZaposlenog = (string)dataGridView1.SelectedRows[0].Cells["JedinstveniBroj"].Value;
+            try
+            {
+                FarmaceutBasic farmaceut = DTOManager.vratiFarmaceuta(idZaposlenog);
+                IzmeniZaposlenogForm forma = new IzmeniZaposlenogForm(farmaceut);
+                forma.ShowDialog();
+            }
+            catch (Exception ec)
+            {
+                ZaposleniBasic zaposleni = DTOManager.vratiZaposlenog(idZaposlenog);
+                IzmeniZaposlenogForm forma = new IzmeniZaposlenogForm(zaposleni);
+                forma.ShowDialog();
+            }
             popuniPodacima();
         }
 

@@ -730,6 +730,101 @@ namespace Apoteka
                 //handle exceptions
             }
         }
+
+        public static ZaposleniBasic vratiZaposlenog(string idZaposlenog)
+        {
+            ZaposleniBasic zb = new ZaposleniBasic();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Apoteka.Entiteti.Zaposleni z = s.Load<Apoteka.Entiteti.Zaposleni>(idZaposlenog);
+                zb = new ZaposleniBasic(z.JedinstveniBroj, z.Ime, z.Prezime, z.DatumRodjenja, z.Adresa, z.BrojTelefona);
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+
+            return zb;
+        }
+
+        public static FarmaceutBasic vratiFarmaceuta(string idFarmaceuta)
+        {
+            FarmaceutBasic fb = new FarmaceutBasic();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Apoteka.Entiteti.Farmaceut f = s.Load<Apoteka.Entiteti.Farmaceut>(idFarmaceuta);
+                fb = new FarmaceutBasic(f.JedinstveniBroj, f.Ime, f.Prezime, f.DatumRodjenja, f.Adresa, f.BrojTelefona,
+                    f.DatumDiplomiranja, f.DatumObnoveLicence);
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+
+            return fb;
+        }
+
+        public static void IzmeniZaposlenog(ZaposleniBasic zaposleni)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Apoteka.Entiteti.Zaposleni z = s.Load<Zaposleni>(zaposleni.JedinstveniBroj);
+
+                z.Adresa = zaposleni.Adresa;
+                z.BrojTelefona = zaposleni.BrojTelefona;
+                z.Ime = zaposleni.Ime;
+                z.Prezime = zaposleni.Prezime;
+                z.DatumRodjenja = zaposleni.DatumRodjenja;
+
+                s.SaveOrUpdate(z);
+
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+        }
+
+        public static void IzmeniFarmaceuta(FarmaceutBasic farmaceut)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Apoteka.Entiteti.Farmaceut f = s.Load<Farmaceut>(farmaceut.JedinstveniBroj);
+
+                f.Adresa = farmaceut.Adresa;
+                f.BrojTelefona = farmaceut.BrojTelefona;
+                f.Ime = farmaceut.Ime;
+                f.Prezime = farmaceut.Prezime;
+                f.DatumRodjenja = farmaceut.DatumRodjenja;
+                f.DatumObnoveLicence = farmaceut.DatumObnoveLicence;
+                f.DatumDiplomiranja = farmaceut.DatumDiplomiranja;
+
+                s.SaveOrUpdate(f);
+
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+        }
         #endregion
 
 
