@@ -55,7 +55,28 @@ namespace Apoteka
 
         private void btnObrisiZaposlenog_Click(object sender, EventArgs e)
         {
-            //TODO: Obrisi zaposlenog
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Izaberite zaposlenog kojeg želite da obrišete!");
+                return;
+            }
+
+            string idZaposlenog = (string)dataGridView1.SelectedRows[0].Cells["JedinstveniBroj"].Value;
+            string poruka = "Da li želite da obrišete izabranog zaposlenog?";
+            string title = "Pitanje";
+            MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
+            DialogResult result = MessageBox.Show(poruka, title, buttons);
+
+            if (result == DialogResult.OK)
+            {
+                DTOManager.obrisiZaposlenog(idZaposlenog);
+                MessageBox.Show("Brisanje zaposlenog je uspešno obavljeno!");
+                this.popuniPodacima();
+            }
+            else
+            {
+
+            }
         }
 
         private void ZaposleniForm_Load(object sender, EventArgs e)

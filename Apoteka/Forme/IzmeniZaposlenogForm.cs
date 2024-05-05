@@ -52,7 +52,6 @@ namespace Apoteka.Forme
             farmaceut.DatumObnoveLicence = dateTimePicker2.Value.Date;
             farmaceut.DatumDiplomiranja = dateTimePicker1.Value.Date;
             DTOManager.IzmeniFarmaceuta(farmaceut);
-            MessageBox.Show("Uspešno ste izmenili farmaceuta!");
             this.Close();
         }
 
@@ -64,7 +63,6 @@ namespace Apoteka.Forme
             zaposleni.BrojTelefona = textBox6.Text;
             zaposleni.DatumRodjenja = dateTimePicker3.Value.Date;
             DTOManager.IzmeniZaposlenog(zaposleni);
-            MessageBox.Show("Uspešno ste izmenili zaposlenog!");
             this.Close();
         }
         public void popuniPodacimaFarmaceut(FarmaceutBasic farmaceut)
