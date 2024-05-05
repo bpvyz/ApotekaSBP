@@ -605,7 +605,7 @@ namespace Apoteka
             return b;
         }
 
-        public static void IzmeniBolest(BolestBasic bolest)
+        public static void izmeniBolest(BolestBasic bolest)
         {
             try
             {
@@ -772,7 +772,7 @@ namespace Apoteka
             return fb;
         }
 
-        public static void IzmeniZaposlenog(ZaposleniBasic zaposleni)
+        public static void izmeniZaposlenog(ZaposleniBasic zaposleni)
         {
             try
             {
@@ -798,7 +798,7 @@ namespace Apoteka
             }
         }
 
-        public static void IzmeniFarmaceuta(FarmaceutBasic farmaceut)
+        public static void izmeniFarmaceuta(FarmaceutBasic farmaceut)
         {
             try
             {

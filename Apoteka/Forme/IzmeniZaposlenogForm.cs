@@ -51,7 +51,7 @@ namespace Apoteka.Forme
             farmaceut.DatumRodjenja = dateTimePicker3.Value.Date;
             farmaceut.DatumObnoveLicence = dateTimePicker2.Value.Date;
             farmaceut.DatumDiplomiranja = dateTimePicker1.Value.Date;
-            DTOManager.IzmeniFarmaceuta(farmaceut);
+            DTOManager.izmeniFarmaceuta(farmaceut);
             this.Close();
         }
 

@@ -50,7 +50,7 @@ namespace Apoteka.Forme
         {
             bolest.Naziv = textBox1.Text;
             
-            DTOManager.IzmeniBolest(bolest);
+            DTOManager.izmeniBolest(bolest);
             MessageBox.Show("Uspešno ste izmenili bolest!");
             this.Close();
         }
