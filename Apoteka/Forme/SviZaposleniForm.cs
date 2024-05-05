@@ -19,7 +19,28 @@ namespace Apoteka.Forme
 
         private void btnObrisiZaposlenog_Click(object sender, EventArgs e)
         {
-            //TODO: Obrisi zaposlenog iz svih
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Izaberite zaposlenog kojeg želite da obrišete!");
+                return;
+            }
+
+            string idZaposlenog = (string)dataGridView1.SelectedRows[0].Cells["JedinstveniBroj"].Value;
+            string poruka = "Da li želite da obrišete izabranog zaposlenog?";
+            string title = "Pitanje";
+            MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
+            DialogResult result = MessageBox.Show(poruka, title, buttons);
+
+            if (result == DialogResult.OK)
+            {
+                DTOManager.obrisiZaposlenog(idZaposlenog);
+                MessageBox.Show("Brisanje zaposlenog je uspešno obavljeno!");
+                this.popuniPodacima();
+            }
+            else
+            {
+
+            }
         }
 
         private void SviZaposleniForm_Load(object sender, EventArgs e)
@@ -33,17 +54,13 @@ namespace Apoteka.Forme
             dataGridView1.DataSource = podaci;
         }
 
-        private void button2_Paint(object sender, PaintEventArgs e)
+        private void button1_Paint(object sender, PaintEventArgs e)
         {
             ControlPaint.DrawBorder(e.Graphics, button1.ClientRectangle,
         SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset,
         SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset,
         SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset,
         SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset);
-        }
-
-        private void button1_Paint(object sender, PaintEventArgs e)
-        {
 
         }
 

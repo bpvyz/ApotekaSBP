@@ -19,7 +19,7 @@ namespace Apoteka.Mapiranja
 
             Map(x => x.DatumDiplomiranja).Column("DATUM_DIPLOMIRANJA").Not.Nullable();
             Map(x => x.DatumObnoveLicence).Column("DATUM_OBNOVE_LICENCE").Not.Nullable();
-            HasMany(x => x.Recepti).KeyColumn("FARMACEUT_ID").Cascade.All();
+            HasMany(x => x.Recepti).KeyColumn("FARMACEUT_ID").Cascade.All().Inverse();
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Apoteka
 {
     public class DTOManager
     {
-        #region Prodavnica
+        #region Prodajno Mesto
         public static List<ProdajnoMestoPregled> vratiSvaProdajnaMesta()
         {
             List<ProdajnoMestoPregled> prodajnamesta = new List<ProdajnoMestoPregled>();
@@ -640,6 +640,90 @@ namespace Apoteka
 
                 s.Close();
 
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+        }
+
+        public static void obrisiZaposlenog(string idZaposlenog)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Zaposleni zaposleni = s.Load<Zaposleni>(idZaposlenog);
+
+                s.Delete(zaposleni);
+                s.Flush();
+
+                s.Close();
+
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+        }
+
+        public static void dodajFarmaceuta(FarmaceutBasic farmaceut, ProdajnoMestoBasic prodajnomesto)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Apoteka.Entiteti.Farmaceut f = new Apoteka.Entiteti.Farmaceut();
+                f.JedinstveniBroj = farmaceut.JedinstveniBroj;
+                f.BrojTelefona = farmaceut.BrojTelefona;
+                f.Ime = farmaceut.Ime;
+                f.Prezime = farmaceut.Prezime;
+                f.BrojTelefona = farmaceut.BrojTelefona;
+                f.Adresa = farmaceut.Adresa;
+                f.DatumRodjenja = farmaceut.DatumRodjenja.Date;
+                f.DatumDiplomiranja = farmaceut.DatumDiplomiranja.Date;
+                f.DatumObnoveLicence = farmaceut.DatumObnoveLicence.Date;
+
+                Apoteka.Entiteti.ProdajnoMesto pm = s.Load<Apoteka.Entiteti.ProdajnoMesto>(prodajnomesto.JedinstveniBroj);
+                f.ProdajnoMesto = pm;
+
+
+                s.Save(f);
+
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+        }
+
+        public static void dodajZaposlenog(ZaposleniBasic zaposleni, ProdajnoMestoBasic prodajnomesto)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Apoteka.Entiteti.Zaposleni z = new Apoteka.Entiteti.Zaposleni();
+                z.JedinstveniBroj = zaposleni.JedinstveniBroj;
+                z.BrojTelefona = zaposleni.BrojTelefona;
+                z.Ime = zaposleni.Ime;
+                z.Prezime = zaposleni.Prezime;
+                z.BrojTelefona = zaposleni.BrojTelefona;
+                z.Adresa = zaposleni.Adresa;
+                z.DatumRodjenja = zaposleni.DatumRodjenja.Date;
+                
+                Apoteka.Entiteti.ProdajnoMesto pm = s.Load<Apoteka.Entiteti.ProdajnoMesto>(prodajnomesto.JedinstveniBroj);
+                z.ProdajnoMesto = pm;
+
+
+                s.Save(z);
+
+                s.Flush();
+
+                s.Close();
             }
             catch (Exception ec)
             {

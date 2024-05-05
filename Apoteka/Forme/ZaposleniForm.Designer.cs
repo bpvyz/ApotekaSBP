@@ -38,13 +38,10 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -54,11 +51,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.dataGridView1);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.groupBox1.Location = new System.Drawing.Point(6, 11);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Location = new System.Drawing.Point(4, 7);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(899, 834);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox1.Size = new System.Drawing.Size(599, 542);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Podaci o zaposlenima";
@@ -84,14 +81,15 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridView1.Location = new System.Drawing.Point(6, 46);
+            this.dataGridView1.Location = new System.Drawing.Point(4, 30);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 72;
             this.dataGridView1.RowTemplate.Height = 31;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(888, 776);
+            this.dataGridView1.Size = new System.Drawing.Size(592, 504);
             this.dataGridView1.TabIndex = 9;
             // 
             // groupBox6
@@ -99,11 +97,9 @@
             this.groupBox6.Controls.Add(this.button8);
             this.groupBox6.Controls.Add(this.button7);
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox6.Location = new System.Drawing.Point(0, 852);
-            this.groupBox6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox6.Location = new System.Drawing.Point(0, 554);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox6.Size = new System.Drawing.Size(1218, 94);
+            this.groupBox6.Size = new System.Drawing.Size(812, 61);
             this.groupBox6.TabIndex = 13;
             this.groupBox6.TabStop = false;
             // 
@@ -113,10 +109,9 @@
             this.button8.BackColor = System.Drawing.Color.DarkGreen;
             this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button8.ForeColor = System.Drawing.Color.White;
-            this.button8.Location = new System.Drawing.Point(464, 23);
-            this.button8.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button8.Location = new System.Drawing.Point(309, 15);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(446, 62);
+            this.button8.Size = new System.Drawing.Size(297, 40);
             this.button8.TabIndex = 2;
             this.button8.Text = "Proširi prozor <F1>";
             this.button8.UseVisualStyleBackColor = false;
@@ -128,10 +123,9 @@
             this.button7.BackColor = System.Drawing.Color.DarkGreen;
             this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button7.ForeColor = System.Drawing.Color.White;
-            this.button7.Location = new System.Drawing.Point(9, 23);
-            this.button7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button7.Location = new System.Drawing.Point(6, 15);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(446, 62);
+            this.button7.Size = new System.Drawing.Size(297, 40);
             this.button7.TabIndex = 1;
             this.button7.Text = "Zatvori prozor <ESC>";
             this.button7.UseVisualStyleBackColor = false;
@@ -144,11 +138,9 @@
             this.groupBox4.Controls.Add(this.button6);
             this.groupBox4.Controls.Add(this.button9);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.Location = new System.Drawing.Point(911, 11);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox4.Location = new System.Drawing.Point(607, 7);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox4.Size = new System.Drawing.Size(294, 580);
+            this.groupBox4.Size = new System.Drawing.Size(196, 377);
             this.groupBox4.TabIndex = 14;
             this.groupBox4.TabStop = false;
             // 
@@ -161,9 +153,10 @@
             this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ControlDark;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.Location = new System.Drawing.Point(22, 48);
+            this.button5.Location = new System.Drawing.Point(15, 31);
+            this.button5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(254, 165);
+            this.button5.Size = new System.Drawing.Size(169, 107);
             this.button5.TabIndex = 1;
             this.button5.Text = "Dodaj zaposlenog";
             this.button5.UseVisualStyleBackColor = false;
@@ -180,9 +173,10 @@
             this.button6.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ControlDark;
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.Location = new System.Drawing.Point(22, 234);
+            this.button6.Location = new System.Drawing.Point(15, 152);
+            this.button6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(254, 158);
+            this.button6.Size = new System.Drawing.Size(169, 103);
             this.button6.TabIndex = 2;
             this.button6.Text = "Izmeni zaposlenog";
             this.button6.UseVisualStyleBackColor = false;
@@ -198,56 +192,25 @@
             this.button9.FlatAppearance.BorderSize = 0;
             this.button9.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ControlDark;
             this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button9.Location = new System.Drawing.Point(22, 412);
+            this.button9.Location = new System.Drawing.Point(15, 268);
+            this.button9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(254, 149);
+            this.button9.Size = new System.Drawing.Size(169, 97);
             this.button9.TabIndex = 4;
-            this.button9.Text = "Obriši prodajno mesto";
+            this.button9.Text = "Obriši zaposlenog";
             this.button9.UseVisualStyleBackColor = false;
             this.button9.Paint += new System.Windows.Forms.PaintEventHandler(this.button5_Paint);
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox3.Controls.Add(this.button1);
-            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(905, 601);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox3.Size = new System.Drawing.Size(300, 160);
-            this.groupBox3.TabIndex = 15;
-            this.groupBox3.TabStop = false;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackColor = System.Drawing.SystemColors.Control;
-            this.button1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ControlDark;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(22, 30);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(254, 122);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Farmaceuti";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.btnFarmaceut_Click);
-            this.button1.Paint += new System.Windows.Forms.PaintEventHandler(this.button5_Paint);
-            // 
             // ZaposleniForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MediumAquamarine;
-            this.ClientSize = new System.Drawing.Size(1218, 946);
-            this.Controls.Add(this.groupBox3);
+            this.ClientSize = new System.Drawing.Size(812, 615);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ZaposleniForm";
             this.Text = "ZaposleniForm";
             this.Load += new System.EventHandler(this.ZaposleniForm_Load);
@@ -255,7 +218,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox6.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -270,7 +232,5 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button button1;
     }
 }

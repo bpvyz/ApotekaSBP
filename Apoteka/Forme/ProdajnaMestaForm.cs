@@ -1,4 +1,5 @@
-﻿using Apoteka.Forme;
+﻿using Apoteka.Entiteti;
+using Apoteka.Forme;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -133,6 +134,21 @@ namespace Apoteka
                 this.button8.Text = "Proširi prozor <F1>";
             }
 
+        }
+
+        private void btnFarmaceuti_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Izaberite prodajno mesto čije recepte želite da vidite!");
+                return;
+            }
+            DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+            string idProdajnogMesta = selectedRow.Cells[0].Value.ToString();
+
+            ProdajnoMestoBasic p = DTOManager.vratiProdajnoMesto(idProdajnogMesta);
+            FarmaceutForm forma = new FarmaceutForm(p);
+            forma.ShowDialog();
         }
     }
 }

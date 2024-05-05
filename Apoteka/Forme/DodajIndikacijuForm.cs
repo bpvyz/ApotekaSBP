@@ -43,7 +43,7 @@ namespace Apoteka.Forme
             indikacija.Id.LeciBolest = (Entiteti.Bolest)comboBox2.SelectedItem;
             //indikacija.Id.LekLeci = 
             //TODO: Zavrsi
-            DTOManager.dodajIndikaciju(lek);
+            //DTOManager.dodajIndikaciju(lek);
 
             MessageBox.Show("Uspešno ste dodali novu indikaciju!");
             this.Close();

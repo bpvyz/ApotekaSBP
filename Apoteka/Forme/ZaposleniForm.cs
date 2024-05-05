@@ -26,21 +26,19 @@ namespace Apoteka
 
         private void btnDodajZaposlenog_Click(object sender, EventArgs e)
         {
-            DodajZaposlenogForm forma = new DodajZaposlenogForm();
+            DodajZaposlenogForm forma = new DodajZaposlenogForm(prodajnomesto);
             forma.ShowDialog();
+            popuniPodacima();
         }
 
         private void btnIzmeniZaposlenog_Click(object sender, EventArgs e)
         {
             IzmeniZaposlenogForm forma = new IzmeniZaposlenogForm();
             forma.ShowDialog();
+            popuniPodacima();
         }
 
-        private void btnFarmaceut_Click(object sender, EventArgs e)
-        {
-            FarmaceutForm forma = new FarmaceutForm(prodajnomesto);
-            forma.ShowDialog();
-        }
+        
 
         private void btnObrisiZaposlenog_Click(object sender, EventArgs e)
         {

@@ -51,12 +51,13 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(50, 185);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(124, 44);
             this.button1.TabIndex = 17;
             this.button1.Text = "Dodaj";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.btnDodajZaposlenog_Click);
             // 
             // label4
             // 
@@ -101,7 +102,7 @@
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(14, 116);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(2);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(204, 20);
             this.textBox3.TabIndex = 11;
@@ -109,7 +110,7 @@
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(14, 74);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(2);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(204, 20);
             this.textBox2.TabIndex = 10;
@@ -117,7 +118,7 @@
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(14, 31);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(204, 20);
             this.textBox1.TabIndex = 9;
@@ -134,8 +135,8 @@
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(221, 31);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox5.Location = new System.Drawing.Point(224, 31);
+            this.textBox5.Margin = new System.Windows.Forms.Padding(2);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(204, 20);
             this.textBox5.TabIndex = 18;
@@ -152,8 +153,8 @@
             // 
             // textBox6
             // 
-            this.textBox6.Location = new System.Drawing.Point(219, 74);
-            this.textBox6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox6.Location = new System.Drawing.Point(224, 74);
+            this.textBox6.Margin = new System.Windows.Forms.Padding(2);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(204, 20);
             this.textBox6.TabIndex = 20;
@@ -162,7 +163,7 @@
             // 
             this.checkBox1.AutoSize = true;
             this.checkBox1.Location = new System.Drawing.Point(289, 200);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(2);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(76, 17);
             this.checkBox1.TabIndex = 22;
@@ -171,24 +172,27 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(221, 116);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateTimePicker1.CustomFormat = "YYYY-MM-dd";
+            this.dateTimePicker1.Location = new System.Drawing.Point(224, 116);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(202, 20);
             this.dateTimePicker1.TabIndex = 23;
             // 
             // dateTimePicker2
             // 
+            this.dateTimePicker2.CustomFormat = "YYYY-MM-dd";
             this.dateTimePicker2.Location = new System.Drawing.Point(224, 156);
-            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(202, 20);
             this.dateTimePicker2.TabIndex = 24;
             // 
             // dateTimePicker3
             // 
-            this.dateTimePicker3.Location = new System.Drawing.Point(14, 157);
-            this.dateTimePicker3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateTimePicker3.CustomFormat = "YYYY-MM-dd";
+            this.dateTimePicker3.Location = new System.Drawing.Point(14, 156);
+            this.dateTimePicker3.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker3.Name = "dateTimePicker3";
             this.dateTimePicker3.Size = new System.Drawing.Size(204, 20);
             this.dateTimePicker3.TabIndex = 25;
@@ -237,7 +241,7 @@
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "DodajZaposlenogForm";
             this.Text = "DodajZaposlenogForm";
             this.Load += new System.EventHandler(this.DodajZaposlenogForm_Load);
