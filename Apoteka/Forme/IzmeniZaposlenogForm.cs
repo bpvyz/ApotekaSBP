@@ -62,7 +62,7 @@ namespace Apoteka.Forme
             zaposleni.Adresa = textBox5.Text;
             zaposleni.BrojTelefona = textBox6.Text;
             zaposleni.DatumRodjenja = dateTimePicker3.Value.Date;
-            DTOManager.IzmeniZaposlenog(zaposleni);
+            DTOManager.izmeniZaposlenog(zaposleni);
             this.Close();
         }
         public void popuniPodacimaFarmaceut(FarmaceutBasic farmaceut)
