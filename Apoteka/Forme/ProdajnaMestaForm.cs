@@ -27,8 +27,17 @@ namespace Apoteka
 
         private void btnIzmeniProdajnoMesto_Click(object sender, EventArgs e)
         {
-            IzmeniProdajnoMestoForm forma = new IzmeniProdajnoMestoForm();
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Izaberite prodajno mesto koje želite da izmenite!");
+                return;
+            }
+
+            string idProdajnogMesta = (string)dataGridView1.SelectedRows[0].Cells["JedinstveniBroj"].Value;
+            ProdajnoMestoBasic prodajnomesto = DTOManager.vratiProdajnoMesto(idProdajnogMesta);
+            IzmeniProdajnoMestoForm forma = new IzmeniProdajnoMestoForm(prodajnomesto);
             forma.ShowDialog();
+            popuniPodacima();
         }
 
         private void btnZaposleni_Click(object sender, EventArgs e)
@@ -78,7 +87,28 @@ namespace Apoteka
 
         private void btnObrisiProdajnoMesto_Click(object sender, EventArgs e)
         {
-            // TODO: Obrisi prodajno mesto
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Izaberite prodajno mesto koje želite da obrišete!");
+                return;
+            }
+
+            string idProdajnoMesto = (string)dataGridView1.SelectedRows[0].Cells["JedinstveniBroj"].Value;
+            string poruka = "Da li želite da obrišete izabrano prodajno mesto?";
+            string title = "Pitanje";
+            MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
+            DialogResult result = MessageBox.Show(poruka, title, buttons);
+
+            if (result == DialogResult.OK)
+            {
+                DTOManager.obrisiProdajnoMesto(idProdajnoMesto);
+                MessageBox.Show("Brisanje prodajnog mesta je uspešno obavljeno!");
+                this.popuniPodacima();
+            }
+            else
+            {
+
+            }
         }
 
         private void ProdajnaMestaForm_Load(object sender, EventArgs e)

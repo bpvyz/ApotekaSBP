@@ -121,6 +121,7 @@
     <Compile Include="Entiteti\ProdajnoMesto.cs" />
     <Compile Include="Entiteti\Recept.cs" />
     <Compile Include="Entiteti\ZalihaGrupaLekova.cs" />
+    <Compile Include="Entiteti\ZalihaGrupaLekovaId.cs" />
     <Compile Include="Entiteti\Zaposleni.cs" />
     <Compile Include="Forme\DodajBolestForm.cs">
       <SubType>Form</SubType>

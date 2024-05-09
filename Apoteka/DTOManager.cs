@@ -825,6 +825,75 @@ namespace Apoteka
                 //handle exceptions
             }
         }
+
+        public static void dodajProdajnoMesto(ProdajnoMestoBasic prodajnomesto)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Apoteka.Entiteti.ProdajnoMesto pm = new Apoteka.Entiteti.ProdajnoMesto();
+                pm.Adresa = prodajnomesto.Adresa;
+                pm.Naziv = prodajnomesto.Naziv;
+                pm.Mesto = prodajnomesto.Mesto;
+                pm.JedinstveniBroj = prodajnomesto.JedinstveniBroj;
+
+
+                s.Save(pm);
+
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+        }
+
+        public static void izmeniProdajnoMesto(ProdajnoMestoBasic prodajnomesto)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Apoteka.Entiteti.ProdajnoMesto pm = s.Load<ProdajnoMesto>(prodajnomesto.JedinstveniBroj);
+
+                pm.Naziv = prodajnomesto.Naziv;
+                pm.Mesto = prodajnomesto.Mesto;
+                pm.Adresa = prodajnomesto.Adresa;
+
+                s.SaveOrUpdate(pm);
+
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+        }
+
+        public static void obrisiProdajnoMesto(string idProdajnogMesta)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                ProdajnoMesto prodajnomesto = s.Load<ProdajnoMesto>(idProdajnogMesta);
+
+                s.Delete(prodajnomesto);
+                s.Flush();
+
+                s.Close();
+
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+        }
         #endregion
 
 

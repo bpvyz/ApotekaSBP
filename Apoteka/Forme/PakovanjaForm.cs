@@ -60,12 +60,20 @@ namespace Apoteka.Forme
 
         private void btnIzmeniPakovanje_Click(object sender, EventArgs e)
         {
-            int idPakovanja = (int)dataGridView1.SelectedRows[0].Cells["Id"].Value;
-            PakovanjaBasic pak = DTOManager.vratiPakovanje(idPakovanja);
+            try
+            {
+                int idPakovanja = (int)dataGridView1.SelectedRows[0].Cells["Id"].Value;
+                PakovanjaBasic pak = DTOManager.vratiPakovanje(idPakovanja);
 
-            IzmeniPakovanjeForm forma = new IzmeniPakovanjeForm(pak);
-            forma.ShowDialog();
-            this.popuniPodacima();
+                IzmeniPakovanjeForm forma = new IzmeniPakovanjeForm(pak);
+                forma.ShowDialog();
+                this.popuniPodacima();
+            }
+            catch (Exception ec)
+            {
+                MessageBox.Show("Izaberite pakovanje koje želite da izmenite!");
+            }
+            
         }
 
         private void PakovanjaForm_Load(object sender, EventArgs e)
