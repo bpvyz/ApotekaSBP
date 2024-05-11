@@ -276,14 +276,17 @@ namespace Apoteka
         public LekBasic Lek { get; protected set; }
         public BolestBasic Bolest { get; protected set; }
 
-        public LekLeciBasic() { }
+        public LekLeciBasic() 
+        {
+            this.Lek = new LekBasic();
+            this.Bolest = new BolestBasic();
+        }
 
-        public LekLeciBasic(LekLeciId id, LekBasic lekBasic, BolestBasic bolest)
+        public LekLeciBasic(LekLeciId id)
         {
             this.Id = id;
-            this.Lek = lekBasic;
-            this.Bolest = bolest;
         }
+
     }
     public class LekLeciPregled
     {

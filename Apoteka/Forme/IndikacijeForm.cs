@@ -25,24 +25,35 @@ namespace Apoteka.Forme
         }
         private void btnDodajIndikaciju_Click(object sender, EventArgs e)
         {
-            DodajIndikacijuForm forma = new DodajIndikacijuForm();
+            DodajIndikacijuForm forma = new DodajIndikacijuForm(lek);
             forma.ShowDialog();
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
+            popuniPodacima();
         }
 
         private void btnObrisiIndikaciju_Click(object sender, EventArgs e)
         {
-            // TODO: Obrisi indikaciju
-        }
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Izaberite indikaciju koju želite da obrišete!");
+                return;
+            }
 
-        private void btnIzmeniIndikaciju_Click(object sender, EventArgs e)
-        {
-            IzmeniIndikacijuForm forma = new IzmeniIndikacijuForm();
-            forma.ShowDialog();
+            BolestBasic indikacija = DTOManager.vratiBolest((int)dataGridView1.SelectedRows[0].Cells["Id"].Value);
+            string poruka = "Da li želite da obrišete izabranu indikaciju?";
+            string title = "Pitanje";
+            MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
+            DialogResult result = MessageBox.Show(poruka, title, buttons);
+
+            if (result == DialogResult.OK)
+            {
+                DTOManager.obrisiIndikaciju(lek, indikacija);
+                MessageBox.Show("Brisanje indikacije je uspešno obavljeno!");
+                this.popuniPodacima();
+            }
+            else
+            {
+
+            }
         }
 
         private void IndikacijeForm_Load(object sender, EventArgs e)
@@ -56,15 +67,49 @@ namespace Apoteka.Forme
 
             dataGridView1.Columns.Clear();
 
-
-            // Create a column for the Bolest property
-            DataGridViewTextBoxColumn bolestColumn = new DataGridViewTextBoxColumn();
-            bolestColumn.DataPropertyName = "Naziv";
-            bolestColumn.HeaderText = "Bolest";
-            dataGridView1.Columns.Add(bolestColumn);
-
-            dataGridView1.AutoGenerateColumns = false;
             dataGridView1.DataSource = podaci;
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Escape))
+            {
+                button7.PerformClick();
+            }
+
+            if (keyData == (Keys.F1))
+            {
+                button8.PerformClick();
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Normal)
+            {
+                this.WindowState = FormWindowState.Maximized;
+                this.button8.Text = "Smanji prozor <F1>";
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Normal;
+                this.button8.Text = "Proširi prozor <F1>";
+            }
+        }
+
+        private void button9_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, button9.ClientRectangle,
+       SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset,
+       SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset,
+       SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset,
+       SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset);
         }
     }
 }

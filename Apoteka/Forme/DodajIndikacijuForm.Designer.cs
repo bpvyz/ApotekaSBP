@@ -71,6 +71,7 @@
             this.button6.Text = "Dodaj indikaciju";
             this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.btnDodajIndikaciju_Click);
+            this.button6.Paint += new System.Windows.Forms.PaintEventHandler(this.button6_Paint);
             // 
             // DodajIndikacijuForm
             // 
@@ -81,6 +82,7 @@
             this.Controls.Add(this.button6);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "DodajIndikacijuForm";
             this.Text = "DodajIndikacijuForm";

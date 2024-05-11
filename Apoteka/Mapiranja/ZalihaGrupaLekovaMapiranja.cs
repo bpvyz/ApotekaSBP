@@ -14,9 +14,8 @@ namespace Apoteka.Mapiranja
         {
             Table("ZALIHA_GRUPA_LEKOVA");
 
-            CompositeId(x => x.Id)
-            .KeyReference(x => x.PripadaProdavnici, "PRODAJNO_MESTO_ID")
-            .KeyReference(x => x.ZalihaPripada, "GRUPA_LEKOVA_ID");
+            Id(x => x.ZalihaGrupaLekovaId).Column("ZALIHA_GRUPA_LEKOVA_ID").GeneratedBy.TriggerIdentity();
+            //zavrsi
 
             Map(x => x.Kolicina).Column("KOLICINA").Not.Nullable();
         }

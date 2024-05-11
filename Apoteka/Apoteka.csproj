@@ -121,7 +121,6 @@
     <Compile Include="Entiteti\ProdajnoMesto.cs" />
     <Compile Include="Entiteti\Recept.cs" />
     <Compile Include="Entiteti\ZalihaGrupaLekova.cs" />
-    <Compile Include="Entiteti\ZalihaGrupaLekovaId.cs" />
     <Compile Include="Entiteti\Zaposleni.cs" />
     <Compile Include="Forme\DodajBolestForm.cs">
       <SubType>Form</SubType>
@@ -194,18 +193,6 @@
     </Compile>
     <Compile Include="Forme\IzmeniBolestForm.Designer.cs">
       <DependentUpon>IzmeniBolestForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forme\IzmeniIndikacijuForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forme\IzmeniIndikacijuForm.Designer.cs">
-      <DependentUpon>IzmeniIndikacijuForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forme\IzmeniKontraindikacijuForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forme\IzmeniKontraindikacijuForm.Designer.cs">
-      <DependentUpon>IzmeniKontraindikacijuForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forme\IzmeniLekForm.cs">
       <SubType>Form</SubType>
@@ -339,12 +326,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forme\IzmeniBolestForm.resx">
       <DependentUpon>IzmeniBolestForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forme\IzmeniIndikacijuForm.resx">
-      <DependentUpon>IzmeniIndikacijuForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forme\IzmeniKontraindikacijuForm.resx">
-      <DependentUpon>IzmeniKontraindikacijuForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forme\IzmeniLekForm.resx">
       <DependentUpon>IzmeniLekForm.cs</DependentUpon>

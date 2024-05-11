@@ -894,6 +894,101 @@ namespace Apoteka
                 //handle exceptions
             }
         }
+
+        public static void dodajIndikaciju(LekBasic lek, BolestPregled bp)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Apoteka.Entiteti.LekLeci ll = new Apoteka.Entiteti.LekLeci();
+                Apoteka.Entiteti.Lek l = s.Load<Apoteka.Entiteti.Lek>(lek.KomercijalniNaziv);
+                Apoteka.Entiteti.Bolest b = s.Load<Apoteka.Entiteti.Bolest>(bp.Id);
+
+                ll.Id.LekLeci = l;
+                ll.Id.LeciBolest = b;
+
+
+                s.Save(ll);
+
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+        }
+
+        public static void obrisiIndikaciju(LekBasic lek, BolestBasic bolest)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+                Lek l = s.Load<Apoteka.Entiteti.Lek>(lek.KomercijalniNaziv);
+                Bolest b = s.Load<Apoteka.Entiteti.Bolest>(bolest.BolestId);
+
+                LekLeci indikacija = s.Load<LekLeci>(new LekLeciId { LekLeci = l, LeciBolest = b});
+
+                s.Delete(indikacija);
+                s.Flush();
+
+                s.Close();
+
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+        }
+
+        internal static void obrisiKontrandikaciju(LekBasic lek, BolestBasic bolest)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+                Lek l = s.Load<Apoteka.Entiteti.Lek>(lek.KomercijalniNaziv);
+                Bolest b = s.Load<Apoteka.Entiteti.Bolest>(bolest.BolestId);
+
+                LekKontraindikacija kontraindikacija = s.Load<LekKontraindikacija>(new LekKontraindikacijaId { LekIzaziva = l, IzazivaBolest = b });
+
+                s.Delete(kontraindikacija);
+                s.Flush();
+
+                s.Close();
+
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+        }
+
+        public static void dodajKontraindikaciju(LekBasic lek, BolestPregled bp)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Apoteka.Entiteti.LekKontraindikacija lk = new Apoteka.Entiteti.LekKontraindikacija();
+                Apoteka.Entiteti.Lek l = s.Load<Apoteka.Entiteti.Lek>(lek.KomercijalniNaziv);
+                Apoteka.Entiteti.Bolest b = s.Load<Apoteka.Entiteti.Bolest>(bp.Id);
+
+                lk.Id.LekIzaziva = l;
+                lk.Id.IzazivaBolest = b;
+
+                s.Save(lk);
+
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+        }
         #endregion
 
 

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
 
 namespace Apoteka.Forme
 {
@@ -39,14 +40,22 @@ namespace Apoteka.Forme
 
         private void btnDodajIndikaciju_Click(object sender, EventArgs e)
         {
-            LekLeciBasic indikacija = new LekLeciBasic();
-            indikacija.Id.LeciBolest = (Entiteti.Bolest)comboBox2.SelectedItem;
-            //indikacija.Id.LekLeci = 
-            //TODO: Zavrsi
-            //DTOManager.dodajIndikaciju(lek);
+
+            BolestPregled bp = (BolestPregled)comboBox2.SelectedItem;
+
+            DTOManager.dodajIndikaciju(this.lek, bp);
 
             MessageBox.Show("Uspešno ste dodali novu indikaciju!");
             this.Close();
+        }
+
+        private void button6_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, button6.ClientRectangle,
+       SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset,
+       SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset,
+       SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset,
+       SystemColors.ControlLightLight, 5, ButtonBorderStyle.Outset);
         }
     }
 }
