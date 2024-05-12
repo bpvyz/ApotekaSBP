@@ -13,7 +13,7 @@ namespace Apoteka.Forme
     public partial class IzdatiReceptiForm : Form
     {
         FarmaceutBasic farmaceut;
-        ProdajnoMestoBasic prodajnoMesto;
+        ProdajnoMestoBasic prodajnomesto;
         public IzdatiReceptiForm()
         {
             InitializeComponent();
@@ -23,13 +23,15 @@ namespace Apoteka.Forme
         {
             InitializeComponent();
             farmaceut = f;
+            popuniPodacimaFarmaceut();
         }
 
         public IzdatiReceptiForm(ProdajnoMestoBasic pm)
         {
             InitializeComponent();
-            prodajnoMesto = pm;
+            prodajnomesto = pm;
             groupBox1.Text = "Podaci o receptima prodajnog mesta";
+            popuniPodacimaProdajnoMesto();
         }
 
         private void btnIzmeniRecept_Click(object sender, EventArgs e)
@@ -41,11 +43,30 @@ namespace Apoteka.Forme
         private void IzdatiReceptiForm_Load(object sender, EventArgs e)
         {
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
-            popuniPodacima();
         }
-        public void popuniPodacima()
+        public void popuniPodacimaFarmaceut()
         {
             List<ReceptPregled> podaci = DTOManager.vratiRecepteFarmaceuta(farmaceut);
+            var modifiedPodaci = podaci.Select(r => new
+            {
+                r.SerijskiBroj,
+                r.SifraLekara,
+                r.Tip,
+                r.OblikPakovanja,
+                r.Kolicina,
+                r.DatumIzdavanja,
+                r.DatumRealizacije,
+                ProdajnoMesto = r.ProdajnoMesto.JedinstveniBroj,
+                Farmaceut = r.Farmaceut.JedinstveniBroj,
+                Lek = r.Lek.KomercijalniNaziv
+            }).ToList();
+
+            dataGridView1.DataSource = modifiedPodaci;
+        }
+
+        public void popuniPodacimaProdajnoMesto()
+        {
+            List<ReceptPregled> podaci = DTOManager.vratiRecepteProdajnogMesta(prodajnomesto);
             var modifiedPodaci = podaci.Select(r => new
             {
                 r.SerijskiBroj,

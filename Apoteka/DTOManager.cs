@@ -193,16 +193,15 @@ namespace Apoteka
         }
         #endregion
         #region Recept
-        public static List<ReceptPregled> vratiRecepteProdajnogMesta(string id)
+        public static List<ReceptPregled> vratiRecepteProdajnogMesta(ProdajnoMestoBasic prodajnomesto)
         {
-            //TODO: Napraviti da vraca PRODAJNO_MESTO_ID, FARMACEUT_ID i LEK_ID
             List<ReceptPregled> recepti = new List<ReceptPregled>();
             try
             {
                 ISession s = DataLayer.GetSession();
 
                 IEnumerable<Apoteka.Entiteti.Recept> sviRecepti = from o in s.Query<Apoteka.Entiteti.Recept>()
-                                                                            where o.ProdajnoMesto.JedinstveniBroj == id
+                                                                            where o.ProdajnoMesto.JedinstveniBroj == prodajnomesto.JedinstveniBroj
                                                                             select o;
 
                 foreach (Apoteka.Entiteti.Recept r in sviRecepti)
