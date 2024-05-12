@@ -1037,6 +1037,26 @@ namespace Apoteka
                 //handle exceptions
             }
         }
+
+        public static void obrisiRecept(int idRecepta)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Recept recept = s.Load<Recept>(idRecepta);
+
+                s.Delete(recept);
+                s.Flush();
+
+                s.Close();
+
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+        }
         #endregion
 
 

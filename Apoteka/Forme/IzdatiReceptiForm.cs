@@ -23,6 +23,7 @@ namespace Apoteka.Forme
         {
             InitializeComponent();
             farmaceut = f;
+            button6.Click += btnObrisiReceptFarmaceuta_Click;
             popuniPodacimaFarmaceut();
         }
 
@@ -31,6 +32,7 @@ namespace Apoteka.Forme
             InitializeComponent();
             prodajnomesto = pm;
             groupBox1.Text = "Podaci o receptima prodajnog mesta";
+            button6.Click += btnObrisiReceptProdajnogMesta_Click;
             popuniPodacimaProdajnoMesto();
         }
 
@@ -44,6 +46,59 @@ namespace Apoteka.Forme
         {
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
         }
+
+        private void btnObrisiReceptProdajnogMesta_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Izaberite recept koji želite da obrišete!");
+                return;
+            }
+
+            int idRecepta = (int)dataGridView1.SelectedRows[0].Cells["SerijskiBroj"].Value;
+            string poruka = "Da li želite da obrišete izabrani recept?";
+            string title = "Pitanje";
+            MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
+            DialogResult result = MessageBox.Show(poruka, title, buttons);
+
+            if (result == DialogResult.OK)
+            {
+                DTOManager.obrisiRecept(idRecepta);
+                MessageBox.Show("Brisanje recepta je uspešno obavljeno!");
+                this.popuniPodacimaProdajnoMesto();
+            }
+            else
+            {
+
+            }
+        }
+
+        private void btnObrisiReceptFarmaceuta_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Izaberite recept koji želite da obrišete!");
+                return;
+            }
+
+            int idRecepta = (int)dataGridView1.SelectedRows[0].Cells["SerijskiBroj"].Value;
+            string poruka = "Da li želite da obrišete izabrani recept?";
+            string title = "Pitanje";
+            MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
+            DialogResult result = MessageBox.Show(poruka, title, buttons);
+
+            if (result == DialogResult.OK)
+            {
+                DTOManager.obrisiRecept(idRecepta);
+                MessageBox.Show("Brisanje recepta je uspešno obavljeno!");
+                this.popuniPodacimaFarmaceut();
+            }
+            else
+            {
+
+            }
+        }
+
         public void popuniPodacimaFarmaceut()
         {
             List<ReceptPregled> podaci = DTOManager.vratiRecepteFarmaceuta(farmaceut);
