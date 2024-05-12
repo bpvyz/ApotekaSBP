@@ -208,7 +208,8 @@ namespace Apoteka
                 foreach (Apoteka.Entiteti.Recept r in sviRecepti)
                 {
                     recepti.Add(new ReceptPregled(r.SerijskiBroj, r.SifraLekara, r.Tip, r.OblikPakovanja, r.Kolicina,
-                        r.DatumIzdavanja, r.DatumRealizacije));
+                        r.DatumIzdavanja, r.DatumRealizacije, DTOManager.vratiProdajnoMesto(r.ProdajnoMesto.JedinstveniBroj), 
+                        DTOManager.vratiFarmaceuta(r.Farmaceut.JedinstveniBroj), DTOManager.vratiLek(r.Lek.KomercijalniNaziv)));
                 }
 
                 s.Close();
@@ -988,6 +989,34 @@ namespace Apoteka
             {
                 //handle exceptions
             }
+        }
+
+        public static List<ReceptPregled> vratiRecepteFarmaceuta(FarmaceutBasic farmaceut)
+        {
+            List<ReceptPregled> recepti = new List<ReceptPregled>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                IEnumerable<Apoteka.Entiteti.Recept> sviRecepti = from o in s.Query<Apoteka.Entiteti.Recept>()
+                                                                  where o.Farmaceut.JedinstveniBroj == farmaceut.JedinstveniBroj
+                                                                  select o;
+
+                foreach (Apoteka.Entiteti.Recept r in sviRecepti)
+                {
+                    recepti.Add(new ReceptPregled(r.SerijskiBroj, r.SifraLekara, r.Tip, r.OblikPakovanja, r.Kolicina, r.DatumIzdavanja, r.DatumRealizacije, 
+                        DTOManager.vratiProdajnoMesto(r.ProdajnoMesto.JedinstveniBroj), DTOManager.vratiFarmaceuta(r.Farmaceut.JedinstveniBroj),
+                        DTOManager.vratiLek(r.Lek.KomercijalniNaziv)));
+                }
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+
+            return recepti;
         }
         #endregion
 

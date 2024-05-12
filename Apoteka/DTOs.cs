@@ -449,9 +449,9 @@ namespace Apoteka
         public int Kolicina { get; set; }
         public DateTime DatumIzdavanja { get; set; }
         public DateTime? DatumRealizacije { get; set; }
-        public ProdajnoMestoPregled ProdajnoMesto { get; set; }
-        public FarmaceutPregled Farmaceut { get; set; }
-        public LekPregled Lek { get; set; }
+        public ProdajnoMestoBasic ProdajnoMesto { get; set; }
+        public FarmaceutBasic Farmaceut { get; set; }
+        public LekBasic Lek { get; set; }
 
 
         public ReceptPregled()
@@ -461,7 +461,7 @@ namespace Apoteka
 
 
         public ReceptPregled(int sbroj, string sifra, string tip, string oblik,
-            int kolicina, DateTime izdavanje, DateTime? realizacija)
+            int kolicina, DateTime izdavanje, DateTime? realizacija, ProdajnoMestoBasic pm, FarmaceutBasic f, LekBasic lek)
         {
             this.SerijskiBroj = sbroj;
             this.SifraLekara = sifra;
@@ -470,6 +470,9 @@ namespace Apoteka
             this.Kolicina = kolicina;
             this.DatumIzdavanja = izdavanje;
             this.DatumRealizacije = realizacija;
+            this.ProdajnoMesto = pm;
+            this.Farmaceut = f;
+            this.Lek = lek;
 
         }
     }
@@ -569,6 +572,7 @@ namespace Apoteka
             this.DatumRodjenja = datum;
             this.Adresa = adresa;
             this.BrojTelefona = brojTelefona;
+
         }
     }
     #endregion

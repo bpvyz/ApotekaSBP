@@ -74,7 +74,7 @@ namespace Apoteka
         {
             if (dataGridView1.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Izaberite prodajno mesto cije recepte zelite da vidite!");
+                MessageBox.Show("Izaberite farmaceuta čije recepte zelite da vidite!");
                 return;
             }
             DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
