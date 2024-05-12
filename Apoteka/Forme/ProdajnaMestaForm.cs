@@ -23,6 +23,7 @@ namespace Apoteka
         {
             DodajProdajnoMestoForm forma = new DodajProdajnoMestoForm();
             forma.ShowDialog();
+            popuniPodacima();
         }
 
         private void btnIzmeniProdajnoMesto_Click(object sender, EventArgs e)

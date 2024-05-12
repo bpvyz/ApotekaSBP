@@ -259,6 +259,7 @@
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "IzmeniZaposlenogForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
