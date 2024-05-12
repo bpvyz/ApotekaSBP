@@ -28,7 +28,28 @@ namespace Apoteka
 
         private void btnObrisiFarmaceuta_Click(object sender, EventArgs e)
         {
-            // TODO: Obrisi farmaceuta
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Izaberite farmaceuta kojeg želite da obrišete!");
+                return;
+            }
+
+            string idFarmaceuta = (string)dataGridView1.SelectedRows[0].Cells["JedinstveniBroj"].Value;
+            string poruka = "Da li želite da obrišete izabranog farmaceuta?";
+            string title = "Pitanje";
+            MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
+            DialogResult result = MessageBox.Show(poruka, title, buttons);
+
+            if (result == DialogResult.OK)
+            {
+                DTOManager.obrisiFarmaceuta(idFarmaceuta);
+                MessageBox.Show("Brisanje farmaceuta je uspešno obavljeno!");
+                this.popuniPodacima();
+            }
+            else
+            {
+
+            }
         }
 
         private void btnIzdajRecept_Click(object sender, EventArgs e)

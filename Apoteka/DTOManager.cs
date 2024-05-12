@@ -1018,6 +1018,26 @@ namespace Apoteka
 
             return recepti;
         }
+
+        public static void obrisiFarmaceuta(string idFarmaceuta)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Farmaceut farmaceut = s.Load<Farmaceut>(idFarmaceuta);
+
+                s.Delete(farmaceut);
+                s.Flush();
+
+                s.Close();
+
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+        }
         #endregion
 
 
