@@ -54,7 +54,8 @@ namespace Apoteka
 
         private void btnIzdajRecept_Click(object sender, EventArgs e)
         {
-            IzdajReceptForm forma = new IzdajReceptForm();
+            FarmaceutBasic farmaceut = DTOManager.vratiFarmaceuta((string)dataGridView1.SelectedRows[0].Cells["JedinstveniBroj"].Value);
+            IzdajReceptForm forma = new IzdajReceptForm(prodajnomesto, farmaceut);
             forma.ShowDialog();
         }
 

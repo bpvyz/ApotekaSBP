@@ -327,6 +327,7 @@ namespace Apoteka
             this.Sastav = sastav;
             this.Kolicina = kolicina;
         }
+
     }
     public class PakovanjaPregled
     {
@@ -345,6 +346,11 @@ namespace Apoteka
             this.Oblik = oblik;
             this.Sastav = sastav;
             this.Kolicina = kolicina;
+        }
+
+        public override string ToString()
+        {
+            return $"{Oblik} - {Sastav}";
         }
     }
     #endregion
@@ -405,7 +411,7 @@ namespace Apoteka
         public string SerijskiBroj { get; set; }
         public string SifraLekara { get; set; }
         public string Tip { get; set; }
-        public string OblikPakovanja { get; set; }
+        public PakovanjaBasic OblikPakovanja { get; set; }
         public int Kolicina { get; set; }
         public DateTime DatumIzdavanja { get; set; }
         public DateTime? DatumRealizacije { get; set; }
@@ -419,9 +425,10 @@ namespace Apoteka
             ProdajnoMesto = new ProdajnoMestoBasic(); // da se proveri
             Farmaceut = new FarmaceutBasic(); //da se proveri
             Lek = new LekBasic(); //da se proveri
+            OblikPakovanja = new PakovanjaBasic();
         }
 
-        public ReceptBasic(string sbroj, string sifra, string tip, string oblik,
+        public ReceptBasic(string sbroj, string sifra, string tip, PakovanjaBasic oblik,
             int kolicina, DateTime izdavanje, DateTime? realizacija, ProdajnoMestoBasic pmesto, FarmaceutBasic farmaceut,
             LekBasic lek)
         {
@@ -445,10 +452,10 @@ namespace Apoteka
         public int SerijskiBroj { get; set; }
         public string SifraLekara { get; set; }
         public string Tip { get; set; }
-        public string OblikPakovanja { get; set; }
         public int Kolicina { get; set; }
         public DateTime DatumIzdavanja { get; set; }
         public DateTime? DatumRealizacije { get; set; }
+        public PakovanjaBasic OblikPakovanja { get; set; }
         public ProdajnoMestoBasic ProdajnoMesto { get; set; }
         public FarmaceutBasic Farmaceut { get; set; }
         public LekBasic Lek { get; set; }
@@ -460,13 +467,13 @@ namespace Apoteka
         }
 
 
-        public ReceptPregled(int sbroj, string sifra, string tip, string oblik,
+        public ReceptPregled(int sbroj, string sifra, string tip, PakovanjaBasic pakovanje,
             int kolicina, DateTime izdavanje, DateTime? realizacija, ProdajnoMestoBasic pm, FarmaceutBasic f, LekBasic lek)
         {
             this.SerijskiBroj = sbroj;
             this.SifraLekara = sifra;
             this.Tip = tip;
-            this.OblikPakovanja = oblik;
+            this.OblikPakovanja = pakovanje;
             this.Kolicina = kolicina;
             this.DatumIzdavanja = izdavanje;
             this.DatumRealizacije = realizacija;

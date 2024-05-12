@@ -206,7 +206,7 @@ namespace Apoteka
 
                 foreach (Apoteka.Entiteti.Recept r in sviRecepti)
                 {
-                    recepti.Add(new ReceptPregled(r.SerijskiBroj, r.SifraLekara, r.Tip, r.OblikPakovanja, r.Kolicina,
+                    recepti.Add(new ReceptPregled(r.SerijskiBroj, r.SifraLekara, r.Tip, DTOManager.vratiPakovanje(r.OblikPakovanja.Id), r.Kolicina,
                         r.DatumIzdavanja, r.DatumRealizacije, DTOManager.vratiProdajnoMesto(r.ProdajnoMesto.JedinstveniBroj), 
                         DTOManager.vratiFarmaceuta(r.Farmaceut.JedinstveniBroj), DTOManager.vratiLek(r.Lek.KomercijalniNaziv)));
                 }
@@ -1003,7 +1003,7 @@ namespace Apoteka
 
                 foreach (Apoteka.Entiteti.Recept r in sviRecepti)
                 {
-                    recepti.Add(new ReceptPregled(r.SerijskiBroj, r.SifraLekara, r.Tip, r.OblikPakovanja, r.Kolicina, r.DatumIzdavanja, r.DatumRealizacije, 
+                    recepti.Add(new ReceptPregled(r.SerijskiBroj, r.SifraLekara, r.Tip, DTOManager.vratiPakovanje(r.OblikPakovanja.Id), r.Kolicina, r.DatumIzdavanja, r.DatumRealizacije, 
                         DTOManager.vratiProdajnoMesto(r.ProdajnoMesto.JedinstveniBroj), DTOManager.vratiFarmaceuta(r.Farmaceut.JedinstveniBroj),
                         DTOManager.vratiLek(r.Lek.KomercijalniNaziv)));
                 }
@@ -1051,6 +1051,43 @@ namespace Apoteka
 
                 s.Close();
 
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+        }
+
+        public static void dodajRecept(ReceptBasic rec, FarmaceutBasic farmaceut, ProdajnoMestoBasic prodajnomesto, LekPregled lek, PakovanjaPregled pak)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Apoteka.Entiteti.Recept r = new Apoteka.Entiteti.Recept();
+                r.SifraLekara = rec.SifraLekara;
+                r.DatumIzdavanja = rec.DatumIzdavanja.Date;
+                r.DatumRealizacije = rec.DatumRealizacije?.Date;
+                r.Kolicina = rec.Kolicina;
+                r.Tip = rec.Tip;
+
+                Apoteka.Entiteti.Lek l = s.Load<Apoteka.Entiteti.Lek>(lek.KomercijalniNaziv);
+                r.Lek = l;
+
+                Apoteka.Entiteti.Pakovanje p = s.Load<Apoteka.Entiteti.Pakovanje>(pak.Id);
+                r.OblikPakovanja = p;
+
+                Apoteka.Entiteti.ProdajnoMesto pm = s.Load<Apoteka.Entiteti.ProdajnoMesto>(prodajnomesto.JedinstveniBroj);
+                r.ProdajnoMesto = pm;
+
+                Apoteka.Entiteti.Farmaceut f = s.Load<Apoteka.Entiteti.Farmaceut>(farmaceut.JedinstveniBroj);
+                r.Farmaceut = f;
+
+                s.Save(r);
+
+                s.Flush();
+
+                s.Close();
             }
             catch (Exception ec)
             {
