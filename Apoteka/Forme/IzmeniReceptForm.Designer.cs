@@ -64,6 +64,7 @@
             this.button6.Text = "Izmeni recept";
             this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.btnIzmeniRecept_Click);
+            this.button6.Paint += new System.Windows.Forms.PaintEventHandler(this.button6_Paint);
             // 
             // comboBox3
             // 
