@@ -59,6 +59,7 @@ namespace Apoteka.Forme
                 rec.Tip = (string)comboBox1.SelectedItem;
                 rec.Kolicina = (int)numericUpDown1.Value;
                 rec.DatumIzdavanja = dateTimePicker1.Value;
+                rec.DatumRealizacije = dateTimePicker2.Value;
                 PakovanjaPregled pakovanje = (PakovanjaPregled)comboBox2.SelectedItem;
                 LekPregled lek = (LekPregled)comboBox3.SelectedItem;
                 DTOManager.dodajRecept(rec, farmaceut, prodajnomesto, lek, pakovanje);
@@ -71,7 +72,6 @@ namespace Apoteka.Forme
                 rec.Tip = (string)comboBox1.SelectedItem;
                 rec.Kolicina = (int)numericUpDown1.Value;
                 rec.DatumIzdavanja = dateTimePicker1.Value;
-                rec.DatumRealizacije = dateTimePicker2.Value;
                 PakovanjaPregled pakovanje = (PakovanjaPregled)comboBox2.SelectedItem;
                 LekPregled lek = (LekPregled)comboBox3.SelectedItem;
                 DTOManager.dodajRecept(rec, farmaceut, prodajnomesto, lek, pakovanje);

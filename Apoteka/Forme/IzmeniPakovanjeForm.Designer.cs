@@ -48,7 +48,6 @@
             this.label3.Size = new System.Drawing.Size(84, 29);
             this.label3.TabIndex = 54;
             this.label3.Text = "Sastav";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // textBox2
             // 
@@ -58,7 +57,6 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(204, 32);
             this.textBox2.TabIndex = 53;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label2
             // 
@@ -70,7 +68,6 @@
             this.label2.Size = new System.Drawing.Size(99, 29);
             this.label2.TabIndex = 52;
             this.label2.Text = "Količina";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // comboBox1
             // 
@@ -87,7 +84,6 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(204, 33);
             this.comboBox1.TabIndex = 51;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -99,7 +95,6 @@
             this.label1.Size = new System.Drawing.Size(70, 29);
             this.label1.TabIndex = 50;
             this.label1.Text = "Oblik";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // button6
             // 
@@ -133,7 +128,6 @@
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(204, 32);
             this.numericUpDown1.TabIndex = 56;
-            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // IzmeniPakovanjeForm
             // 

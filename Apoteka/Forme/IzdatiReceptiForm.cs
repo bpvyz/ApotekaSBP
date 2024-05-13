@@ -38,8 +38,17 @@ namespace Apoteka.Forme
 
         private void btnIzmeniRecept_Click(object sender, EventArgs e)
         {
-            IzmeniReceptForm forma = new IzmeniReceptForm();
+            ReceptBasic recept = DTOManager.vratiRecept((int)dataGridView1.SelectedRows[0].Cells["SerijskiBroj"].Value);
+            IzmeniReceptForm forma = new IzmeniReceptForm(recept);
             forma.ShowDialog();
+            if(farmaceut != null)
+            {
+                popuniPodacimaFarmaceut();
+            }
+            else
+            {
+                popuniPodacimaProdajnoMesto();
+            }
         }
 
         private void IzdatiReceptiForm_Load(object sender, EventArgs e)

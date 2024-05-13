@@ -1094,6 +1094,56 @@ namespace Apoteka
                 //handle exceptions
             }
         }
+
+        public static ReceptBasic vratiRecept(int idRecepta)
+        {
+            ReceptBasic rb = new ReceptBasic();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Apoteka.Entiteti.Recept r = s.Load<Apoteka.Entiteti.Recept>(idRecepta);
+                rb = new ReceptBasic(r.SerijskiBroj, r.SifraLekara, r.Tip, DTOManager.vratiPakovanje(r.OblikPakovanja.Id), r.Kolicina, r.DatumIzdavanja, r.DatumRealizacije,
+                    DTOManager.vratiProdajnoMesto(r.ProdajnoMesto.JedinstveniBroj), DTOManager.vratiFarmaceuta(r.Farmaceut.JedinstveniBroj),
+                    DTOManager.vratiLek(r.Lek.KomercijalniNaziv));
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+
+            return rb;
+        }
+
+        public static void IzmeniRecept(ReceptBasic recept)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Apoteka.Entiteti.Recept r = s.Load<Recept>(recept.SerijskiBroj);
+
+                r.Kolicina = recept.Kolicina;
+                r.SifraLekara = recept.SifraLekara;
+                r.DatumIzdavanja = recept.DatumIzdavanja;
+                r.DatumRealizacije = recept.DatumRealizacije;
+                r.OblikPakovanja = s.Load<Pakovanje>(recept.OblikPakovanja.Id);
+                r.Farmaceut = s.Load<Farmaceut>(recept.Farmaceut.JedinstveniBroj);
+                r.Lek = s.Load<Lek>(recept.Lek.KomercijalniNaziv);
+
+                s.SaveOrUpdate(r);
+
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+        }
         #endregion
 
 

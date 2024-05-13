@@ -408,7 +408,7 @@ namespace Apoteka
     #region Recept
     public class ReceptBasic
     {
-        public string SerijskiBroj { get; set; }
+        public int SerijskiBroj { get; set; }
         public string SifraLekara { get; set; }
         public string Tip { get; set; }
         public PakovanjaBasic OblikPakovanja { get; set; }
@@ -428,7 +428,7 @@ namespace Apoteka
             OblikPakovanja = new PakovanjaBasic();
         }
 
-        public ReceptBasic(string sbroj, string sifra, string tip, PakovanjaBasic oblik,
+        public ReceptBasic(int sbroj, string sifra, string tip, PakovanjaBasic oblik,
             int kolicina, DateTime izdavanje, DateTime? realizacija, ProdajnoMestoBasic pmesto, FarmaceutBasic farmaceut,
             LekBasic lek)
         {
