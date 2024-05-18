@@ -35,6 +35,11 @@ namespace Apoteka
 
         private void btnIzmeniZaposlenog_Click(object sender, EventArgs e)
         {
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Izaberite zaposlenog kojeg želite da izmenite!");
+                return;
+            }
             string idZaposlenog = (string)dataGridView1.SelectedRows[0].Cells["JedinstveniBroj"].Value;
             try
             {

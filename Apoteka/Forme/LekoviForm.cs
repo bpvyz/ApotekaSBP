@@ -27,6 +27,11 @@ namespace Apoteka
 
         private void btnIzmeniLek_Click(object sender, EventArgs e)
         {
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Izaberite lek koji želite da izmenite!");
+                return;
+            }
             string idLeka = (string)dataGridView1.SelectedRows[0].Cells["KomercijalniNaziv"].Value;
             LekBasic lek = DTOManager.vratiLek(idLeka);
             IzmeniLekForm forma = new IzmeniLekForm(lek);

@@ -1173,7 +1173,5 @@ namespace Apoteka
 
         #endregion
 
-
-
     }
 }
