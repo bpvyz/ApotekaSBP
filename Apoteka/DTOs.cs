@@ -112,12 +112,10 @@ namespace Apoteka
 
         public IList<LekBasic> Lekovi { get; set; }
 
-        public IList<ZalihaGrupaLekovaBasic> ZaliheGrupaLekova { get; set; }
 
         public GrupaLekovaBasic()
         {
             Lekovi = new List<LekBasic>();
-            ZaliheGrupaLekova = new List<ZalihaGrupaLekovaBasic>();
         }
 
         public GrupaLekovaBasic(int id, string naziv)
@@ -364,12 +362,10 @@ namespace Apoteka
         public string Mesto { get; set; }
         public IList<ZaposleniBasic> Zaposleni { get; set; }
         public IList<ReceptBasic> Recepti { get; set; }
-        public IList<ZalihaGrupaLekovaBasic> ZaliheGrupaLekova { get; set; }
 
         public ProdajnoMestoBasic()
         {
             Zaposleni = new List<ZaposleniBasic>();
-            ZaliheGrupaLekova = new List<ZalihaGrupaLekovaBasic>();
             Recepti = new List<ReceptBasic>();
         }
 
@@ -482,50 +478,6 @@ namespace Apoteka
             this.Lek = lek;
 
         }
-    }
-    #endregion
-
-    #region ZalihaGrupaLekova
-    public class ZalihaGrupaLekovaBasic
-    {
-        public ProdajnoMestoBasic ProdajnoMesto { get; protected set; }
-        public GrupaLekovaBasic GrupaLekova { get; protected set; }
-        public int Kolicina { get; set; }
-
-        public ZalihaGrupaLekovaBasic()
-        {
-
-        }
-
-        public ZalihaGrupaLekovaBasic (ProdajnoMestoBasic prodajno, GrupaLekovaBasic grupa, int kolicina)
-        {
-            this.ProdajnoMesto = prodajno;
-            this.GrupaLekova = grupa;
-            this.Kolicina= kolicina;
-        }
-    }
-
-    public class ZalihaGrupaLekovaPregled
-    {
-        public ProdajnoMestoBasic ProdajnoMesto { get; protected set; }
-        public GrupaLekovaBasic GrupaLekova { get; protected set; }
-        public int Kolicina { get; set; }
-
-        public ZalihaGrupaLekovaPregled()
-        {
-
-        }
-
-        public ZalihaGrupaLekovaPregled(int kolicina)
-        {
-            /*
-            this.ProdajnoMesto = prodajnomesto;
-            this.GrupaLekova = grupalekova;
-            */
-            this.Kolicina = kolicina;
-        }
-
-
     }
     #endregion
 

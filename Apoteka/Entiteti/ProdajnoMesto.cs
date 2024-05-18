@@ -15,11 +15,9 @@ namespace Apoteka.Entiteti
         public virtual string Mesto { get; set; }
         public virtual IList<Zaposleni> Zaposleni { get; set; }
         public virtual IList<Recept> Recepti { get; set; }
-        public virtual IList<ZalihaGrupaLekova> ZaliheGrupaLekova { get; set; }
         public ProdajnoMesto()
         {
             Zaposleni = new List<Zaposleni>();
-            ZaliheGrupaLekova = new List<ZalihaGrupaLekova>();
             Recepti = new List<Recept>();
         }
     }

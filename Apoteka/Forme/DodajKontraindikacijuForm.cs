@@ -37,7 +37,7 @@ namespace Apoteka.Forme
 
         private void btnDodajKontraindikaciju_Click(object sender, EventArgs e)
         {
-            BolestPregled bp = (BolestPregled)comboBox2.SelectedItem;
+            BolestBasic bp = DTOManager.vratiBolest(((BolestPregled)comboBox2.SelectedItem).Id);
 
             DTOManager.dodajKontraindikaciju(this.lek, bp);
 

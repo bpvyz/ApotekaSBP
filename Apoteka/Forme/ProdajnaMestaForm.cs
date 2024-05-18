@@ -56,21 +56,6 @@ namespace Apoteka
             forma.ShowDialog();
         }
 
-        private void btnZaliheLekova_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("Izaberite prodajno mesto cije zalihe zelite da vidite!");
-                return;
-            }
-            DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
-            string idProdajnogMesta = selectedRow.Cells[0].Value.ToString();
-
-            ProdajnoMestoBasic p = DTOManager.vratiProdajnoMesto(idProdajnogMesta);
-            ZaliheLekovaForm forma = new ZaliheLekovaForm(p);
-            forma.ShowDialog();
-        }
-
         private void btnIzdatiRecepti_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count == 0)

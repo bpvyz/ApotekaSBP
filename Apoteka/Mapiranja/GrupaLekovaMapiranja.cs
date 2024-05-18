@@ -17,7 +17,6 @@ namespace Apoteka.Mapiranja
             Id(x => x.Id).Column("ID").GeneratedBy.Identity();
             Map(x => x.Naziv).Column("NAZIV").Not.Nullable();
             HasMany(x => x.Lekovi).KeyColumn("GRUPA_LEKOVA_ID").Cascade.All();
-            HasMany(x => x.ZaliheGrupaLekova).KeyColumn("GRUPA_LEKOVA_ID").Inverse().Cascade.All();
         }
     }
 }

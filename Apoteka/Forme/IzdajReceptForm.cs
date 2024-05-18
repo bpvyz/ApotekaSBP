@@ -60,8 +60,8 @@ namespace Apoteka.Forme
                 rec.Kolicina = (int)numericUpDown1.Value;
                 rec.DatumIzdavanja = dateTimePicker1.Value;
                 rec.DatumRealizacije = dateTimePicker2.Value;
-                PakovanjaPregled pakovanje = (PakovanjaPregled)comboBox2.SelectedItem;
-                LekPregled lek = (LekPregled)comboBox3.SelectedItem;
+                PakovanjaBasic pakovanje = DTOManager.vratiPakovanje(((PakovanjaPregled)comboBox2.SelectedItem).Id);
+                LekBasic lek = DTOManager.vratiLek(((LekPregled)comboBox3.SelectedItem).KomercijalniNaziv);
                 DTOManager.dodajRecept(rec, farmaceut, prodajnomesto, lek, pakovanje);
                 MessageBox.Show("Uspešno ste dodali novi recept!");
             }
@@ -72,8 +72,8 @@ namespace Apoteka.Forme
                 rec.Tip = (string)comboBox1.SelectedItem;
                 rec.Kolicina = (int)numericUpDown1.Value;
                 rec.DatumIzdavanja = dateTimePicker1.Value;
-                PakovanjaPregled pakovanje = (PakovanjaPregled)comboBox2.SelectedItem;
-                LekPregled lek = (LekPregled)comboBox3.SelectedItem;
+                PakovanjaBasic pakovanje = DTOManager.vratiPakovanje(((PakovanjaPregled)comboBox2.SelectedItem).Id);
+                LekBasic lek = DTOManager.vratiLek(((LekPregled)comboBox3.SelectedItem).KomercijalniNaziv);
                 DTOManager.dodajRecept(rec, farmaceut, prodajnomesto, lek, pakovanje);
                 MessageBox.Show("Uspešno ste dodali novi recept!");
             }

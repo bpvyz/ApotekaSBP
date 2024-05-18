@@ -40,10 +40,8 @@ namespace Apoteka.Forme
 
         private void btnDodajIndikaciju_Click(object sender, EventArgs e)
         {
-
-            BolestPregled bp = (BolestPregled)comboBox2.SelectedItem;
-
-            DTOManager.dodajIndikaciju(this.lek, bp);
+            BolestBasic indikacija = DTOManager.vratiBolest(((BolestPregled)comboBox2.SelectedItem).Id);
+            DTOManager.dodajIndikaciju(this.lek, indikacija);
 
             MessageBox.Show("Uspešno ste dodali novu indikaciju!");
             this.Close();

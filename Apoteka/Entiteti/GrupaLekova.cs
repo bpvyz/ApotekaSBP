@@ -11,11 +11,9 @@ namespace Apoteka.Entiteti
         public virtual int Id { get; protected set; }
         public virtual string Naziv { get; set; }
         public virtual IList<Lek> Lekovi { get; set; }
-        public virtual IList<ZalihaGrupaLekova> ZaliheGrupaLekova { get; set; }
         public GrupaLekova()
         {
             Lekovi = new List<Lek>();
-            ZaliheGrupaLekova = new List<ZalihaGrupaLekova>();
         }
     }
 }

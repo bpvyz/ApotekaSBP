@@ -120,7 +120,6 @@
     <Compile Include="Entiteti\Pakovanje.cs" />
     <Compile Include="Entiteti\ProdajnoMesto.cs" />
     <Compile Include="Entiteti\Recept.cs" />
-    <Compile Include="Entiteti\ZalihaGrupaLekova.cs" />
     <Compile Include="Entiteti\Zaposleni.cs" />
     <Compile Include="Forme\DodajBolestForm.cs">
       <SubType>Form</SubType>
@@ -248,12 +247,6 @@
     <Compile Include="Forme\SviZaposleniForm.Designer.cs">
       <DependentUpon>SviZaposleniForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forme\ZaliheLekovaForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forme\ZaliheLekovaForm.Designer.cs">
-      <DependentUpon>ZaliheLekovaForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -275,7 +268,6 @@
     <Compile Include="Mapiranja\PakovanjeMapiranja.cs" />
     <Compile Include="Mapiranja\ProdajnoMestoMapiranja.cs" />
     <Compile Include="Mapiranja\ReceptMapiranja.cs" />
-    <Compile Include="Mapiranja\ZalihaGrupaLekovaMapiranja.cs" />
     <Compile Include="Mapiranja\ZaposleniMapiranja.cs" />
     <Compile Include="Forme\ProdajnaMestaForm.cs">
       <SubType>Form</SubType>
@@ -353,9 +345,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forme\SviZaposleniForm.resx">
       <DependentUpon>SviZaposleniForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forme\ZaliheLekovaForm.resx">
-      <DependentUpon>ZaliheLekovaForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

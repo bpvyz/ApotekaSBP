@@ -46,8 +46,9 @@ namespace Apoteka.Forme
             lek.NacinDoziranjaTrudnice = textBox3.Text;
             lek.NacinDoziranjaOdrasli = textBox5.Text;
             lek.NacinDoziranjaDeca = textBox6.Text;
-            GrupaLekovaPregled gl = (GrupaLekovaPregled)comboBox1.SelectedItem;
-            ProdajnoMestoPregled pm = (ProdajnoMestoPregled)comboBox2.SelectedItem;
+
+            GrupaLekovaBasic gl = DTOManager.vratiGrupuLekova(((GrupaLekovaPregled)comboBox1.SelectedItem).Id);
+            ProdajnoMestoBasic pm = DTOManager.vratiProdajnoMesto(((ProdajnoMestoPregled)comboBox2.SelectedItem).JedinstveniBroj);
 
             DTOManager.dodajLek(lek, gl, pm);
 
