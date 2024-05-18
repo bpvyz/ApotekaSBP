@@ -38,6 +38,11 @@ namespace Apoteka.Forme
 
         private void btnIzmeniRecept_Click(object sender, EventArgs e)
         {
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Izaberite recept koji želite da izmenite!");
+                return;
+            }
             ReceptBasic recept = DTOManager.vratiRecept((int)dataGridView1.SelectedRows[0].Cells["SerijskiBroj"].Value);
             IzmeniReceptForm forma = new IzmeniReceptForm(recept);
             forma.ShowDialog();

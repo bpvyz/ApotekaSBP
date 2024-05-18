@@ -39,7 +39,7 @@ namespace Apoteka.Forme
 
         private void popuniPodacima()
         {
-            List<LekPregled> podaci = DTOManager.vratiSveLekove();
+            List<LekPregled> podaci = DTOManager.vratiLekoveZaProdajnoMesto(prodajnomesto);
             foreach(LekPregled l in podaci)
             {
                 comboBox3.Items.Add(l);

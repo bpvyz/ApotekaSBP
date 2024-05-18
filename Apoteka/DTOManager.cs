@@ -280,69 +280,6 @@ namespace Apoteka
 
         #endregion
 
-        #region Lekovi
-        public static List<LekPregled> vratiSveLekove()
-        {
-            List<LekPregled> lekovi = new List<LekPregled>();
-            try
-            {
-                ISession s = DataLayer.GetSession();
-
-                IEnumerable<Apoteka.Entiteti.Lek> sviLekovi = from o in s.Query<Apoteka.Entiteti.Lek>()
-                                                              select o;
-
-                foreach (Apoteka.Entiteti.Lek l in sviLekovi)
-                {
-                    lekovi.Add(new LekPregled(l.KomercijalniNaziv, l.HemijskiNaziv,
-                        l.NacinDoziranjaOdrasli, l.NacinDoziranjaDeca, l.NacinDoziranjaTrudnice,
-                        l.IzdajeSeNaRecept, l.ProcenatParticipacije, l.Cena));
-                }
-
-                s.Close();
-            }
-            catch (Exception ec)
-            {
-                //handle exceptions
-            }
-
-            return lekovi;
-        }
-
-        public static void dodajLek(LekBasic lek, GrupaLekovaBasic grupalekova, ProdajnoMestoBasic prodajnomesto)
-        {
-            try
-            {
-                ISession s = DataLayer.GetSession();
-
-                Apoteka.Entiteti.Lek l = new Apoteka.Entiteti.Lek();
-                l.Cena = lek.Cena;
-                l.ProcenatParticipacije = lek.ProcenatParticipacije;
-                l.NacinDoziranjaTrudnice = lek.NacinDoziranjaTrudnice;
-                l.NacinDoziranjaOdrasli = lek.NacinDoziranjaOdrasli;
-                l.NacinDoziranjaDeca = lek.NacinDoziranjaDeca;
-                l.HemijskiNaziv = lek.HemijskiNaziv;
-                l.KomercijalniNaziv = lek.KomercijalniNaziv;
-                l.IzdajeSeNaRecept = lek.IzdajeSeNaRecept;
-                Apoteka.Entiteti.GrupaLekova gl = s.Load<Apoteka.Entiteti.GrupaLekova>(grupalekova.Id);
-                Apoteka.Entiteti.ProdajnoMesto pm = s.Load<Apoteka.Entiteti.ProdajnoMesto>(prodajnomesto.JedinstveniBroj);
-                l.GrupaLekova = gl;
-                l.ProdajnoMesto = pm;
-
-
-                s.Save(l);
-
-                s.Flush();
-
-                s.Close();
-            }
-            catch (Exception ec)
-            {
-                //handle exceptions
-            }
-        }
-
-        #endregion
-
         #region Bolest
         public static BolestBasic vratiBolest(int idBolesti)
         {
@@ -753,6 +690,93 @@ namespace Apoteka
         #endregion
 
         #region Lek
+        public static List<LekPregled> vratiSveLekove()
+        {
+            List<LekPregled> lekovi = new List<LekPregled>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                IEnumerable<Apoteka.Entiteti.Lek> sviLekovi = from o in s.Query<Apoteka.Entiteti.Lek>()
+                                                              select o;
+
+                foreach (Apoteka.Entiteti.Lek l in sviLekovi)
+                {
+                    lekovi.Add(new LekPregled(l.KomercijalniNaziv, l.HemijskiNaziv,
+                        l.NacinDoziranjaOdrasli, l.NacinDoziranjaDeca, l.NacinDoziranjaTrudnice,
+                        l.IzdajeSeNaRecept, l.ProcenatParticipacije, l.Cena));
+                }
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+
+            return lekovi;
+        }
+
+        public static List<LekPregled> vratiLekoveZaProdajnoMesto(ProdajnoMestoBasic pm)
+        {
+            List<LekPregled> lekovi = new List<LekPregled>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                IEnumerable<Apoteka.Entiteti.Lek> sviLekovi = from o in s.Query<Apoteka.Entiteti.Lek>()
+                                                              where o.ProdajnoMesto.JedinstveniBroj == pm.JedinstveniBroj
+                                                              select o;
+
+                foreach (Apoteka.Entiteti.Lek l in sviLekovi)
+                {
+                    lekovi.Add(new LekPregled(l.KomercijalniNaziv, l.HemijskiNaziv,
+                        l.NacinDoziranjaOdrasli, l.NacinDoziranjaDeca, l.NacinDoziranjaTrudnice,
+                        l.IzdajeSeNaRecept, l.ProcenatParticipacije, l.Cena));
+                }
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+
+            return lekovi;
+        }
+
+        public static void dodajLek(LekBasic lek, GrupaLekovaBasic grupalekova, ProdajnoMestoBasic prodajnomesto)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                Apoteka.Entiteti.Lek l = new Apoteka.Entiteti.Lek();
+                l.Cena = lek.Cena;
+                l.ProcenatParticipacije = lek.ProcenatParticipacije;
+                l.NacinDoziranjaTrudnice = lek.NacinDoziranjaTrudnice;
+                l.NacinDoziranjaOdrasli = lek.NacinDoziranjaOdrasli;
+                l.NacinDoziranjaDeca = lek.NacinDoziranjaDeca;
+                l.HemijskiNaziv = lek.HemijskiNaziv;
+                l.KomercijalniNaziv = lek.KomercijalniNaziv;
+                l.IzdajeSeNaRecept = lek.IzdajeSeNaRecept;
+                Apoteka.Entiteti.GrupaLekova gl = s.Load<Apoteka.Entiteti.GrupaLekova>(grupalekova.Id);
+                Apoteka.Entiteti.ProdajnoMesto pm = s.Load<Apoteka.Entiteti.ProdajnoMesto>(prodajnomesto.JedinstveniBroj);
+                l.GrupaLekova = gl;
+                l.ProdajnoMesto = pm;
+
+
+                s.Save(l);
+
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+        }
         public static LekBasic vratiLek(string idLeka)
         {
             LekBasic l = new LekBasic();

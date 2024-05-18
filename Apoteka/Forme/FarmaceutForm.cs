@@ -54,6 +54,11 @@ namespace Apoteka
 
         private void btnIzdajRecept_Click(object sender, EventArgs e)
         {
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Izaberite farmaceuta za kojeg želite da izdate recept!");
+                return;
+            }
             FarmaceutBasic farmaceut = DTOManager.vratiFarmaceuta((string)dataGridView1.SelectedRows[0].Cells["JedinstveniBroj"].Value);
             IzdajReceptForm forma = new IzdajReceptForm(prodajnomesto, farmaceut);
             forma.ShowDialog();
@@ -61,6 +66,11 @@ namespace Apoteka
 
         private void btnIzdatiRecepti_Click(object sender, EventArgs e)
         {
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Izaberite farmaceuta za kojeg želite da vidite izdate recepte!");
+                return;
+            }
             string idFarmaceuta = (string)dataGridView1.SelectedRows[0].Cells["JedinstveniBroj"].Value;
             FarmaceutBasic farmaceut = DTOManager.vratiFarmaceuta(idFarmaceuta);
             IzdatiReceptiForm forma = new IzdatiReceptiForm(farmaceut);
