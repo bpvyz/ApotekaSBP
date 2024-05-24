@@ -10,3 +10,4 @@ C:\Users\B\Desktop\SBP18823-18922\III deo\ApotekaAPI\ApotekaLibrary\obj\Debug\ne
 C:\Users\B\Desktop\SBP18823-18922\III deo\ApotekaAPI\ApotekaLibrary\obj\Debug\net6.0\refint\ApotekaLibrary.dll
 C:\Users\B\Desktop\SBP18823-18922\III deo\ApotekaAPI\ApotekaLibrary\obj\Debug\net6.0\ApotekaLibrary.pdb
 C:\Users\B\Desktop\SBP18823-18922\III deo\ApotekaAPI\ApotekaLibrary\obj\Debug\net6.0\ref\ApotekaLibrary.dll
+C:\Users\B\Desktop\SBP18823-18922\III deo\ApotekaAPI\ApotekaLibrary\obj\Debug\net6.0\ApotekaLibrary.sourcelink.json

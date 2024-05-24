@@ -34,11 +34,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -53,9 +48,9 @@
               "target": "Package",
               "version": "[5.5.1, )"
             },
-            "Oracle.ManagedDataAccess": {
+            "Oracle.ManagedDataAccess.Core": {
               "target": "Package",
-              "version": "[21.14.0, )"
+              "version": "[2.19.70, )"
             }
           },
           "imports": [
