@@ -205,6 +205,7 @@ namespace ApotekaLibrary
                 ISession s = DataLayer.GetSession();
 
                 ApotekaLibrary.Entiteti.Zaposleni z = new ApotekaLibrary.Entiteti.Zaposleni();
+                ApotekaLibrary.Entiteti.ProdajnoMesto pm = s.Load<ApotekaLibrary.Entiteti.ProdajnoMesto>(prodajnomesto.JedinstveniBroj);
                 z.JedinstveniBroj = zaposleni.JedinstveniBroj;
                 z.BrojTelefona = zaposleni.BrojTelefona;
                 z.Ime = zaposleni.Ime;
@@ -212,10 +213,7 @@ namespace ApotekaLibrary
                 z.BrojTelefona = zaposleni.BrojTelefona;
                 z.Adresa = zaposleni.Adresa;
                 z.DatumRodjenja = zaposleni.DatumRodjenja.Date;
-
-                ApotekaLibrary.Entiteti.ProdajnoMesto pm = s.Load<ApotekaLibrary.Entiteti.ProdajnoMesto>(prodajnomesto.JedinstveniBroj);
                 z.ProdajnoMesto = pm;
-
 
                 s.Save(z);
 

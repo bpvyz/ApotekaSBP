@@ -51,6 +51,20 @@ namespace ApotekaAPI.Controllers
             }
         }
 
+        [HttpPost("dodaj/{prodajnomestoID}")]
+        public IActionResult DodajZaposlenog([FromBody]ZaposleniBasic zaposleni, string prodajnomestoID)
+        {
+            var prodajnomesto = DataProvider.vratiProdajnoMesto(prodajnomestoID);
+            try
+            {
+                DataProvider.dodajZaposlenog(zaposleni, prodajnomesto);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
+        }
 
         [HttpPut("izmeni")]
         public IActionResult IzmeniZaposlenog(ZaposleniBasic zaposleni)

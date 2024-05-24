@@ -20,5 +20,15 @@ namespace ApotekaLibrary.Entiteti
         { 
             ProdajnoMesto = new ProdajnoMesto();
         }
+
+        public class ZaposleniBasic
+        {
+            public string JedinstveniBroj { get; set; }
+            public string Ime { get; set; }
+            public string Prezime { get; set; }
+            public DateTime DatumRodjenja { get; set; }
+            public string Adresa { get; set; }
+            public string BrojTelefona { get; set; }
+        }
     }
 }

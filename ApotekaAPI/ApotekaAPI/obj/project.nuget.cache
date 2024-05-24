@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "cnDAUItV/DNrX6L5NRVUG1sZZ9QvaGDNskGhjOXzVh3ngJ/ggSy18l/C9Sp8K1pKj+pK8rqL66j+owncqrox3Q==",
+  "dgSpecHash": "gfG8KM29AdSGPZpgOhYhu+CTeU2IrKzr+IVORthcUDI1LEsHT4fHusJIrz6MSZezZwI07nrpHajKt9wN5236NQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\B\\Desktop\\SBP18823-18922\\III deo\\ApotekaAPI\\ApotekaAPI\\ApotekaAPI.csproj",
   "expectedPackageFiles": [
@@ -109,7 +109,11 @@
     "C:\\Users\\B\\.nuget\\packages\\system.threading.timer\\4.3.0\\system.threading.timer.4.3.0.nupkg.sha512",
     "C:\\Users\\B\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
     "C:\\Users\\B\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
-    "C:\\Users\\B\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
+    "C:\\Users\\B\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
+    "C:\\Users\\B\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.29\\microsoft.netcore.app.ref.6.0.29.nupkg.sha512",
+    "C:\\Users\\B\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.29\\microsoft.windowsdesktop.app.ref.6.0.29.nupkg.sha512",
+    "C:\\Users\\B\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.29\\microsoft.aspnetcore.app.ref.6.0.29.nupkg.sha512",
+    "C:\\Users\\B\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.29\\microsoft.netcore.app.host.win-x64.6.0.29.nupkg.sha512"
   ],
   "logs": []
 }
