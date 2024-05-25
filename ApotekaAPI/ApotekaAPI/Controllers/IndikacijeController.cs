@@ -1,66 +1,45 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using ApotekaLibrary;
 
 namespace ApotekaAPI.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("[controller]")]
     public class IndikacijeController : ControllerBase
     {
-        [HttpGet("{id}")]
-        public IActionResult VratiIndikacijeZaLek(string id)
+        [HttpGet("vratiIndikacijeZaLek/{id}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public IActionResult GetIndikacijeZaLek(string id)
         {
-            try
-            {
-                List<BolestPregled> indikacije = DataProvider.vratiIndikacijeZaLek(id);
-                return Ok(indikacije);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = DataProvider.vratiIndikacijeZaLek(id);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
-
-        [HttpPost("dodaj")]
-        public IActionResult DodajIndikaciju([FromBody] DodajIndikacijuRequest request)
+        
+        /*
+        [HttpPost("dodajIndikacijuAsync")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> AddIndikacijuAsync([FromBody] LekBasic lek, [FromBody] BolestBasic bolest)
         {
-            try
-            {
-                DataProvider.dodajIndikaciju(request.Lek, request.Bolest);
-                return Ok("Indikacija uspešno dodana.");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = await DataProvider.dodajIndikacijuAsync(lek, bolest);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
+        */
 
-        [HttpPost("obrisi")]
-        public IActionResult ObrisiIndikaciju([FromBody] ObrisiIndikacijuRequest request)
+        /*
+        [HttpDelete("obrisiIndikacijuAsync")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> DeleteIndikacijuAsync([FromBody] LekBasic lek, [FromBody] BolestBasic bolest)
         {
-            try
-            {
-                DataProvider.obrisiIndikaciju(request.Lek, request.Bolest);
-                return Ok("Indikacija uspešno obrisana.");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = await DataProvider.obrisiIndikacijuAsync(lek, bolest);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
-    }
+        */
 
-    public class DodajIndikacijuRequest
-    {
-        public LekBasic Lek { get; set; }
-        public BolestBasic Bolest { get; set; }
-    }
-
-    public class ObrisiIndikacijuRequest
-    {
-        public LekBasic Lek { get; set; }
-        public BolestBasic Bolest { get; set; }
     }
 }

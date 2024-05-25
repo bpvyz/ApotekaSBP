@@ -1,40 +1,31 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using ApotekaLibrary;
 
 namespace ApotekaAPI.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("[controller]")]
     public class GrupaLekovaController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult VratiSveGrupeLekova()
+        [HttpGet("vratiSveGrupeLekovaAsync")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetAllGrupaLekovaAsync()
         {
-            try
-            {
-                List<GrupaLekovaPregled> grupe = DataProvider.vratiSveGrupeLekova();
-                return Ok(grupe);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = await DataProvider.vratiSveGrupeLekovaAsync();
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpGet("{id}")]
-        public IActionResult VratiGrupuLekova(int id)
+        [HttpGet("vratiGrupuLekovaAsync/{id}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetGrupaLekovaAsync(int id)
         {
-            try
-            {
-                GrupaLekovaBasic grupa = DataProvider.vratiGrupuLekova(id);
-                return Ok(grupa);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = await DataProvider.vratiGrupuLekovaAsync(id);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
     }
 }

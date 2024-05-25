@@ -12,7 +12,7 @@ namespace ApotekaLibrary.Entiteti
         public virtual Lek Lek { get; protected set; }
         public virtual Bolest Bolest { get; protected set; }
 
-        public LekKontraindikacija()
+        internal LekKontraindikacija()
         {
             Id = new LekKontraindikacijaId();
         }

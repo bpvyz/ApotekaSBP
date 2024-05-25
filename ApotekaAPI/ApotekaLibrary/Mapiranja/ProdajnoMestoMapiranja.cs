@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ApotekaLibrary.Mapiranja
 {
-    public class ProdajnoMestoMapiranja : ClassMap<ProdajnoMesto>
+    internal class ProdajnoMestoMapiranja : ClassMap<ProdajnoMesto>
     {
         public ProdajnoMestoMapiranja()
         {

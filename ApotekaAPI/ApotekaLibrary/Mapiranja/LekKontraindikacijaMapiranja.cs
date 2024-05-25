@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ApotekaLibrary.Mapiranja
 {
-    public class LekKontraindikacijaMapiranja : ClassMap<LekKontraindikacija>
+    internal class LekKontraindikacijaMapiranja : ClassMap<LekKontraindikacija>
     {
         public LekKontraindikacijaMapiranja()
         {

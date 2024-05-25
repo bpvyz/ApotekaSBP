@@ -13,7 +13,7 @@ namespace ApotekaLibrary.Entiteti
         public virtual int Kolicina { get; set; }
         public virtual string Sastav { get; set; }
         public virtual Lek Lek { get; set; }
-        public Pakovanje()
+        internal Pakovanje()
         {
             Lek = new Lek();
         }

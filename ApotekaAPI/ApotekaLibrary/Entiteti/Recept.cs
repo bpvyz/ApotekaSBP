@@ -18,7 +18,7 @@ namespace ApotekaLibrary.Entiteti
         public virtual Farmaceut Farmaceut { get; set; }
         public virtual Lek Lek { get; set; }
         public virtual Pakovanje OblikPakovanja { get; set; }
-        public Recept()
+        internal Recept()
         {
             DatumIzdavanja = DateTime.Now;
             DatumRealizacije = DateTime.Now;

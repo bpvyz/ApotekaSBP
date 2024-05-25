@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Linq;
 using NHibernate;
 using ApotekaLibrary;
@@ -10,56 +11,86 @@ namespace ApotekaLibrary
     public class DataProvider
     {
         #region Prodajno Mesto
-        public static List<ProdajnoMestoPregled> vratiSvaProdajnaMesta()
+        public static Result<List<ProdajnoMestoPregled>, ErrorMessage> vratiSvaProdajnaMesta()
         {
+            ISession? s = null;
+
             List<ProdajnoMestoPregled> prodajnamesta = new List<ProdajnoMestoPregled>();
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
                 IEnumerable<ApotekaLibrary.Entiteti.ProdajnoMesto> svaProdajnaMesta = from o in s.Query<ApotekaLibrary.Entiteti.ProdajnoMesto>()
-                                                                               select o;
+                                                                                      select o;
 
                 foreach (ApotekaLibrary.Entiteti.ProdajnoMesto p in svaProdajnaMesta)
                 {
                     prodajnamesta.Add(new ProdajnoMestoPregled(p.JedinstveniBroj, p.Naziv, p.Adresa, p.Mesto));
                 }
 
-                s.Close();
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće vratiti sva prodajna mesta.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
             }
 
             return prodajnamesta;
         }
 
-        public static ProdajnoMestoBasic vratiProdajnoMesto(string idProdajnogMesta)
+        public async static Task<Result<ProdajnoMestoBasic, ErrorMessage>> vratiProdajnoMestoAsync(string idProdajnogMesta)
         {
+            ISession? s = null;
             ProdajnoMestoBasic pb = new ProdajnoMestoBasic();
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
-                ApotekaLibrary.Entiteti.ProdajnoMesto o = s.Load<ApotekaLibrary.Entiteti.ProdajnoMesto>(idProdajnogMesta);
+                ApotekaLibrary.Entiteti.ProdajnoMesto o = await s.LoadAsync<ApotekaLibrary.Entiteti.ProdajnoMesto>(idProdajnogMesta);
                 pb = new ProdajnoMestoBasic(o.JedinstveniBroj, o.Naziv, o.Adresa, o.Mesto);
 
-                s.Close();
+                
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće vratiti prodajno mesto sa zadatim ID-jem.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
             }
 
             return pb;
         }
 
-        public static void dodajProdajnoMesto(ProdajnoMestoBasic prodajnomesto)
+        public async static Task<Result<bool, ErrorMessage>> dodajProdajnoMestoAsync(ProdajnoMestoBasic prodajnomesto)
         {
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
                 ApotekaLibrary.Entiteti.ProdajnoMesto pm = new ApotekaLibrary.Entiteti.ProdajnoMesto();
                 pm.Adresa = prodajnomesto.Adresa;
@@ -68,96 +99,145 @@ namespace ApotekaLibrary
                 pm.JedinstveniBroj = prodajnomesto.JedinstveniBroj;
 
 
-                s.Save(pm);
+                await s.SaveOrUpdateAsync(pm);
 
-                s.Flush();
+                await s.FlushAsync();
 
-                s.Close();
+                
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće dodati prodajno mesto.".ToError(400);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+            
+            return true;
         }
 
-        public static void izmeniProdajnoMesto(ProdajnoMestoBasic prodajnomesto)
+        public async static Task<Result<ProdajnoMestoBasic, ErrorMessage>> izmeniProdajnoMesto(ProdajnoMestoBasic prodajnomesto)
         {
+            ISession? s = null;
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
-                ApotekaLibrary.Entiteti.ProdajnoMesto pm = s.Load<ProdajnoMesto>(prodajnomesto.JedinstveniBroj);
+                ApotekaLibrary.Entiteti.ProdajnoMesto pm = await s.LoadAsync<ProdajnoMesto>(prodajnomesto.JedinstveniBroj);
 
                 pm.Naziv = prodajnomesto.Naziv;
                 pm.Mesto = prodajnomesto.Mesto;
                 pm.Adresa = prodajnomesto.Adresa;
 
-                s.SaveOrUpdate(pm);
+                await s.UpdateAsync(pm);
 
-                s.Flush();
+                await s.FlushAsync();
 
-                s.Close();
+                
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće izmeniti prodajno mesto.".ToError(400);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return prodajnomesto;
         }
 
-        public static void obrisiProdajnoMesto(string idProdajnogMesta)
+        public async static Task<Result<bool, ErrorMessage>> obrisiProdajnoMestoAsync(string idProdajnogMesta)
         {
+            ISession? s = null;
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
-                ProdajnoMesto prodajnomesto = s.Load<ProdajnoMesto>(idProdajnogMesta);
+                ProdajnoMesto prodajnomesto = await s.LoadAsync<ProdajnoMesto>(idProdajnogMesta);
 
-                s.Delete(prodajnomesto);
-                s.Flush();
-
-                s.Close();
-
+                await s.DeleteAsync(prodajnomesto);
+                await s.FlushAsync();
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće obrisati prodajno mesto.".ToError(400);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
         }
 
         #endregion
 
         #region Zaposleni
-        public static List<ZaposleniPregled> vratiSveZaposlene()
+        public async static Task<Result<List<ZaposleniPregled>, ErrorMessage>> vratiSveZaposleneAsync()
         {
+            ISession? s = null;
+
             List<ZaposleniPregled> zaposleni = new List<ZaposleniPregled>();
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
-                IEnumerable<ApotekaLibrary.Entiteti.Zaposleni> sviZaposleni = from o in s.Query<ApotekaLibrary.Entiteti.Zaposleni>()
+                IEnumerable<ApotekaLibrary.Entiteti.Zaposleni> sviZaposleni = from o in await s.QueryOver<ApotekaLibrary.Entiteti.Zaposleni>().ListAsync()
                                                                        select o;
 
                 foreach (ApotekaLibrary.Entiteti.Zaposleni z in sviZaposleni)
                 {
                     zaposleni.Add(new ZaposleniPregled(z.JedinstveniBroj, z.Ime, z.Prezime, z.DatumRodjenja, z.Adresa, z.BrojTelefona));
-                }
-
-                s.Close();
+                }    
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće vratiti sve zaposlene.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
             }
 
             return zaposleni;
         }
 
-        public static List<ZaposleniPregled> vratiZaposleneProdajnogMesta(string id)
+        public static Result<List<ZaposleniPregled>, ErrorMessage> vratiZaposleneProdajnogMesta(string id)
         {
+            ISession? s = null;
+
             List<ZaposleniPregled> zaposleni = new List<ZaposleniPregled>();
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
                 IEnumerable<ApotekaLibrary.Entiteti.Zaposleni> sviZaposleni = from o in s.Query<ApotekaLibrary.Entiteti.Zaposleni>()
                                                                        where o.ProdajnoMesto.JedinstveniBroj == id
@@ -168,41 +248,65 @@ namespace ApotekaLibrary
                     zaposleni.Add(new ZaposleniPregled(z.JedinstveniBroj, z.Ime, z.Prezime, z.DatumRodjenja, z.Adresa, z.BrojTelefona));
                 }
 
-                s.Close();
+                
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće vratiti sve zaposlene koji rade u prodajnom mesto sa zadatim ID-jem.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
             }
 
             return zaposleni;
         }
 
-        public static ZaposleniBasic vratiZaposlenog(string idZaposlenog)
+        public async static Task<Result<ZaposleniBasic, ErrorMessage>> vratiZaposlenogAsync(string idZaposlenog)
         {
+            ISession? s = null;
+
             ZaposleniBasic zb = new ZaposleniBasic();
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
-                ApotekaLibrary.Entiteti.Zaposleni z = s.Load<ApotekaLibrary.Entiteti.Zaposleni>(idZaposlenog);
+                ApotekaLibrary.Entiteti.Zaposleni z = await s.LoadAsync<ApotekaLibrary.Entiteti.Zaposleni>(idZaposlenog);
                 zb = new ZaposleniBasic(z.JedinstveniBroj, z.Ime, z.Prezime, z.DatumRodjenja, z.Adresa, z.BrojTelefona);
 
-                s.Close();
+                
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće vratiti zaposlenog sa zadatim ID-jem.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
             }
 
             return zb;
         }
 
-        public static void dodajZaposlenog(ZaposleniBasic zaposleni, ProdajnoMestoBasic prodajnomesto)
+        public async static Task<Result<bool, ErrorMessage>> dodajZaposlenogAsync(ZaposleniBasic zaposleni, ProdajnoMestoBasic prodajnomesto)
         {
+            ISession? s = null;
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
                 ApotekaLibrary.Entiteti.Zaposleni z = new ApotekaLibrary.Entiteti.Zaposleni();
                 ApotekaLibrary.Entiteti.ProdajnoMesto pm = s.Load<ApotekaLibrary.Entiteti.ProdajnoMesto>(prodajnomesto.JedinstveniBroj);
@@ -215,23 +319,36 @@ namespace ApotekaLibrary
                 z.DatumRodjenja = zaposleni.DatumRodjenja.Date;
                 z.ProdajnoMesto = pm;
 
-                s.Save(z);
+                await s.SaveOrUpdateAsync(z);
 
-                s.Flush();
+                await s.FlushAsync();
 
-                s.Close();
+                
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće dodati zaposlenog.".ToError(400);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
         }
 
-        public static void izmeniZaposlenog(ZaposleniBasic zaposleni)
+        public static Result<ZaposleniBasic, ErrorMessage> izmeniZaposlenog(ZaposleniBasic zaposleni)
         {
+            ISession? s = null;
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
                 ApotekaLibrary.Entiteti.Zaposleni z = s.Load<Zaposleni>(zaposleni.JedinstveniBroj);
 
@@ -245,65 +362,102 @@ namespace ApotekaLibrary
 
                 s.Flush();
 
-                s.Close();
+                
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće izmeniti zaposlenog.".ToError(400);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+            return zaposleni;
         }
 
-        public static void obrisiZaposlenog(string idZaposlenog)
+        public async static Task<Result<bool, ErrorMessage>> obrisiZaposlenogAsync(string idZaposlenog)
         {
+            ISession? s = null;
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
-                Zaposleni zaposleni = s.Load<Zaposleni>(idZaposlenog);
+                Zaposleni zaposleni = await s.LoadAsync<Zaposleni>(idZaposlenog);
 
-                s.Delete(zaposleni);
-                s.Flush();
-
-                s.Close();
-
+                await s.DeleteAsync(zaposleni);
+                await s.FlushAsync();
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće obrisati zaposlenog.".ToError(400);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
         }
 
         #endregion
 
         #region Bolest
-        public static BolestBasic vratiBolest(int idBolesti)
+        public async static Task<Result<BolestBasic, ErrorMessage>> vratiBolestAsync(int idBolesti)
         {
+            ISession? s = null;
+
             BolestBasic b = new BolestBasic();
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
-                ApotekaLibrary.Entiteti.Bolest bb = s.Load<ApotekaLibrary.Entiteti.Bolest>(idBolesti);
+                ApotekaLibrary.Entiteti.Bolest bb = await s.LoadAsync<ApotekaLibrary.Entiteti.Bolest>(idBolesti);
                 b = new BolestBasic(bb.Id, bb.Naziv);
 
-                s.Close();
+                
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće vratiti bolest sa zadatim ID-jem.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
             }
 
             return b;
         }
 
-        public static List<BolestPregled> vratiSveBolesti()
+        public async static Task<Result<List<BolestPregled>, ErrorMessage>> vratiSveBolestiAsync()
         {
+            ISession? s = null;
+
             List<BolestPregled> bolesti = new List<BolestPregled>();
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
-                IEnumerable<ApotekaLibrary.Entiteti.Bolest> sveBolesti = from o in s.Query<ApotekaLibrary.Entiteti.Bolest>()
+                IEnumerable<ApotekaLibrary.Entiteti.Bolest> sveBolesti = from o in await s.QueryOver<ApotekaLibrary.Entiteti.Bolest>().ListAsync()
                                                                   select o;
 
                 foreach (ApotekaLibrary.Entiteti.Bolest b in sveBolesti)
@@ -311,222 +465,386 @@ namespace ApotekaLibrary
                     bolesti.Add(new BolestPregled(b.Id, b.Naziv));
                 }
 
-                s.Close();
+                
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće vratiti sve bolesti.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
             }
 
             return bolesti;
         }
 
-        public static void izmeniBolest(BolestBasic bolest)
+        public static Result<BolestBasic, ErrorMessage> izmeniBolest(BolestBasic bolest)
         {
+            ISession? s = null;
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
                 ApotekaLibrary.Entiteti.Bolest b = s.Load<Bolest>(bolest.BolestId);
 
                 b.Naziv = bolest.Naziv;
 
                 s.SaveOrUpdate(b);
-
-                s.Flush();
-
-                s.Close();
+                s.Flush();      
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće izmeniti bolest.".ToError(400);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return bolest;
         }
 
-        public static void obrisiBolest(int idBolesti)
+        public async static Task<Result<bool, ErrorMessage>> obrisiBolestAsync(int idBolesti)
         {
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
-                Bolest bolest = s.Load<Bolest>(idBolesti);
+                Bolest bolest = await s.LoadAsync<Bolest>(idBolesti);
 
-                s.Delete(bolest);
-                s.Flush();
-
-                s.Close();
-
+                await s.DeleteAsync(bolest);
+                await s.FlushAsync();
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće obrisati bolest sa zadatim ID-jem.".ToError(400);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
         }
 
-        public static void dodajBolest(BolestBasic bolest)
+        public static Result<bool, ErrorMessage> dodajBolest(BolestBasic bolest)
         {
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
                 ApotekaLibrary.Entiteti.Bolest b = new ApotekaLibrary.Entiteti.Bolest();
                 b.Naziv = bolest.Naziv;
 
-                s.Save(b);
-
+                s.SaveOrUpdate(b);
                 s.Flush();
-
-                s.Close();
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće dodati bolest.".ToError(400);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
         }
 
         #endregion
 
         #region Recept
-        public static List<ReceptPregled> vratiRecepteProdajnogMesta(ProdajnoMestoBasic prodajnomesto)
+        public async static Task<Result<List<ReceptPregled>, ErrorMessage>> vratiRecepteProdajnogMestaAsync(ProdajnoMestoBasic prodajnomesto)
         {
+            ISession? s = null;
             List<ReceptPregled> recepti = new List<ReceptPregled>();
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
                 IEnumerable<ApotekaLibrary.Entiteti.Recept> sviRecepti = from o in s.Query<ApotekaLibrary.Entiteti.Recept>()
-                                                                            where o.ProdajnoMesto.JedinstveniBroj == prodajnomesto.JedinstveniBroj
-                                                                            select o;
+                                                                         where o.ProdajnoMesto.JedinstveniBroj == prodajnomesto.JedinstveniBroj
+                                                                         select o;
 
                 foreach (ApotekaLibrary.Entiteti.Recept r in sviRecepti)
                 {
-                    recepti.Add(new ReceptPregled(r.SerijskiBroj, r.SifraLekara, r.Tip, DataProvider.vratiPakovanje(r.OblikPakovanja.Id), r.Kolicina,
-                        r.DatumIzdavanja, r.DatumRealizacije, DataProvider.vratiProdajnoMesto(r.ProdajnoMesto.JedinstveniBroj), 
-                        DataProvider.vratiFarmaceuta(r.Farmaceut.JedinstveniBroj), DataProvider.vratiLek(r.Lek.KomercijalniNaziv)));
+                    var oblikPakovanjaResult = await DataProvider.vratiPakovanjeAsync(r.OblikPakovanja.Id);
+                    var prodajnoMestoResult = await DataProvider.vratiProdajnoMestoAsync(r.ProdajnoMesto.JedinstveniBroj);
+                    var farmaceutResult = await DataProvider.vratiFarmaceutaAsync(r.Farmaceut.JedinstveniBroj);
+                    var lekResult = await DataProvider.vratiLekAsync(r.Lek.KomercijalniNaziv);
+
+                    if (oblikPakovanjaResult.IsError || prodajnoMestoResult.IsError || farmaceutResult.IsError || lekResult.IsError)
+                    {
+                        return oblikPakovanjaResult.Error;
+                    }
+
+                    recepti.Add(new ReceptPregled(
+                        r.SerijskiBroj, 
+                        r.SifraLekara, 
+                        r.Tip, 
+                        oblikPakovanjaResult.Data, 
+                        r.Kolicina,
+                        r.DatumIzdavanja, 
+                        r.DatumRealizacije, 
+                        prodajnoMestoResult.Data, 
+                        farmaceutResult.Data, 
+                        lekResult.Data));
                 }
 
-                s.Close();
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće vratiti recepte prodajnog mesta.".ToError(400);
+            }
+            finally
+            {
+                if (s?.IsOpen ?? false)
+                {
+                    s.Close();
+                }
+                s?.Dispose();
             }
 
             return recepti;
         }
 
-        public static List<ReceptPregled> vratiRecepteFarmaceuta(FarmaceutBasic farmaceut)
+
+        public static async Task<Result<List<ReceptPregled>, ErrorMessage>> vratiRecepteFarmaceutaAsync(FarmaceutBasic farmaceut)
         {
+            ISession? s = null;
             List<ReceptPregled> recepti = new List<ReceptPregled>();
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
                 IEnumerable<ApotekaLibrary.Entiteti.Recept> sviRecepti = from o in s.Query<ApotekaLibrary.Entiteti.Recept>()
-                                                                  where o.Farmaceut.JedinstveniBroj == farmaceut.JedinstveniBroj
-                                                                  select o;
+                                                                        where o.Farmaceut.JedinstveniBroj == farmaceut.JedinstveniBroj
+                                                                        select o;
 
                 foreach (ApotekaLibrary.Entiteti.Recept r in sviRecepti)
                 {
-                    recepti.Add(new ReceptPregled(r.SerijskiBroj, r.SifraLekara, r.Tip, DataProvider.vratiPakovanje(r.OblikPakovanja.Id), r.Kolicina, r.DatumIzdavanja, r.DatumRealizacije,
-                        DataProvider.vratiProdajnoMesto(r.ProdajnoMesto.JedinstveniBroj), DataProvider.vratiFarmaceuta(r.Farmaceut.JedinstveniBroj),
-                        DataProvider.vratiLek(r.Lek.KomercijalniNaziv)));
-                }
+                    var oblikPakovanjaResult = await DataProvider.vratiPakovanjeAsync(r.OblikPakovanja.Id).ConfigureAwait(false);
+                    var prodajnoMestoResult = await DataProvider.vratiProdajnoMestoAsync(r.ProdajnoMesto.JedinstveniBroj).ConfigureAwait(false);
+                    var farmaceutResult = await DataProvider.vratiFarmaceutaAsync(r.Farmaceut.JedinstveniBroj).ConfigureAwait(false);
+                    var lekResult = await DataProvider.vratiLekAsync(r.Lek.KomercijalniNaziv).ConfigureAwait(false);
 
-                s.Close();
+                    if (oblikPakovanjaResult.IsError || prodajnoMestoResult.IsError || farmaceutResult.IsError || lekResult.IsError)
+                    {
+                        return oblikPakovanjaResult.Error;
+                    }
+
+                    recepti.Add(new ReceptPregled(
+                        r.SerijskiBroj,
+                        r.SifraLekara,
+                        r.Tip,
+                        oblikPakovanjaResult.Data,
+                        r.Kolicina,
+                        r.DatumIzdavanja,
+                        r.DatumRealizacije,
+                        prodajnoMestoResult.Data,
+                        farmaceutResult.Data,
+                        lekResult.Data));
+                }
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće vratiti recepte farmaceuta.".ToError(400);
+            }
+            finally
+            {
+                if (s?.IsOpen ?? false)
+                {
+                    s.Close();
+                }
+                s?.Dispose();
             }
 
             return recepti;
         }
 
-        public static void obrisiRecept(int idRecepta)
+
+
+        public async static Task<Result<bool, ErrorMessage>> obrisiRecept(int idRecepta)
         {
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
-                Recept recept = s.Load<Recept>(idRecepta);
+                Recept recept = await s.LoadAsync<Recept>(idRecepta);
 
-                s.Delete(recept);
-                s.Flush();
-
-                s.Close();
-
+                await s.DeleteAsync(recept);
+                await s.FlushAsync();
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće obrisati recept sa zadatim ID-jem.".ToError(400);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
         }
 
-        public static void dodajRecept(ReceptBasic rec, FarmaceutBasic farmaceut, ProdajnoMestoBasic prodajnomesto, LekBasic lek, PakovanjaBasic pak)
+        public async static Task<Result<bool, ErrorMessage>> dodajReceptAsync(ReceptBasic rec, FarmaceutBasic farmaceut, ProdajnoMestoBasic prodajnomesto, LekBasic lek, PakovanjaBasic pak)
         {
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
                 ApotekaLibrary.Entiteti.Recept r = new ApotekaLibrary.Entiteti.Recept();
+
                 r.SifraLekara = rec.SifraLekara;
                 r.DatumIzdavanja = rec.DatumIzdavanja.Date;
                 r.DatumRealizacije = rec.DatumRealizacije?.Date;
                 r.Kolicina = rec.Kolicina;
                 r.Tip = rec.Tip;
 
-                ApotekaLibrary.Entiteti.Lek l = s.Load<ApotekaLibrary.Entiteti.Lek>(lek.KomercijalniNaziv);
+                ApotekaLibrary.Entiteti.Lek l = await s.LoadAsync<ApotekaLibrary.Entiteti.Lek>(lek.KomercijalniNaziv);
                 r.Lek = l;
 
-                ApotekaLibrary.Entiteti.Pakovanje p = s.Load<ApotekaLibrary.Entiteti.Pakovanje>(pak.Id);
+                ApotekaLibrary.Entiteti.Pakovanje p = await s.LoadAsync<ApotekaLibrary.Entiteti.Pakovanje>(pak.Id);
                 r.OblikPakovanja = p;
 
-                ApotekaLibrary.Entiteti.ProdajnoMesto pm = s.Load<ApotekaLibrary.Entiteti.ProdajnoMesto>(prodajnomesto.JedinstveniBroj);
+                ApotekaLibrary.Entiteti.ProdajnoMesto pm = await s.LoadAsync<ApotekaLibrary.Entiteti.ProdajnoMesto>(prodajnomesto.JedinstveniBroj);
                 r.ProdajnoMesto = pm;
 
-                ApotekaLibrary.Entiteti.Farmaceut f = s.Load<ApotekaLibrary.Entiteti.Farmaceut>(farmaceut.JedinstveniBroj);
+                ApotekaLibrary.Entiteti.Farmaceut f = await s.LoadAsync<ApotekaLibrary.Entiteti.Farmaceut>(farmaceut.JedinstveniBroj);
                 r.Farmaceut = f;
 
-                s.Save(r);
-
-                s.Flush();
-
-                s.Close();
+                await s.SaveOrUpdateAsync(r);
+                await s.FlushAsync();
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće dodati recept.".ToError(400);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
         }
 
-        public static ReceptBasic vratiRecept(int idRecepta)
+        public static async Task<Result<ReceptBasic, ErrorMessage>> vratiReceptAsync(int idRecepta)
         {
+            ISession? s = null;
             ReceptBasic rb = new ReceptBasic();
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
 
-                ApotekaLibrary.Entiteti.Recept r = s.Load<ApotekaLibrary.Entiteti.Recept>(idRecepta);
-                rb = new ReceptBasic(r.SerijskiBroj, r.SifraLekara, r.Tip, DataProvider.vratiPakovanje(r.OblikPakovanja.Id), r.Kolicina, r.DatumIzdavanja, r.DatumRealizacije,
-                    DataProvider.vratiProdajnoMesto(r.ProdajnoMesto.JedinstveniBroj), DataProvider.vratiFarmaceuta(r.Farmaceut.JedinstveniBroj),
-                    DataProvider.vratiLek(r.Lek.KomercijalniNaziv));
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
-                s.Close();
+                ApotekaLibrary.Entiteti.Recept r = await s.LoadAsync<ApotekaLibrary.Entiteti.Recept>(idRecepta).ConfigureAwait(false);
+                var oblikPakovanjaResult = await DataProvider.vratiPakovanjeAsync(r.OblikPakovanja.Id).ConfigureAwait(false);
+                var prodajnoMestoResult = await DataProvider.vratiProdajnoMestoAsync(r.ProdajnoMesto.JedinstveniBroj).ConfigureAwait(false);
+                var farmaceutResult = await DataProvider.vratiFarmaceutaAsync(r.Farmaceut.JedinstveniBroj).ConfigureAwait(false);
+                var lekResult = await DataProvider.vratiLekAsync(r.Lek.KomercijalniNaziv).ConfigureAwait(false);
+
+                if (oblikPakovanjaResult.IsError || prodajnoMestoResult.IsError || farmaceutResult.IsError || lekResult.IsError)
+                {
+                    return oblikPakovanjaResult.Error;
+                }
+
+                rb = new ReceptBasic(
+                    r.SerijskiBroj,
+                    r.SifraLekara,
+                    r.Tip,
+                    oblikPakovanjaResult.Data,
+                    r.Kolicina,
+                    r.DatumIzdavanja,
+                    r.DatumRealizacije,
+                    prodajnoMestoResult.Data,
+                    farmaceutResult.Data,
+                    lekResult.Data);
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće vratiti recept sa zadatim ID-jem.".ToError(400);
+            }
+            finally
+            {
+                if (s?.IsOpen ?? false) // Check if session is open before closing
+                {
+                    s.Close();
+                }
+                s?.Dispose();
             }
 
             return rb;
         }
 
-        public static void IzmeniRecept(ReceptBasic recept)
+        public static Result<ReceptBasic, ErrorMessage> IzmeniRecept(ReceptBasic recept)
         {
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
                 ApotekaLibrary.Entiteti.Recept r = s.Load<Recept>(recept.SerijskiBroj);
 
@@ -539,47 +857,72 @@ namespace ApotekaLibrary
                 r.Lek = s.Load<Lek>(recept.Lek.KomercijalniNaziv);
 
                 s.SaveOrUpdate(r);
-
-                s.Flush();
-
-                s.Close();
+                s.Flush();               
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće izmeniti recept.".ToError(400);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return recept;
         }
 
         #endregion
 
         #region Farmaceut
-        public static FarmaceutBasic vratiFarmaceuta(string idFarmaceuta)
+        public async static Task<Result<FarmaceutBasic, ErrorMessage>> vratiFarmaceutaAsync(string idFarmaceuta)
         {
+            ISession? s = null;
+
             FarmaceutBasic fb = new FarmaceutBasic();
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
-                ApotekaLibrary.Entiteti.Farmaceut f = s.Load<ApotekaLibrary.Entiteti.Farmaceut>(idFarmaceuta);
+                ApotekaLibrary.Entiteti.Farmaceut f = await s.LoadAsync<ApotekaLibrary.Entiteti.Farmaceut>(idFarmaceuta);
                 fb = new FarmaceutBasic(f.JedinstveniBroj, f.Ime, f.Prezime, f.DatumRodjenja, f.Adresa, f.BrojTelefona,
                     f.DatumDiplomiranja, f.DatumObnoveLicence);
 
-                s.Close();
+                
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće vratiti farmaceuta sa zadatim ID-jem.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
             }
 
             return fb;
         }
 
-        public static List<FarmaceutPregled> vratiFarmaceuteProdajnogMesta(string id)
+        public static Result<List<FarmaceutPregled>, ErrorMessage> vratiFarmaceuteProdajnogMesta(string id)
         {
+            ISession? s = null;
+
             List<FarmaceutPregled> farmaceuti = new List<FarmaceutPregled>();
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
                 IEnumerable<ApotekaLibrary.Entiteti.Farmaceut> sviFarmaceuti = from o in s.Query<ApotekaLibrary.Entiteti.Farmaceut>()
                                                                        where o.ProdajnoMesto.JedinstveniBroj == id
@@ -591,23 +934,36 @@ namespace ApotekaLibrary
                         f.BrojTelefona, f.DatumDiplomiranja, f.DatumObnoveLicence));
                 }
 
-                s.Close();
+                
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće vratiti farmaceute prodajnog mesta sa zadatim ID-jem.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
             }
 
             return farmaceuti;
         }
 
-        public static void dodajFarmaceuta(FarmaceutBasic farmaceut, ProdajnoMestoBasic prodajnomesto)
+        public async static Task<Result<bool, ErrorMessage>> dodajFarmaceutaAsync(FarmaceutBasic farmaceut, ProdajnoMestoBasic prodajnomesto)
         {
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
                 ApotekaLibrary.Entiteti.Farmaceut f = new ApotekaLibrary.Entiteti.Farmaceut();
+            
                 f.JedinstveniBroj = farmaceut.JedinstveniBroj;
                 f.BrojTelefona = farmaceut.BrojTelefona;
                 f.Ime = farmaceut.Ime;
@@ -618,27 +974,37 @@ namespace ApotekaLibrary
                 f.DatumDiplomiranja = farmaceut.DatumDiplomiranja.Date;
                 f.DatumObnoveLicence = farmaceut.DatumObnoveLicence.Date;
 
-                ApotekaLibrary.Entiteti.ProdajnoMesto pm = s.Load<ApotekaLibrary.Entiteti.ProdajnoMesto>(prodajnomesto.JedinstveniBroj);
+                ApotekaLibrary.Entiteti.ProdajnoMesto pm = await s.LoadAsync<ApotekaLibrary.Entiteti.ProdajnoMesto>(prodajnomesto.JedinstveniBroj);
                 f.ProdajnoMesto = pm;
 
-
-                s.Save(f);
-
-                s.Flush();
-
-                s.Close();
+                await s.SaveOrUpdateAsync(f);
+                await s.FlushAsync();    
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće dodati farmaceuta.".ToError(400);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
         }
 
-        public static void izmeniFarmaceuta(FarmaceutBasic farmaceut)
+        public static Result<FarmaceutBasic, ErrorMessage> izmeniFarmaceuta(FarmaceutBasic farmaceut)
         {
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
                 ApotekaLibrary.Entiteti.Farmaceut f = s.Load<Farmaceut>(farmaceut.JedinstveniBroj);
 
@@ -651,48 +1017,71 @@ namespace ApotekaLibrary
                 f.DatumDiplomiranja = farmaceut.DatumDiplomiranja;
 
                 s.SaveOrUpdate(f);
-
                 s.Flush();
-
-                s.Close();
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće izmeniti farmaceuta.".ToError(400);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return farmaceut;
         }
 
-        public static void obrisiFarmaceuta(string idFarmaceuta)
+        public async static Task<Result<bool, ErrorMessage>> obrisiFarmaceuta(string idFarmaceuta)
         {
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
-                Farmaceut farmaceut = s.Load<Farmaceut>(idFarmaceuta);
+                Farmaceut farmaceut = await s.LoadAsync<Farmaceut>(idFarmaceuta);
 
-                s.Delete(farmaceut);
-                s.Flush();
-
-                s.Close();
-
+                await s.DeleteAsync(farmaceut);
+                await s.FlushAsync();
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće obrisati farmaceuta sa zadatim ID-jem.".ToError(400);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
         }
 
         #endregion
 
         #region Lek
-        public static List<LekPregled> vratiSveLekove()
+        public async static Task<Result<List<LekPregled>, ErrorMessage>> vratiSveLekove()
         {
+            ISession? s = null;
+
             List<LekPregled> lekovi = new List<LekPregled>();
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
-                IEnumerable<ApotekaLibrary.Entiteti.Lek> sviLekovi = from o in s.Query<ApotekaLibrary.Entiteti.Lek>()
+                IEnumerable<ApotekaLibrary.Entiteti.Lek> sviLekovi = from o in await s.QueryOver<ApotekaLibrary.Entiteti.Lek>().ListAsync()
                                                               select o;
 
                 foreach (ApotekaLibrary.Entiteti.Lek l in sviLekovi)
@@ -700,24 +1089,35 @@ namespace ApotekaLibrary
                     lekovi.Add(new LekPregled(l.KomercijalniNaziv, l.HemijskiNaziv,
                         l.NacinDoziranjaOdrasli, l.NacinDoziranjaDeca, l.NacinDoziranjaTrudnice,
                         l.IzdajeSeNaRecept, l.ProcenatParticipacije, l.Cena));
-                }
-
-                s.Close();
+                }                
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće vratiti sve lekove.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
             }
 
             return lekovi;
         }
 
-        public static List<LekPregled> vratiLekoveZaProdajnoMesto(ProdajnoMestoBasic pm)
+        public static Result<List<LekPregled>, ErrorMessage> vratiLekoveZaProdajnoMesto(ProdajnoMestoBasic pm)
         {
+            ISession? s = null;
+
             List<LekPregled> lekovi = new List<LekPregled>();
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
                 IEnumerable<ApotekaLibrary.Entiteti.Lek> sviLekovi = from o in s.Query<ApotekaLibrary.Entiteti.Lek>()
                                                               where o.ProdajnoMesto.JedinstveniBroj == pm.JedinstveniBroj
@@ -728,25 +1128,36 @@ namespace ApotekaLibrary
                     lekovi.Add(new LekPregled(l.KomercijalniNaziv, l.HemijskiNaziv,
                         l.NacinDoziranjaOdrasli, l.NacinDoziranjaDeca, l.NacinDoziranjaTrudnice,
                         l.IzdajeSeNaRecept, l.ProcenatParticipacije, l.Cena));
-                }
-
-                s.Close();
+                }    
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće vratiti lekove za prodajno mesto.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
             }
 
             return lekovi;
         }
 
-        public static void dodajLek(LekBasic lek, GrupaLekovaBasic grupalekova, ProdajnoMestoBasic prodajnomesto)
+        public async static Task<Result<bool, ErrorMessage>> dodajLekAsync(LekBasic lek, GrupaLekovaBasic grupalekova, ProdajnoMestoBasic prodajnomesto)
         {
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
                 ApotekaLibrary.Entiteti.Lek l = new ApotekaLibrary.Entiteti.Lek();
+            
                 l.Cena = lek.Cena;
                 l.ProcenatParticipacije = lek.ProcenatParticipacije;
                 l.NacinDoziranjaTrudnice = lek.NacinDoziranjaTrudnice;
@@ -760,43 +1171,65 @@ namespace ApotekaLibrary
                 l.GrupaLekova = gl;
                 l.ProdajnoMesto = pm;
 
-
-                s.Save(l);
-
-                s.Flush();
-
-                s.Close();
+                await s.SaveOrUpdateAsync(l);
+                await s.FlushAsync();
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće dodati lek.".ToError(400);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
         }
-        public static LekBasic vratiLek(string idLeka)
+
+        public async static Task<Result<LekBasic, ErrorMessage>> vratiLekAsync(string idLeka)
         {
+            ISession? s = null;
+
             LekBasic l = new LekBasic();
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
-                ApotekaLibrary.Entiteti.Lek o = s.Load<ApotekaLibrary.Entiteti.Lek>(idLeka);
+                ApotekaLibrary.Entiteti.Lek o = await s.LoadAsync<ApotekaLibrary.Entiteti.Lek>(idLeka);
                 l = new LekBasic(o.KomercijalniNaziv, o.HemijskiNaziv, o.NacinDoziranjaOdrasli, o.NacinDoziranjaDeca, o.NacinDoziranjaTrudnice, o.IzdajeSeNaRecept, o.ProcenatParticipacije, o.Cena);
-
-                s.Close();
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće vratiti lek sa zadatim ID-jem.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
             }
 
             return l;
         }
 
-        public static void IzmeniLek(LekBasic lek)
+        public static Result<LekBasic, ErrorMessage> IzmeniLek(LekBasic lek)
         {
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
                 ApotekaLibrary.Entiteti.Lek l = s.Load<Lek>(lek.KomercijalniNaziv);
 
@@ -809,79 +1242,117 @@ namespace ApotekaLibrary
                 l.IzdajeSeNaRecept = lek.IzdajeSeNaRecept;
 
                 s.SaveOrUpdate(l);
-
-                s.Flush();
-
-                s.Close();
+                s.Flush();  
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće izmeniti lek.".ToError(400);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return lek;
         }
 
-        public static void obrisiLek(string idLeka)
+        public async static Task<Result<bool, ErrorMessage>> obrisiLekAsync(string idLeka)
         {
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
-                Lek lek = s.Load<Lek>(idLeka);
+                Lek lek = await s.LoadAsync<Lek>(idLeka);
 
-                s.Delete(lek);
-                s.Flush();
-
-                s.Close();
-
+                await s.DeleteAsync(lek);
+                await s.FlushAsync();
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće obrisati lek sa zadatim ID-jem.".ToError(400);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
         }
 
         #endregion
 
         #region GrupaLekova
-        public static List<GrupaLekovaPregled> vratiSveGrupeLekova()
+        public async static Task<Result<List<GrupaLekovaPregled>, ErrorMessage>> vratiSveGrupeLekovaAsync()
         {
+            ISession? s = null;
+
             List<GrupaLekovaPregled> grupe = new List<GrupaLekovaPregled>();
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
-                IEnumerable<ApotekaLibrary.Entiteti.GrupaLekova> sveGrupe = from o in s.Query<ApotekaLibrary.Entiteti.GrupaLekova>()
+                IEnumerable<ApotekaLibrary.Entiteti.GrupaLekova> sveGrupe = from o in await s.QueryOver<ApotekaLibrary.Entiteti.GrupaLekova>().ListAsync()
                                                                      select o;
 
                 foreach (ApotekaLibrary.Entiteti.GrupaLekova g in sveGrupe)
                 {
                     grupe.Add(new GrupaLekovaPregled(g.Id, g.Naziv));
                 }
-
-                s.Close();
+                
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće vratiti sve grupe lekova.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
             }
 
             return grupe;
         }
-        public static GrupaLekovaBasic vratiGrupuLekova(int id)
+        public async static Task<Result<GrupaLekovaBasic, ErrorMessage>> vratiGrupuLekovaAsync(int id)
         {
+            ISession? s = null;
+
             GrupaLekovaBasic gl = new GrupaLekovaBasic();
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
-                ApotekaLibrary.Entiteti.GrupaLekova g = s.Load<ApotekaLibrary.Entiteti.GrupaLekova>(id);
+                ApotekaLibrary.Entiteti.GrupaLekova g = await s.LoadAsync<ApotekaLibrary.Entiteti.GrupaLekova>(id);
                 gl = new GrupaLekovaBasic(g.Id, g.Naziv);
-
-                s.Close();
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće vratiti grupu lekova sa zadatim ID-jem.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
             }
 
             return gl;
@@ -889,91 +1360,130 @@ namespace ApotekaLibrary
         #endregion
 
         #region Indikacije
-        public static List<BolestPregled> vratiIndikacijeZaLek(string id)
+        public static Result<List<BolestPregled>, ErrorMessage> vratiIndikacijeZaLek(string id)
         {
+            ISession? s = null;
+
             List<BolestPregled> indikacije = new List<BolestPregled>();
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
                 IEnumerable<ApotekaLibrary.Entiteti.LekLeci> sveIndikacije = from o in s.Query<ApotekaLibrary.Entiteti.LekLeci>()
                                                                                         where o.Id.LekLeci.KomercijalniNaziv == id
                                                                                         select o;
 
-            
-
                 foreach (ApotekaLibrary.Entiteti.LekLeci ll in sveIndikacije)
                 {
                     indikacije.Add(new BolestPregled(ll.Id.LeciBolest.Id, ll.Id.LeciBolest.Naziv));
-                }
-
-                s.Close();
+                }         
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće vratiti indikacije za lek sa zadatim ID-jem.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
             }
 
             return indikacije;
         }
 
-        public static void dodajIndikaciju(LekBasic lek, BolestBasic bp)
+        public async static Task<Result<bool, ErrorMessage>> dodajIndikacijuAsync(LekBasic lek, BolestBasic bp)
         {
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
                 ApotekaLibrary.Entiteti.LekLeci ll = new ApotekaLibrary.Entiteti.LekLeci();
-                ApotekaLibrary.Entiteti.Lek l = s.Load<ApotekaLibrary.Entiteti.Lek>(lek.KomercijalniNaziv);
-                ApotekaLibrary.Entiteti.Bolest b = s.Load<ApotekaLibrary.Entiteti.Bolest>(bp.BolestId);
+
+                ApotekaLibrary.Entiteti.Lek l = await s.LoadAsync<ApotekaLibrary.Entiteti.Lek>(lek.KomercijalniNaziv);
+                ApotekaLibrary.Entiteti.Bolest b = await s.LoadAsync<ApotekaLibrary.Entiteti.Bolest>(bp.BolestId);
 
                 ll.Id.LekLeci = l;
                 ll.Id.LeciBolest = b;
 
-
-                s.Save(ll);
-
-                s.Flush();
-
-                s.Close();
+                await s.SaveOrUpdateAsync(ll);
+                await s.FlushAsync();      
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće dodati indikaciju za lek.".ToError(400);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
         }
 
-        public static void obrisiIndikaciju(LekBasic lek, BolestBasic bolest)
+        public async static Task<Result<bool, ErrorMessage>> obrisiIndikacijuAsync(LekBasic lek, BolestBasic bolest)
         {
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
-                Lek l = s.Load<ApotekaLibrary.Entiteti.Lek>(lek.KomercijalniNaziv);
-                Bolest b = s.Load<ApotekaLibrary.Entiteti.Bolest>(bolest.BolestId);
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
-                LekLeci indikacija = s.Load<LekLeci>(new LekLeciId { LekLeci = l, LeciBolest = b });
+                Lek l = await s.LoadAsync<ApotekaLibrary.Entiteti.Lek>(lek.KomercijalniNaziv);
+                Bolest b = await s.LoadAsync<ApotekaLibrary.Entiteti.Bolest>(bolest.BolestId);
+                LekLeci indikacija = await s.LoadAsync<LekLeci>(new LekLeciId { LekLeci = l, LeciBolest = b });
 
-                s.Delete(indikacija);
-                s.Flush();
-
-                s.Close();
-
+                await s.DeleteAsync(indikacija);
+                await s.FlushAsync();
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće obrisati indikaciju za lek".ToError(400);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
         }
 
         #endregion
 
         #region Kontraindikacije
-        public static List<BolestPregled> vratiKontraindikacijeZaLek(string id)
+        public static Result<List<BolestPregled>, ErrorMessage> vratiKontraindikacijeZaLek(string id)
         {
+            ISession? s = null;
+
             List<BolestPregled> kontraindikacije = new List<BolestPregled>();
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
                 IEnumerable<ApotekaLibrary.Entiteti.LekKontraindikacija> sveKontraindikacije = from o in s.Query<ApotekaLibrary.Entiteti.LekKontraindikacija>()
                                                                         where o.Id.LekIzaziva.KomercijalniNaziv == id
@@ -982,147 +1492,213 @@ namespace ApotekaLibrary
                 foreach (ApotekaLibrary.Entiteti.LekKontraindikacija lk in sveKontraindikacije)
                 {
                     kontraindikacije.Add(new BolestPregled(lk.Id.IzazivaBolest.Id, lk.Id.IzazivaBolest.Naziv));
-                }
-
-                s.Close();
+                } 
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće vratiti kontraindikacije za lek sa zadatim ID-jem.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
             }
 
             return kontraindikacije;
         }
 
-        public static void obrisiKontrandikaciju(LekBasic lek, BolestBasic bolest)
+        public async static Task<Result<bool, ErrorMessage>> obrisiKontrandikacijuAsync(LekBasic lek, BolestBasic bolest)
         {
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
-                Lek l = s.Load<ApotekaLibrary.Entiteti.Lek>(lek.KomercijalniNaziv);
-                Bolest b = s.Load<ApotekaLibrary.Entiteti.Bolest>(bolest.BolestId);
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
+                Lek l = await s.LoadAsync<ApotekaLibrary.Entiteti.Lek>(lek.KomercijalniNaziv);
+                Bolest b = await s.LoadAsync<ApotekaLibrary.Entiteti.Bolest>(bolest.BolestId);
                 LekKontraindikacija kontraindikacija = s.Load<LekKontraindikacija>(new LekKontraindikacijaId { LekIzaziva = l, IzazivaBolest = b });
 
-                s.Delete(kontraindikacija);
-                s.Flush();
-
-                s.Close();
-
+                await s.DeleteAsync(kontraindikacija);
+                await s.FlushAsync();
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće obrisati kontraindikaciju za lek.".ToError(400);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
         }
 
-        public static void dodajKontraindikaciju(LekBasic lek, BolestBasic bp)
+        public async static Task<Result<bool, ErrorMessage>> dodajKontraindikacijuAsync(LekBasic lek, BolestBasic bp)
         {
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
                 ApotekaLibrary.Entiteti.LekKontraindikacija lk = new ApotekaLibrary.Entiteti.LekKontraindikacija();
-                ApotekaLibrary.Entiteti.Lek l = s.Load<ApotekaLibrary.Entiteti.Lek>(lek.KomercijalniNaziv);
-                ApotekaLibrary.Entiteti.Bolest b = s.Load<ApotekaLibrary.Entiteti.Bolest>(bp.BolestId);
+
+                ApotekaLibrary.Entiteti.Lek l = await s.LoadAsync<ApotekaLibrary.Entiteti.Lek>(lek.KomercijalniNaziv);
+                ApotekaLibrary.Entiteti.Bolest b = await s.LoadAsync<ApotekaLibrary.Entiteti.Bolest>(bp.BolestId);
 
                 lk.Id.LekIzaziva = l;
                 lk.Id.IzazivaBolest = b;
 
-                s.Save(lk);
-
-                s.Flush();
-
-                s.Close();
+                await s.SaveOrUpdateAsync(lk);
+                await s.FlushAsync();
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće dodati kontraindikaciju za lek.".ToError(400);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
         }
 
         #endregion
 
         #region Pakovanja
-        public static List<PakovanjaPregled> vratiPakovanjaZaLek(string id)
+        public static Result<List<PakovanjaPregled>, ErrorMessage> vratiPakovanjaZaLek(string id)
         {
+            ISession? s = null;
+
             List<PakovanjaPregled> pakovanja = new List<PakovanjaPregled>();
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
                 IEnumerable<ApotekaLibrary.Entiteti.Pakovanje> svaPakovanja = from o in s.Query<ApotekaLibrary.Entiteti.Pakovanje>()
                                                                                         where o.Lek.KomercijalniNaziv == id
                                                                                         select o;
 
-            
-
                 foreach (ApotekaLibrary.Entiteti.Pakovanje pak in svaPakovanja)
                 {
                     pakovanja.Add(new PakovanjaPregled(pak.Id, pak.Oblik,pak.Kolicina,pak.Sastav));
-                }
-
-                s.Close();
+                }                
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće vratiti pakovanja za lek sa zadatim ID-jem.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
             }
 
             return pakovanja;
         }
 
-        public static void dodajPakovanje(PakovanjaBasic pakovanje)
+        public async static Task<Result<bool, ErrorMessage>> dodajPakovanje(PakovanjaBasic pakovanje)
         {
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
                 ApotekaLibrary.Entiteti.Pakovanje p = new ApotekaLibrary.Entiteti.Pakovanje();
+
                 p.Sastav = pakovanje.Sastav;
                 p.Kolicina = pakovanje.Kolicina;
                 p.Oblik = pakovanje.Oblik;
-                ApotekaLibrary.Entiteti.Lek l = s.Load<ApotekaLibrary.Entiteti.Lek>(pakovanje.Lek.KomercijalniNaziv);
+                
+                ApotekaLibrary.Entiteti.Lek l = await s.LoadAsync<ApotekaLibrary.Entiteti.Lek>(pakovanje.Lek.KomercijalniNaziv);
+
                 p.Lek = l;
 
-
-                s.Save(p);
-
-                s.Flush();
-
-                s.Close();
+                await s.SaveOrUpdateAsync(p);
+                await s.FlushAsync();
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće dodati pakovanje.".ToError(400);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
         }
 
-        public static PakovanjaBasic vratiPakovanje(int idPakovanja)
+        public async static Task<Result<PakovanjaBasic, ErrorMessage>> vratiPakovanjeAsync(int idPakovanja)
         {
+            ISession? s = null;
+
             PakovanjaBasic pb = new PakovanjaBasic();
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
-                ApotekaLibrary.Entiteti.Pakovanje p = s.Load<ApotekaLibrary.Entiteti.Pakovanje>(idPakovanja);
+                ApotekaLibrary.Entiteti.Pakovanje p = await s.LoadAsync<ApotekaLibrary.Entiteti.Pakovanje>(idPakovanja);
                 pb = new PakovanjaBasic(p.Id, p.Oblik, p.Kolicina, p.Sastav);
-
-                s.Close();
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće vratiti pakovanje sa zadatim ID-jem.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
             }
 
             return pb;
         }
 
-        public static void IzmeniPakovanje(PakovanjaBasic pakovanje)
+        public static Result<PakovanjaBasic, ErrorMessage> IzmeniPakovanje(PakovanjaBasic pakovanje)
         {
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
                 ApotekaLibrary.Entiteti.Pakovanje p = s.Load<Pakovanje>(pakovanje.Id);
 
@@ -1130,40 +1706,51 @@ namespace ApotekaLibrary
                 p.Kolicina = pakovanje.Kolicina;
                 p.Oblik = pakovanje.Oblik;
 
-
-
                 s.SaveOrUpdate(p);
-
                 s.Flush();
-
-                s.Close();
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće izmeniti pakovanje.".ToError(400);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return pakovanje;
         }
 
-        public static void obrisiPakovanje(int idPakovanja)
+        public async static Task<Result<bool, ErrorMessage>> obrisiPakovanjeAsync(int idPakovanja)
         {
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
-                Pakovanje pakovanje = s.Load<Pakovanje>(idPakovanja);
+                Pakovanje pakovanje = await s.LoadAsync<Pakovanje>(idPakovanja);
 
-                s.Delete(pakovanje);
-                s.Flush();
-
-
-
-                s.Close();
-
+                await s.DeleteAsync(pakovanje);
+                await s.FlushAsync();
             }
             catch (Exception)
             {
-                throw;
+                return "Nemoguće obrisati pakovanje sa zadatim ID-jem.".ToError(400);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
         }
 
         #endregion

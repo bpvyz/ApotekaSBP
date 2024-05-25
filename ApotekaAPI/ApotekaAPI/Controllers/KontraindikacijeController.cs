@@ -1,66 +1,45 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using ApotekaLibrary;
 
 namespace ApotekaAPI.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("[controller]")]
     public class KontraindikacijeController : ControllerBase
     {
-        [HttpGet("{id}")]
-        public IActionResult VratiKontraindikacijeZaLek(string id)
+        [HttpGet("vratiKontraindikacijeZaLek/{id}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public IActionResult GetKontraindikacijeZaLek(string id)
         {
-            try
-            {
-                List<BolestPregled> kontraindikacije = DataProvider.vratiKontraindikacijeZaLek(id);
-                return Ok(kontraindikacije);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = DataProvider.vratiKontraindikacijeZaLek(id);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpPost("dodaj")]
-        public IActionResult DodajKontraindikaciju([FromBody] DodajKontraindikacijuRequest request)
+        /*
+        [HttpPost("dodajKontraindikacijuAsync")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> AddKontraindikacijuAsync([FromBody] LekBasic lek, [FromBody] BolestBasic bolest)
         {
-            try
-            {
-                DataProvider.dodajKontraindikaciju(request.Lek, request.Bolest);
-                return Ok("Kontraindikacija uspešno dodana.");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = await DataProvider.dodajKontraindikacijuAsync(lek, bolest);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
+        */
 
-        [HttpPost("obrisi")]
-        public IActionResult ObrisiKontraindikaciju([FromBody] ObrisiKontraindikacijuRequest request)
+        /*
+        [HttpDelete("obrisiKontrandikacijuAsync")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> DeleteKontraindikacijuAsync([FromBody] LekBasic lek, [FromBody] BolestBasic bolest)
         {
-            try
-            {
-                DataProvider.obrisiKontrandikaciju(request.Lek, request.Bolest);
-                return Ok("Kontraindikacija uspešno obrisana.");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = await DataProvider.obrisiKontrandikacijuAsync(lek, bolest);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
-    }
+        */
 
-    public class DodajKontraindikacijuRequest
-    {
-        public LekBasic Lek { get; set; }
-        public BolestBasic Bolest { get; set; }
-    }
-
-    public class ObrisiKontraindikacijuRequest
-    {
-        public LekBasic Lek { get; set; }
-        public BolestBasic Bolest { get; set; }
     }
 }

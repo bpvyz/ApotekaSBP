@@ -11,7 +11,7 @@ namespace ApotekaLibrary.Entiteti
         public virtual LekLeciId Id { get; set; }
         public virtual Lek Lek { get; protected set; }
         public virtual Bolest Bolest { get; protected set; }
-        public LekLeci()
+        internal LekLeci()
         {
             Id = new LekLeciId();
         }

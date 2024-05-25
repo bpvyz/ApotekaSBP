@@ -1,82 +1,58 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using ApotekaLibrary;
 
 namespace ApotekaAPI.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("[controller]")]
     public class BolestController : ControllerBase
     {
-        [HttpGet("{id}")]
-        public IActionResult VratiBolest(int id)
+        [HttpGet("vratiBolestAsync/{idBolesti}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetBolestAsync(int idBolesti)
         {
-            try
-            {
-                BolestBasic bolest = DataProvider.vratiBolest(id);
-                return Ok(bolest);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = await DataProvider.vratiBolestAsync(idBolesti);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpGet("sve")]
-        public IActionResult VratiSveBolesti()
+        [HttpGet("vratiSveBolestiAsync")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetAllBolestiAsync()
         {
-            try
-            {
-                List<BolestPregled> bolesti = DataProvider.vratiSveBolesti();
-                return Ok(bolesti);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = await DataProvider.vratiSveBolestiAsync();
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpPost("dodaj")]
-        public IActionResult DodajBolest(BolestBasic bolest)
+        [HttpPost("dodajBolest")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public IActionResult AddBolest([FromBody] BolestBasic bolest)
         {
-            try
-            {
-                DataProvider.dodajBolest(bolest);
-                return Ok("Bolest uspešno dodata.");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = DataProvider.dodajBolest(bolest);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpPut("izmeni")]
-        public IActionResult IzmeniBolest(BolestBasic bolest)
+        [HttpPut("izmeniBolest")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public IActionResult UpdateBolest([FromBody] BolestBasic bolest)
         {
-            try
-            {
-                DataProvider.izmeniBolest(bolest);
-                return Ok("Bolest uspešno izmenjena.");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = DataProvider.izmeniBolest(bolest);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult ObrisiBolest(int id)
+        [HttpDelete("obrisiBolestAsync/{idBolesti}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> DeleteBolestAsync(int idBolesti)
         {
-            try
-            {
-                DataProvider.obrisiBolest(id);
-                return Ok("Bolest uspešno obrisana.");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = await DataProvider.obrisiBolestAsync(idBolesti);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
     }
 }

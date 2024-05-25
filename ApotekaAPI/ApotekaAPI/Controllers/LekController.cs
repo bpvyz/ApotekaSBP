@@ -1,83 +1,69 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using ApotekaLibrary;
 
 namespace ApotekaAPI.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("[controller]")]
     public class LekController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult VratiSveLekove()
+        [HttpGet("vratiSveLekove")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetSviLekovi()
         {
-            try
-            {
-                List<LekPregled> lekovi = DataProvider.vratiSveLekove();
-                return Ok(lekovi);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = await DataProvider.vratiSveLekove();
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpGet("prodajnomesto/{id}")]
-        public IActionResult VratiLekoveZaProdajnoMesto(string id)
+        [HttpGet("vratiLekoveZaProdajnoMesto")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public IActionResult GetLekoviZaProdajnoMesto([FromBody] ProdajnoMestoBasic pm)
         {
-            try
-            {
-                ProdajnoMestoBasic pm = new ProdajnoMestoBasic() { JedinstveniBroj = id };
-                List<LekPregled> lekovi = DataProvider.vratiLekoveZaProdajnoMesto(pm);
-                return Ok(lekovi);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = DataProvider.vratiLekoveZaProdajnoMesto(pm);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpGet("{id}")]
-        public IActionResult VratiLek(string id)
+        /*
+        [HttpPost("dodajLek")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> AddLek([FromBody] LekBasic lek, [FromBody] GrupaLekovaBasic grupalekova, [FromBody] ProdajnoMestoBasic prodajnomesto)
         {
-            try
-            {
-                LekBasic lek = DataProvider.vratiLek(id);
-                return Ok(lek);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = await DataProvider.dodajLekAsync(lek, grupalekova, prodajnomesto);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
+        }
+        */
+
+        [HttpGet("vratiLekAsync/{idLeka}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetLekAsync(string idLeka)
+        {
+            var result = await DataProvider.vratiLekAsync(idLeka);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpPut("izmeni")]
-        public IActionResult IzmeniLek(LekBasic lek)
+        [HttpPut("izmeniLek")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public IActionResult UpdateLek([FromBody] LekBasic lek)
         {
-            try
-            {
-                DataProvider.IzmeniLek(lek);
-                return Ok("Lek uspešno izmenjen.");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = DataProvider.IzmeniLek(lek);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult ObrisiLek(string id)
+        [HttpDelete("obrisiLekAsync/{idLeka}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> DeleteLekAsync(string idLeka)
         {
-            try
-            {
-                DataProvider.obrisiLek(id);
-                return Ok("Lek uspešno obrisan.");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = await DataProvider.obrisiLekAsync(idLeka);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
     }
 }

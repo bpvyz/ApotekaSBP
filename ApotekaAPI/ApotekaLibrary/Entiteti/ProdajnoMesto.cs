@@ -15,7 +15,7 @@ namespace ApotekaLibrary.Entiteti
         public virtual string Mesto { get; set; }
         public virtual IList<Zaposleni> Zaposleni { get; set; }
         public virtual IList<Recept> Recepti { get; set; }
-        public ProdajnoMesto()
+        internal ProdajnoMesto()
         {
             Zaposleni = new List<Zaposleni>();
             Recepti = new List<Recept>();

@@ -16,7 +16,7 @@ namespace ApotekaLibrary.Entiteti
         public virtual string BrojTelefona { get; set; }
         public virtual ProdajnoMesto ProdajnoMesto { get; set; }
 
-        public Zaposleni() 
+        internal Zaposleni() 
         { 
             ProdajnoMesto = new ProdajnoMesto();
         }

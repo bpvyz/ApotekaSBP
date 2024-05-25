@@ -1,96 +1,58 @@
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using ApotekaLibrary;
 
 namespace ApotekaAPI.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("[controller]")]
     public class ProdajnoMestoController : ControllerBase
     {
-        [HttpGet]
-        [Route("PreuzmiSvaProdajnaMesta")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpGet("vratiSvaProdajnaMesta")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
         public IActionResult GetSvaProdajnaMesta()
         {
-            try
-            {
-                return new JsonResult(DataProvider.vratiSvaProdajnaMesta());
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.ToString());
-            }
+            var result = DataProvider.vratiSvaProdajnaMesta();
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpGet]
-        [Route("PreuzmiProdajnoMesto/{idProdajnogMesta}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult GetProdajnoMesto(string idProdajnogMesta)
+        [HttpGet("vratiProdajnoMestoAsync/{idProdajnogMesta}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetProdajnoMestoAsync(string idProdajnogMesta)
         {
-            try
-            {
-                return new JsonResult(DataProvider.vratiProdajnoMesto(idProdajnogMesta));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.ToString());
-            }
+            var result = await DataProvider.vratiProdajnoMestoAsync(idProdajnogMesta);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpPost]
-        [Route("DodajProdajnoMesto")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult AddProdajnoMesto([FromBody] ProdajnoMestoBasic prodajnomesto)
+        [HttpPost("dodajProdajnoMestoAsync")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> AddProdajnoMestoAsync([FromBody] ProdajnoMestoBasic prodajnoMesto)
         {
-            try
-            {
-                DataProvider.dodajProdajnoMesto(prodajnomesto);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.ToString());
-            }
+            var result = await DataProvider.dodajProdajnoMestoAsync(prodajnoMesto);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpPut]
-        [Route("IzmeniProdajnoMesto")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult UpdateProdajnoMesto([FromBody] ProdajnoMestoBasic prodajnomesto)
+        [HttpPut("izmeniProdajnoMesto")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> UpdateProdajnoMesto([FromBody] ProdajnoMestoBasic prodajnoMesto)
         {
-            try
-            {
-                DataProvider.izmeniProdajnoMesto(prodajnomesto);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.ToString());
-            }
+            var result = await DataProvider.izmeniProdajnoMesto(prodajnoMesto);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpDelete]
-        [Route("ObrisiProdajnoMesto/{idProdajnogMesta}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult DeleteProdajnoMesto(string idProdajnogMesta)
+        [HttpDelete("obrisiProdajnoMestoAsync/{idProdajnogMesta}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> DeleteProdajnoMestoAsync(string idProdajnogMesta)
         {
-            try
-            {
-                DataProvider.obrisiProdajnoMesto(idProdajnogMesta);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.ToString());
-            }
+            var result = await DataProvider.obrisiProdajnoMestoAsync(idProdajnogMesta);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace ApotekaLibrary.Entiteti
         public virtual GrupaLekova GrupaLekova { get; set; }
         public virtual ProdajnoMesto ProdajnoMesto { get; set; }
         public virtual IList<Recept> Recepti { get; set; }
-        public Lek() 
+        internal Lek() 
         {
             Pakovanja = new List<Pakovanje>();
             Leci = new List<LekLeci>();

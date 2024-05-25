@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ApotekaLibrary.Mapiranja
 {
-    public class ZaposleniMapiranja : ClassMap<Zaposleni>
+    internal class ZaposleniMapiranja : ClassMap<Zaposleni>
     {
         public ZaposleniMapiranja()
         {

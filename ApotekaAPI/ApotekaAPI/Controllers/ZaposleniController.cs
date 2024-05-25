@@ -1,97 +1,76 @@
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 using ApotekaLibrary;
 
-namespace ApotekaAPI.Controllers
+namespace ZaposleniController
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("[controller]")]
     public class ZaposleniController : ControllerBase
     {
-        [HttpGet("svi")]
-        public IActionResult VratiSveZaposlene()
+        [HttpGet("vratiSveZaposlene")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetSviZaposleni()
         {
-            try
-            {
-                List<ZaposleniPregled> zaposleni = DataProvider.vratiSveZaposlene();
-                return Ok(zaposleni);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = await DataProvider.vratiSveZaposleneAsync();
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpGet("prodajno-mesto/{id}")]
-        public IActionResult VratiZaposleneProdajnogMesta(string id)
+        [HttpGet("vratiZaposleneProdajnogMesta/{id}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public IActionResult GetZaposleniProdajnogMesta(string id)
         {
-            try
-            {
-                List<ZaposleniPregled> zaposleni = DataProvider.vratiZaposleneProdajnogMesta(id);
-                return Ok(zaposleni);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = DataProvider.vratiZaposleneProdajnogMesta(id);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpGet("{id}")]
-        public IActionResult VratiZaposlenog(string id)
+        [HttpGet("vratiZaposlenog/{id}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetZaposlenog(string id)
         {
-            try
-            {
-                ZaposleniBasic zaposleni = DataProvider.vratiZaposlenog(id);
-                return Ok(zaposleni);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = await DataProvider.vratiZaposlenogAsync(id);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpPost("dodaj/{prodajnomestoID}")]
-        public IActionResult DodajZaposlenog([FromBody]ZaposleniBasic zaposleni, string prodajnomestoID)
+        [HttpPost("dodajZaposlenog/{idProdajnogMesta}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> AddZaposleni([FromBody] ZaposleniBasic zaposleni, string idProdajnogMesta)
         {
-            var prodajnomesto = DataProvider.vratiProdajnoMesto(prodajnomestoID);
-            try
+            (bool isError, var prodajnomesto, var error) = await DataProvider.vratiProdajnoMestoAsync(idProdajnogMesta);
+
+            if (isError)
             {
-                DataProvider.dodajZaposlenog(zaposleni, prodajnomesto);
-                return Ok();
+                return StatusCode(error?.StatusCode ?? 400, $"{error?.Message}");
             }
-            catch (Exception ex)
+            if (prodajnomesto == null)
             {
-                return BadRequest(ex.ToString());
+                return BadRequest("Prodavnica nije validna.");
             }
+
+            var result = await DataProvider.dodajZaposlenogAsync(zaposleni, prodajnomesto);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpPut("izmeni")]
-        public IActionResult IzmeniZaposlenog(ZaposleniBasic zaposleni)
+        [HttpPut("izmeniZaposlenog")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public IActionResult UpdateZaposleni([FromBody] ZaposleniBasic zaposleni)
         {
-            try
-            {
-                DataProvider.izmeniZaposlenog(zaposleni);
-                return Ok("Zaposleni uspešno izmenjen.");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = DataProvider.izmeniZaposlenog(zaposleni);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult ObrisiZaposlenog(string id)
+        [HttpDelete("obrisiZaposlenog/{id}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> DeleteZaposlenog(string id)
         {
-            try
-            {
-                DataProvider.obrisiZaposlenog(id);
-                return Ok("Zaposleni uspešno obrisan.");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = await DataProvider.obrisiZaposlenogAsync(id);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
     }
 }

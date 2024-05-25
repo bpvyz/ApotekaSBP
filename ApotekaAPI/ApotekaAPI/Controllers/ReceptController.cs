@@ -1,84 +1,69 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using ApotekaLibrary;
 
-namespace ApotekaAPI.Controllers
+namespace ReceptController
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("[controller]")]
     public class ReceptController : ControllerBase
     {
-        [HttpGet("prodajnomesto")]
-        public IActionResult VratiRecepteProdajnogMesta(ProdajnoMestoBasic prodajnoMesto)
+        [HttpGet("vratiRecepteProdajnogMestaAsync")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetRecepteProdajnogMestaAsync([FromBody] ProdajnoMestoBasic prodajnomesto)
         {
-            try
-            {
-                List<ReceptPregled> recepti = DataProvider.vratiRecepteProdajnogMesta(prodajnoMesto);
-                return Ok(recepti);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = await DataProvider.vratiRecepteProdajnogMestaAsync(prodajnomesto);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpGet("farmaceut")]
-        public IActionResult VratiRecepteFarmaceuta(FarmaceutBasic farmaceut)
+        [HttpGet("vratiRecepteFarmaceutaAsync")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetRecepteFarmaceutaAsync([FromBody] FarmaceutBasic farmaceut)
         {
-            try
-            {
-                List<ReceptPregled> recepti = DataProvider.vratiRecepteFarmaceuta(farmaceut);
-                return Ok(recepti);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = await DataProvider.vratiRecepteFarmaceutaAsync(farmaceut);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpGet("{id}")]
-        public IActionResult VratiRecept(int id)
+        [HttpDelete("obrisiRecept/{idRecepta}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> DeleteRecept(int idRecepta)
         {
-            try
-            {
-                ReceptBasic recept = DataProvider.vratiRecept(id);
-                return Ok(recept);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = await DataProvider.obrisiRecept(idRecepta);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        
-
-        [HttpPut("izmeni")]
-        public IActionResult IzmeniRecept(ReceptBasic recept)
+        /*
+        [HttpPost("dodajReceptAsync")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> AddReceptAsync([FromBody] ReceptBasic rec, [FromBody] FarmaceutBasic farmaceut, [FromBody] ProdajnoMestoBasic prodajnomesto, [FromBody] LekBasic lek, [FromBody] PakovanjaBasic pak)
         {
-            try
-            {
-                DataProvider.IzmeniRecept(recept);
-                return Ok("Recept uspešno izmenjen.");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = await DataProvider.dodajReceptAsync(rec, farmaceut, prodajnomesto, lek, pak);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
+        }
+        */
+
+        [HttpGet("vratiReceptAsync/{idRecepta}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetReceptAsync(int idRecepta)
+        {
+            var result = await DataProvider.vratiReceptAsync(idRecepta);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult ObrisiRecept(int id)
+        [HttpPut("izmeniRecept")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public IActionResult UpdateRecept([FromBody] ReceptBasic recept)
         {
-            try
-            {
-                DataProvider.obrisiRecept(id);
-                return Ok("Recept uspešno obrisan.");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = DataProvider.IzmeniRecept(recept);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
     }
 }

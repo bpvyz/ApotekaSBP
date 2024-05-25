@@ -1,82 +1,58 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using ApotekaLibrary;
 
 namespace ApotekaAPI.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("[controller]")]
     public class PakovanjaController : ControllerBase
     {
-        [HttpGet("{id}")]
-        public IActionResult VratiPakovanjaZaLek(string id)
+        [HttpGet("vratiPakovanjaZaLek/{id}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public IActionResult GetPakovanjaZaLek(string id)
         {
-            try
-            {
-                List<PakovanjaPregled> pakovanja = DataProvider.vratiPakovanjaZaLek(id);
-                return Ok(pakovanja);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = DataProvider.vratiPakovanjaZaLek(id);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpPost("dodaj")]
-        public IActionResult DodajPakovanje([FromBody] PakovanjaBasic pakovanje)
+        [HttpPost("dodajPakovanje")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> AddPakovanje([FromBody] PakovanjaBasic pakovanje)
         {
-            try
-            {
-                DataProvider.dodajPakovanje(pakovanje);
-                return Ok("Pakovanje uspešno dodano.");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = await DataProvider.dodajPakovanje(pakovanje);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpGet("vrati/{idPakovanja}")]
-        public IActionResult VratiPakovanje(int idPakovanja)
+        [HttpGet("vratiPakovanjeAsync/{idPakovanja}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetPakovanjeAsync(int idPakovanja)
         {
-            try
-            {
-                PakovanjaBasic pak = DataProvider.vratiPakovanje(idPakovanja);
-                return Ok(pak);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = await DataProvider.vratiPakovanjeAsync(idPakovanja);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpPut("izmeni")]
-        public IActionResult IzmeniPakovanje([FromBody] PakovanjaBasic pakovanje)
+        [HttpPut("izmeniPakovanje")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public IActionResult UpdatePakovanje([FromBody] PakovanjaBasic pakovanje)
         {
-            try
-            {
-                DataProvider.IzmeniPakovanje(pakovanje);
-                return Ok("Pakovanje uspešno izmenjeno.");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = DataProvider.IzmeniPakovanje(pakovanje);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpDelete("obrisi/{idPakovanja}")]
-        public IActionResult ObrisiPakovanje(int idPakovanja)
+        [HttpDelete("obrisiPakovanjeAsync/{idPakovanja}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> DeletePakovanjeAsync(int idPakovanja)
         {
-            try
-            {
-                DataProvider.obrisiPakovanje(idPakovanja);
-                return Ok("Pakovanje uspešno obrisano.");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var result = await DataProvider.obrisiPakovanjeAsync(idPakovanja);
+            return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
     }
 }
