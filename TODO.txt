@@ -1,0 +1,8 @@
+Controller routes:
+  dodajKontraindikaciju
+  obrisiKontraindikaciju
+  dodajIndikaciju
+  obrisiIndikaciju
+  dodajFarmaceuta
+  dodajRecept
+  dodajLek
