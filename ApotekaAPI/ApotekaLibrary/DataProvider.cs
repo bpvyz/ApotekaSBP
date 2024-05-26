@@ -1217,6 +1217,37 @@ namespace ApotekaLibrary
 
             return l;
         }
+        public async static Task<Result<LekBasic, ErrorMessage>> vratiLekZaPakovanjeAsync(int idPakovanjaLeka)
+        {
+            ISession? s = null;
+
+            LekBasic lek = new LekBasic();
+
+            try
+            {
+                s = DataLayer.GetSession();
+                
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                ApotekaLibrary.Entiteti.Pakovanje p = await s.LoadAsync<ApotekaLibrary.Entiteti.Pakovanje>(idPakovanjaLeka);
+                ApotekaLibrary.Entiteti.Lek l = await s.LoadAsync<ApotekaLibrary.Entiteti.Lek>(p.Lek.KomercijalniNaziv);
+                lek = new LekBasic(l.KomercijalniNaziv, l.HemijskiNaziv, l.NacinDoziranjaOdrasli, l.NacinDoziranjaDeca, l.NacinDoziranjaTrudnice, l.IzdajeSeNaRecept, l.ProcenatParticipacije, l.Cena);
+            }
+            catch (Exception)
+            {
+                return "Nemoguće vratiti lek za pakovanje sa zadatim ID-jem.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return lek;
+        }
 
         public static Result<LekBasic, ErrorMessage> IzmeniLek(LekBasic lek)
         {
@@ -1617,7 +1648,7 @@ namespace ApotekaLibrary
             return pakovanja;
         }
 
-        public async static Task<Result<bool, ErrorMessage>> dodajPakovanje(PakovanjaBasic pakovanje)
+        public async static Task<Result<bool, ErrorMessage>> dodajPakovanjeAsync(PakovanjaBasic pakovanje, LekBasic lek)
         {
             ISession? s = null;
 
@@ -1631,13 +1662,10 @@ namespace ApotekaLibrary
                 }
 
                 ApotekaLibrary.Entiteti.Pakovanje p = new ApotekaLibrary.Entiteti.Pakovanje();
-
+                ApotekaLibrary.Entiteti.Lek l = await s.LoadAsync<ApotekaLibrary.Entiteti.Lek>(lek.KomercijalniNaziv);
                 p.Sastav = pakovanje.Sastav;
                 p.Kolicina = pakovanje.Kolicina;
                 p.Oblik = pakovanje.Oblik;
-                
-                ApotekaLibrary.Entiteti.Lek l = await s.LoadAsync<ApotekaLibrary.Entiteti.Lek>(pakovanje.Lek.KomercijalniNaziv);
-
                 p.Lek = l;
 
                 await s.SaveOrUpdateAsync(p);

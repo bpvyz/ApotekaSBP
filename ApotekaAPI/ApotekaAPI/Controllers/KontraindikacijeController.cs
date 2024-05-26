@@ -19,27 +19,49 @@ namespace ApotekaAPI.Controllers
             return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        /*
-        [HttpPost("dodajKontraindikacijuAsync")]
+        
+        [HttpPost("dodajKontraindikacijuAsync/{KomercijalniNazivLeka}/{idBolesti}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> AddKontraindikacijuAsync([FromBody] LekBasic lek, [FromBody] BolestBasic bolest)
+        public async Task<IActionResult> AddKontraindikacijuAsync(string KomercijalniNazivLeka, int idBolesti)
         {
+            (bool isError1, var lek, var error1) = await DataProvider.vratiLekAsync(KomercijalniNazivLeka);
+            (bool isError2, var bolest, var error2) = await DataProvider.vratiBolestAsync(idBolesti);
+
+            if (isError1 || isError2)
+            {
+            return StatusCode(error1?.StatusCode ?? 400, $"{error1?.Message}{Environment.NewLine}{error2?.Message}");
+            }
+            if (lek == null || bolest == null)
+            {
+                return BadRequest("Lek ili bolest nije validna.");
+            }
+
             var result = await DataProvider.dodajKontraindikacijuAsync(lek, bolest);
             return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
-        */
-
-        /*
-        [HttpDelete("obrisiKontrandikacijuAsync")]
+        
+        [HttpDelete("obrisiKontrandikacijuAsync/{KomercijalniNazivLeka}/{idBolesti}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> DeleteKontraindikacijuAsync([FromBody] LekBasic lek, [FromBody] BolestBasic bolest)
+        public async Task<IActionResult> DeleteKontraindikacijuAsync(string KomercijalniNazivLeka, int idBolesti)
         {
+            (bool isError1, var lek, var error1) = await DataProvider.vratiLekAsync(KomercijalniNazivLeka);
+            (bool isError2, var bolest, var error2) = await DataProvider.vratiBolestAsync(idBolesti);
+
+            if (isError1 || isError2)
+            {
+            return StatusCode(error1?.StatusCode ?? 400, $"{error1?.Message}{Environment.NewLine}{error2?.Message}");
+            }
+            if (lek == null || bolest == null)
+            {
+                return BadRequest("Lek ili bolest nije validna.");
+            }
+
             var result = await DataProvider.obrisiKontrandikacijuAsync(lek, bolest);
             return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
-        */
+        
 
     }
 }

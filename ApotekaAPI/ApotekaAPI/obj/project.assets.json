@@ -6133,19 +6133,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\B\\.nuget\\packages\\": {}
+    "C:\\Users\\boki\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\B\\Desktop\\SBP18823-18922\\III deo\\ApotekaAPI\\ApotekaAPI\\ApotekaAPI.csproj",
+      "projectUniqueName": "C:\\Users\\boki\\Desktop\\Apoteka3\\ApotekaAPI\\ApotekaAPI\\ApotekaAPI.csproj",
       "projectName": "ApotekaAPI",
-      "projectPath": "C:\\Users\\B\\Desktop\\SBP18823-18922\\III deo\\ApotekaAPI\\ApotekaAPI\\ApotekaAPI.csproj",
-      "packagesPath": "C:\\Users\\B\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\B\\Desktop\\SBP18823-18922\\III deo\\ApotekaAPI\\ApotekaAPI\\obj\\",
+      "projectPath": "C:\\Users\\boki\\Desktop\\Apoteka3\\ApotekaAPI\\ApotekaAPI\\ApotekaAPI.csproj",
+      "packagesPath": "C:\\Users\\boki\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\boki\\Desktop\\Apoteka3\\ApotekaAPI\\ApotekaAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\B\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\boki\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6159,8 +6159,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\B\\Desktop\\SBP18823-18922\\III deo\\ApotekaAPI\\ApotekaLibrary\\ApotekaLibrary.csproj": {
-              "projectPath": "C:\\Users\\B\\Desktop\\SBP18823-18922\\III deo\\ApotekaAPI\\ApotekaLibrary\\ApotekaLibrary.csproj"
+            "C:\\Users\\boki\\Desktop\\Apoteka3\\ApotekaAPI\\ApotekaLibrary\\ApotekaLibrary.csproj": {
+              "projectPath": "C:\\Users\\boki\\Desktop\\Apoteka3\\ApotekaAPI\\ApotekaLibrary\\ApotekaLibrary.csproj"
             }
           }
         }
@@ -6169,11 +6169,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -6208,24 +6203,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[7.0.18, 7.0.18]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[7.0.18, 7.0.18]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[7.0.18, 7.0.18]"
-          },
-          {
-            "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[7.0.18, 7.0.18]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -6234,7 +6211,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }

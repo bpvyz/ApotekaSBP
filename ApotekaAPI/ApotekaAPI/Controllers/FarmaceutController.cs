@@ -28,16 +28,27 @@ namespace ApotekaAPI.Controllers
             return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        /*
-        [HttpPost("dodajFarmaceutaAsync")]
+        
+        [HttpPost("dodajFarmaceutaAsync/{idProdajnogMesta}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> AddFarmaceutaAsync([FromBody] FarmaceutBasic farmaceut, [FromBody] ProdajnoMestoBasic prodajnomesto)
+        public async Task<IActionResult> AddFarmaceutaAsync([FromBody] FarmaceutBasic farmaceut, string idProdajnogMesta)
         {
+            (bool isError, var prodajnomesto, var error) = await DataProvider.vratiProdajnoMestoAsync(idProdajnogMesta);
+
+            if (isError)
+            {
+                return StatusCode(error?.StatusCode ?? 400, $"{error?.Message}");
+            }
+            if (prodajnomesto == null)
+            {
+                return BadRequest("Prodavnica nije validna.");
+            }
+            
             var result = await DataProvider.dodajFarmaceutaAsync(farmaceut, prodajnomesto);
             return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
-        */
+        
 
         [HttpPut("izmeniFarmaceuta")]
         [ProducesResponseType(200)]

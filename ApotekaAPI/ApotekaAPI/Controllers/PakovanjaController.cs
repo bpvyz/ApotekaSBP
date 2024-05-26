@@ -19,12 +19,21 @@ namespace ApotekaAPI.Controllers
             return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpPost("dodajPakovanje")]
+        [HttpPost("dodajPakovanje/{idLeka}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> AddPakovanje([FromBody] PakovanjaBasic pakovanje)
+        public async Task<IActionResult> AddPakovanje([FromBody] PakovanjaBasic pakovanje, string idLeka)
         {
-            var result = await DataProvider.dodajPakovanje(pakovanje);
+            (bool isError, var lek, var error) = await DataProvider.vratiLekAsync(idLeka);
+            if (isError)
+            {
+            return StatusCode(error?.StatusCode ?? 400, $"{error?.Message}");
+            }
+            if (lek == null)
+            {
+                return BadRequest("Lek nije validan.");
+            }
+            var result = await DataProvider.dodajPakovanjeAsync(pakovanje, lek);
             return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 

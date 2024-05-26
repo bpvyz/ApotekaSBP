@@ -8,6 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ApotekaLibrary
-build_property.ProjectDir = C:\Users\B\Desktop\SBP18823-18922\III deo\ApotekaAPI\ApotekaLibrary\
-build_property.EnableComHosting = 
-build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.ProjectDir = C:\Users\boki\Desktop\Apoteka3\ApotekaAPI\ApotekaLibrary\

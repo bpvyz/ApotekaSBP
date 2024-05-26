@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ApotekaAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+667706732586ffaf0c7e910cb48dcbaed12ef1d7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("ApotekaAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ApotekaAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

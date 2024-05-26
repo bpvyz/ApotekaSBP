@@ -28,16 +28,27 @@ namespace ApotekaAPI.Controllers
             return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        /*
-        [HttpPost("dodajLek")]
+        
+        [HttpPost("dodajLek/{idProdajnogMesta}/{idGrupeLekova}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> AddLek([FromBody] LekBasic lek, [FromBody] GrupaLekovaBasic grupalekova, [FromBody] ProdajnoMestoBasic prodajnomesto)
+        public async Task<IActionResult> AddLek([FromBody] LekBasic lek, int idGrupeLekova, string idProdajnogMesta)
         {
+            (bool isError1, var prodajnomesto, var error1) = await DataProvider.vratiProdajnoMestoAsync(idProdajnogMesta);
+            (bool isError2, var grupalekova, var error2) = await DataProvider.vratiGrupuLekovaAsync(idGrupeLekova);
+
+            if (isError1 || isError2)
+            {
+            return StatusCode(error1?.StatusCode ?? 400, $"{error1?.Message}{Environment.NewLine}{error2?.Message}");
+            }
+            if (prodajnomesto == null || grupalekova == null)
+            {
+                return BadRequest("Prodajno mesto ili grupa lekova nije validna.");
+            }
+
             var result = await DataProvider.dodajLekAsync(lek, grupalekova, prodajnomesto);
             return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
-        */
 
         [HttpGet("vratiLekAsync/{idLeka}")]
         [ProducesResponseType(200)]
