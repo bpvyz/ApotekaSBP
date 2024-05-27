@@ -1,9 +1,3 @@
 Controller routes:
-  dodajKontraindikaciju (treba da se isproba)
-  obrisiKontraindikaciju (treba da se isproba)
-  dodajIndikaciju (treba da se isproba)
-  obrisiIndikaciju (treba da se isproba)
-  dodajFarmaceuta (treba da se isproba)
-  dodajRecept (treba da se isproba)
-  dodajLek (treba da se isproba)
-  dodajPakovanje (treba da se isproba)
+  dodajRecept (popraviti, ne radi)
+  dodajPakovanje (radi, samo u kontroleru treba da se zameni da ne pise idLeka vec KomercijalniNazivLeka)
