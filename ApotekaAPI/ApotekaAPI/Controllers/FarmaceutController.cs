@@ -19,12 +19,12 @@ namespace ApotekaAPI.Controllers
             return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpGet("vratiFarmaceuteProdajnogMesta/{id}")]
+        [HttpGet("vratiFarmaceuteProdajnogMesta/{idProdajnogMesta}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public IActionResult GetFarmaceuteProdajnogMesta(string id)
+        public IActionResult GetFarmaceuteProdajnogMesta(string idProdajnogMesta)
         {
-            var result = DataProvider.vratiFarmaceuteProdajnogMesta(id);
+            var result = DataProvider.vratiFarmaceuteProdajnogMesta(idProdajnogMesta);
             return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
@@ -42,7 +42,7 @@ namespace ApotekaAPI.Controllers
             }
             if (prodajnomesto == null)
             {
-                return BadRequest("Prodavnica nije validna.");
+                return BadRequest("Prodajno mesto nije validno.");
             }
             
             var result = await DataProvider.dodajFarmaceutaAsync(farmaceut, prodajnomesto);

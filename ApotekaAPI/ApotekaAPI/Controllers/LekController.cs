@@ -19,12 +19,23 @@ namespace ApotekaAPI.Controllers
             return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpGet("vratiLekoveZaProdajnoMesto")]
+        [HttpGet("vratiLekoveZaProdajnoMesto/{idProdajnogMesta}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public IActionResult GetLekoviZaProdajnoMesto([FromBody] ProdajnoMestoBasic pm)
+        public async Task<IActionResult> GetLekoviZaProdajnoMestoAsync(string idProdajnogMesta)
         {
-            var result = DataProvider.vratiLekoveZaProdajnoMesto(pm);
+            (bool isError, var prodajnomesto, var error) = await DataProvider.vratiProdajnoMestoAsync(idProdajnogMesta);
+
+            if (isError)
+            {
+                return StatusCode(error?.StatusCode ?? 400, $"{error?.Message}");
+            }
+            if (prodajnomesto == null)
+            {
+                return BadRequest("Prodajno mesto nije validno.");
+            }
+
+            var result = DataProvider.vratiLekoveZaProdajnoMesto(prodajnomesto);
             return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
@@ -50,12 +61,12 @@ namespace ApotekaAPI.Controllers
             return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpGet("vratiLekAsync/{idLeka}")]
+        [HttpGet("vratiLekAsync/{KomercijalniNazivLeka}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> GetLekAsync(string idLeka)
+        public async Task<IActionResult> GetLekAsync(string KomercijalniNazivLeka)
         {
-            var result = await DataProvider.vratiLekAsync(idLeka);
+            var result = await DataProvider.vratiLekAsync(KomercijalniNazivLeka);
             return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
@@ -68,12 +79,12 @@ namespace ApotekaAPI.Controllers
             return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpDelete("obrisiLekAsync/{idLeka}")]
+        [HttpDelete("obrisiLekAsync/{KomercijalniNazivLeka}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> DeleteLekAsync(string idLeka)
+        public async Task<IActionResult> DeleteLekAsync(string KomercijalniNazivLeka)
         {
-            var result = await DataProvider.obrisiLekAsync(idLeka);
+            var result = await DataProvider.obrisiLekAsync(KomercijalniNazivLeka);
             return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
     }

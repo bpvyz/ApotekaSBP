@@ -307,7 +307,7 @@ namespace ApotekaLibrary
 
     public class PakovanjaBasic
     {
-        public int Id { get; protected set; }
+        public int Id { get; set; }
         public string Oblik { get; set; }
         public int Kolicina { get; set; }
         public string Sastav { get; set; }
@@ -318,12 +318,13 @@ namespace ApotekaLibrary
             Lek = new LekBasic();
         }
 
-        public PakovanjaBasic(int id, string oblik, int kolicina, string sastav)
+        public PakovanjaBasic(int id, string oblik, int kolicina, string sastav, LekBasic lek)
         {
             this.Id = id;
             this.Oblik = oblik;
             this.Sastav = sastav;
             this.Kolicina = kolicina;
+            this.Lek = lek;
         }
 
     }

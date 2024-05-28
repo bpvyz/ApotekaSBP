@@ -121,6 +121,7 @@ namespace ApotekaLibrary
         public async static Task<Result<ProdajnoMestoBasic, ErrorMessage>> izmeniProdajnoMesto(ProdajnoMestoBasic prodajnomesto)
         {
             ISession? s = null;
+
             try
             {
                 s = DataLayer.GetSession();
@@ -137,10 +138,7 @@ namespace ApotekaLibrary
                 pm.Adresa = prodajnomesto.Adresa;
 
                 await s.UpdateAsync(pm);
-
                 await s.FlushAsync();
-
-                
             }
             catch (Exception)
             {
@@ -341,6 +339,7 @@ namespace ApotekaLibrary
         public static Result<ZaposleniBasic, ErrorMessage> izmeniZaposlenog(ZaposleniBasic zaposleni)
         {
             ISession? s = null;
+
             try
             {
                 s = DataLayer.GetSession();
@@ -659,10 +658,10 @@ namespace ApotekaLibrary
 
                 foreach (ApotekaLibrary.Entiteti.Recept r in sviRecepti)
                 {
-                    var oblikPakovanjaResult = await DataProvider.vratiPakovanjeAsync(r.OblikPakovanja.Id).ConfigureAwait(false);
-                    var prodajnoMestoResult = await DataProvider.vratiProdajnoMestoAsync(r.ProdajnoMesto.JedinstveniBroj).ConfigureAwait(false);
-                    var farmaceutResult = await DataProvider.vratiFarmaceutaAsync(r.Farmaceut.JedinstveniBroj).ConfigureAwait(false);
-                    var lekResult = await DataProvider.vratiLekAsync(r.Lek.KomercijalniNaziv).ConfigureAwait(false);
+                    var oblikPakovanjaResult = await DataProvider.vratiPakovanjeAsync(r.OblikPakovanja.Id);
+                    var prodajnoMestoResult = await DataProvider.vratiProdajnoMestoAsync(r.ProdajnoMesto.JedinstveniBroj);
+                    var farmaceutResult = await DataProvider.vratiFarmaceutaAsync(r.Farmaceut.JedinstveniBroj);
+                    var lekResult = await DataProvider.vratiLekAsync(r.Lek.KomercijalniNaziv);
 
                     if (oblikPakovanjaResult.IsError || prodajnoMestoResult.IsError || farmaceutResult.IsError || lekResult.IsError)
                     {
@@ -731,7 +730,7 @@ namespace ApotekaLibrary
             return true;
         }
 
-        public async static Task<Result<bool, ErrorMessage>> dodajReceptAsync(ReceptBasic rec, FarmaceutBasic farmaceut, ProdajnoMestoBasic prodajnomesto, LekBasic lek, PakovanjaBasic pak)
+        public async static Task<Result<bool, ErrorMessage>> dodajReceptAsync(ReceptBasic rec, FarmaceutBasic farmaceut, PakovanjaBasic pakovanje)
         {
             ISession? s = null;
 
@@ -752,24 +751,28 @@ namespace ApotekaLibrary
                 r.Kolicina = rec.Kolicina;
                 r.Tip = rec.Tip;
 
-                ApotekaLibrary.Entiteti.Lek l = await s.LoadAsync<ApotekaLibrary.Entiteti.Lek>(lek.KomercijalniNaziv);
+                ApotekaLibrary.Entiteti.Lek l = await s.LoadAsync<ApotekaLibrary.Entiteti.Lek>(pakovanje.Lek.KomercijalniNaziv);
                 r.Lek = l;
 
-                ApotekaLibrary.Entiteti.Pakovanje p = await s.LoadAsync<ApotekaLibrary.Entiteti.Pakovanje>(pak.Id);
+                ApotekaLibrary.Entiteti.Pakovanje p = await s.LoadAsync<ApotekaLibrary.Entiteti.Pakovanje>(pakovanje.Id);
                 r.OblikPakovanja = p;
-
-                ApotekaLibrary.Entiteti.ProdajnoMesto pm = await s.LoadAsync<ApotekaLibrary.Entiteti.ProdajnoMesto>(prodajnomesto.JedinstveniBroj);
-                r.ProdajnoMesto = pm;
 
                 ApotekaLibrary.Entiteti.Farmaceut f = await s.LoadAsync<ApotekaLibrary.Entiteti.Farmaceut>(farmaceut.JedinstveniBroj);
                 r.Farmaceut = f;
 
+                Console.WriteLine(f.ProdajnoMesto.JedinstveniBroj);
+
+                ApotekaLibrary.Entiteti.ProdajnoMesto pm = await s.LoadAsync<ApotekaLibrary.Entiteti.ProdajnoMesto>(f.ProdajnoMesto.JedinstveniBroj);
+                r.ProdajnoMesto = pm;
+                
+
+
                 await s.SaveOrUpdateAsync(r);
                 await s.FlushAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return "Nemoguće dodati recept.".ToError(400);
+                return $"Nemoguće dodati recept. {ex.Message}".ToError(400);
             }
             finally
             {
@@ -794,11 +797,11 @@ namespace ApotekaLibrary
                     return "Nemoguće otvoriti sesiju.".ToError(403);
                 }
 
-                ApotekaLibrary.Entiteti.Recept r = await s.LoadAsync<ApotekaLibrary.Entiteti.Recept>(idRecepta).ConfigureAwait(false);
-                var oblikPakovanjaResult = await DataProvider.vratiPakovanjeAsync(r.OblikPakovanja.Id).ConfigureAwait(false);
-                var prodajnoMestoResult = await DataProvider.vratiProdajnoMestoAsync(r.ProdajnoMesto.JedinstveniBroj).ConfigureAwait(false);
-                var farmaceutResult = await DataProvider.vratiFarmaceutaAsync(r.Farmaceut.JedinstveniBroj).ConfigureAwait(false);
-                var lekResult = await DataProvider.vratiLekAsync(r.Lek.KomercijalniNaziv).ConfigureAwait(false);
+                ApotekaLibrary.Entiteti.Recept r = await s.LoadAsync<ApotekaLibrary.Entiteti.Recept>(idRecepta);
+                var oblikPakovanjaResult = await DataProvider.vratiPakovanjeAsync(r.OblikPakovanja.Id);
+                var prodajnoMestoResult = await DataProvider.vratiProdajnoMestoAsync(r.ProdajnoMesto.JedinstveniBroj);
+                var farmaceutResult = await DataProvider.vratiFarmaceutaAsync(r.Farmaceut.JedinstveniBroj);
+                var lekResult = await DataProvider.vratiLekAsync(r.Lek.KomercijalniNaziv);
 
                 if (oblikPakovanjaResult.IsError || prodajnoMestoResult.IsError || farmaceutResult.IsError || lekResult.IsError)
                 {
@@ -823,7 +826,7 @@ namespace ApotekaLibrary
             }
             finally
             {
-                if (s?.IsOpen ?? false) // Check if session is open before closing
+                if (s?.IsOpen ?? false)
                 {
                     s.Close();
                 }
@@ -845,23 +848,25 @@ namespace ApotekaLibrary
                 {
                     return "Nemoguće otvoriti sesiju.".ToError(403);
                 }
-
+                // Console.WriteLine(recept.SerijskiBroj);
+                // Console.WriteLine(recept.SifraLekara);
+                // Console.WriteLine(recept.DatumIzdavanja);
+                // Console.WriteLine(recept.DatumRealizacije);
+                
                 ApotekaLibrary.Entiteti.Recept r = s.Load<Recept>(recept.SerijskiBroj);
 
                 r.Kolicina = recept.Kolicina;
                 r.SifraLekara = recept.SifraLekara;
                 r.DatumIzdavanja = recept.DatumIzdavanja;
                 r.DatumRealizacije = recept.DatumRealizacije;
-                r.OblikPakovanja = s.Load<Pakovanje>(recept.OblikPakovanja.Id);
-                r.Farmaceut = s.Load<Farmaceut>(recept.Farmaceut.JedinstveniBroj);
-                r.Lek = s.Load<Lek>(recept.Lek.KomercijalniNaziv);
+                r.Tip = recept.Tip;
 
                 s.SaveOrUpdate(r);
                 s.Flush();               
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return "Nemoguće izmeniti recept.".ToError(400);
+                return $"Nemoguće izmeniti recept. Exception: {ex.Message}".ToError(400);
             }
             finally
             {
@@ -1700,7 +1705,8 @@ namespace ApotekaLibrary
                 }
 
                 ApotekaLibrary.Entiteti.Pakovanje p = await s.LoadAsync<ApotekaLibrary.Entiteti.Pakovanje>(idPakovanja);
-                pb = new PakovanjaBasic(p.Id, p.Oblik, p.Kolicina, p.Sastav);
+                var lekResult = await DataProvider.vratiLekAsync(p.Lek.KomercijalniNaziv);
+                pb = new PakovanjaBasic(p.Id, p.Oblik, p.Kolicina, p.Sastav, lekResult.Data);
             }
             catch (Exception)
             {
@@ -1715,7 +1721,7 @@ namespace ApotekaLibrary
             return pb;
         }
 
-        public static Result<PakovanjaBasic, ErrorMessage> IzmeniPakovanje(PakovanjaBasic pakovanje)
+        public async static Task<Result<PakovanjaBasic, ErrorMessage>> IzmeniPakovanjeAsync(PakovanjaBasic pakovanje)
         {
             ISession? s = null;
 
@@ -1728,18 +1734,18 @@ namespace ApotekaLibrary
                     return "Nemoguće otvoriti sesiju.".ToError(403);
                 }
 
-                ApotekaLibrary.Entiteti.Pakovanje p = s.Load<Pakovanje>(pakovanje.Id);
+                ApotekaLibrary.Entiteti.Pakovanje p = await s.LoadAsync<Pakovanje>(pakovanje.Id);
 
                 p.Sastav = pakovanje.Sastav;
                 p.Kolicina = pakovanje.Kolicina;
                 p.Oblik = pakovanje.Oblik;
 
-                s.SaveOrUpdate(p);
-                s.Flush();
+                await s.UpdateAsync(p);
+                await s.FlushAsync();
             }
             catch (Exception)
             {
-                return "Nemoguće izmeniti pakovanje.".ToError(400);
+                return $"Nemoguće izmeniti pakovanje.".ToError(400);
             }
             finally
             {

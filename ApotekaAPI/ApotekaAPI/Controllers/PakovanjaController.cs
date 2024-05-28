@@ -10,21 +10,21 @@ namespace ApotekaAPI.Controllers
     [ApiController]
     public class PakovanjaController : ControllerBase
     {
-        [HttpGet("vratiPakovanjaZaLek/{id}")]
+        [HttpGet("vratiPakovanjaZaLek/{KomercijalniNazivLeka}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public IActionResult GetPakovanjaZaLek(string id)
+        public IActionResult GetPakovanjaZaLek(string KomercijalniNazivLeka)
         {
-            var result = DataProvider.vratiPakovanjaZaLek(id);
+            var result = DataProvider.vratiPakovanjaZaLek(KomercijalniNazivLeka);
             return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpPost("dodajPakovanje/{idLeka}")]
+        [HttpPost("dodajPakovanje/{KomercijalniNazivLeka}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> AddPakovanje([FromBody] PakovanjaBasic pakovanje, string idLeka)
+        public async Task<IActionResult> AddPakovanje([FromBody] PakovanjaBasic pakovanje, string KomercijalniNazivLeka)
         {
-            (bool isError, var lek, var error) = await DataProvider.vratiLekAsync(idLeka);
+            (bool isError, var lek, var error) = await DataProvider.vratiLekAsync(KomercijalniNazivLeka);
             if (isError)
             {
             return StatusCode(error?.StatusCode ?? 400, $"{error?.Message}");
@@ -49,9 +49,9 @@ namespace ApotekaAPI.Controllers
         [HttpPut("izmeniPakovanje")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public IActionResult UpdatePakovanje([FromBody] PakovanjaBasic pakovanje)
+        public async Task<IActionResult> UpdatePakovanje([FromBody] PakovanjaBasic pakovanje)
         {
-            var result = DataProvider.IzmeniPakovanje(pakovanje);
+            var result = await DataProvider.IzmeniPakovanjeAsync(pakovanje);
             return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 

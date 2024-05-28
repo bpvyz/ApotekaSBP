@@ -10,12 +10,12 @@ namespace ApotekaAPI.Controllers
     [ApiController]
     public class KontraindikacijeController : ControllerBase
     {
-        [HttpGet("vratiKontraindikacijeZaLek/{id}")]
+        [HttpGet("vratiKontraindikacijeZaLek/{KomercijalniNazivLeka}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public IActionResult GetKontraindikacijeZaLek(string id)
+        public IActionResult GetKontraindikacijeZaLek(string KomercijalniNazivLeka)
         {
-            var result = DataProvider.vratiKontraindikacijeZaLek(id);
+            var result = DataProvider.vratiKontraindikacijeZaLek(KomercijalniNazivLeka);
             return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
@@ -41,7 +41,7 @@ namespace ApotekaAPI.Controllers
             return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
         
-        [HttpDelete("obrisiKontrandikacijuAsync/{KomercijalniNazivLeka}/{idBolesti}")]
+        [HttpDelete("obrisiKontraindikacijuAsync/{KomercijalniNazivLeka}/{idBolesti}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         public async Task<IActionResult> DeleteKontraindikacijuAsync(string KomercijalniNazivLeka, int idBolesti)

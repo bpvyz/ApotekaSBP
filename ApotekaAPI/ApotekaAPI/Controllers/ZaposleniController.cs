@@ -17,21 +17,21 @@ namespace ZaposleniController
             return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpGet("vratiZaposleneProdajnogMesta/{id}")]
+        [HttpGet("vratiZaposleneProdajnogMesta/{idProdajnogMesta}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public IActionResult GetZaposleniProdajnogMesta(string id)
+        public IActionResult GetZaposleniProdajnogMesta(string idProdajnogMesta)
         {
-            var result = DataProvider.vratiZaposleneProdajnogMesta(id);
+            var result = DataProvider.vratiZaposleneProdajnogMesta(idProdajnogMesta);
             return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpGet("vratiZaposlenog/{id}")]
+        [HttpGet("vratiZaposlenog/{idZaposlenog}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> GetZaposlenog(string id)
+        public async Task<IActionResult> GetZaposlenog(string idZaposlenog)
         {
-            var result = await DataProvider.vratiZaposlenogAsync(id);
+            var result = await DataProvider.vratiZaposlenogAsync(idZaposlenog);
             return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
@@ -64,12 +64,12 @@ namespace ZaposleniController
             return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
 
-        [HttpDelete("obrisiZaposlenog/{id}")]
+        [HttpDelete("obrisiZaposlenog/{idZaposlenog}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> DeleteZaposlenog(string id)
+        public async Task<IActionResult> DeleteZaposlenog(string idZaposlenog)
         {
-            var result = await DataProvider.obrisiZaposlenogAsync(id);
+            var result = await DataProvider.obrisiZaposlenogAsync(idZaposlenog);
             return result.IsError ? StatusCode(400, result.Error.Message) : Ok(result.Data);
         }
     }
