@@ -1,0 +1,6 @@
+C:\Users\B\Desktop\SBP18823-18922\III deo\ApotekaAPI\ApotekaLibrary\obj\Debug\net8.0\ApotekaLibrary.csproj.AssemblyReference.cache
+C:\Users\B\Desktop\SBP18823-18922\III deo\ApotekaAPI\ApotekaLibrary\obj\Debug\net8.0\ApotekaLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\B\Desktop\SBP18823-18922\III deo\ApotekaAPI\ApotekaLibrary\obj\Debug\net8.0\ApotekaLibrary.AssemblyInfoInputs.cache
+C:\Users\B\Desktop\SBP18823-18922\III deo\ApotekaAPI\ApotekaLibrary\obj\Debug\net8.0\ApotekaLibrary.AssemblyInfo.cs
+C:\Users\B\Desktop\SBP18823-18922\III deo\ApotekaAPI\ApotekaLibrary\obj\Debug\net8.0\ApotekaLibrary.csproj.CoreCompileInputs.cache
+C:\Users\B\Desktop\SBP18823-18922\III deo\ApotekaAPI\ApotekaLibrary\obj\Debug\net8.0\ApotekaLibrary.sourcelink.json

@@ -1,0 +1,3 @@
+Napraviti da korisnik moze iz dropdown-a u swagger-u da izabere opcije umesto da se kucaju ID-evi (zamisliti da obican korisnik treba da koristi ovo, ne bi imalo smisla da se kucaju neki brojevi, vec treba da se prikazuju imena odgovarajucih entiteta vezanih za ID).
+
+Izbaciti suvisne parametre iz body-ja request-a (treba da se ostavi unos samo onih parametra koji su predvidjeni u http fajlu, tj. koji su potrebni za DataProvider funkciju).

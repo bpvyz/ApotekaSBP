@@ -1,0 +1,372 @@
+
+@WebAPI_HostAddress = https://localhost:5001
+@WebAPI_idProdajnogMesta = PM001
+@WebAPI_idGrupeLekova = 1
+
+### Prodajno mesto
+
+GET {{WebAPI_HostAddress}}/api/ProdajnoMesto/vratiSvaProdajnaMesta
+Accept: application/json
+
+###
+
+GET {{WebAPI_HostAddress}}/api/ProdajnoMesto/vratiProdajnoMestoAsync/{{WebAPI_idProdajnogMesta}}
+Accept: application/json
+
+###
+
+POST {{WebAPI_HostAddress}}/api/ProdajnoMesto/dodajProdajnoMestoAsync
+Content-Type: application/json
+Accept: application/json
+
+{
+    "jedinstveniBroj": "PM011",
+    "naziv": "TestProdajnoMesto",
+    "adresa": "Adresa 11-2",
+    "mesto": "Beograd"
+}
+
+###
+
+PUT {{WebAPI_HostAddress}}/api/ProdajnoMesto/izmeniProdajnoMesto
+Content-Type: application/json
+Accept: application/json
+
+{
+    "jedinstveniBroj": "PM011",
+    "naziv": "IzmenjenNazivProdajnogMesta",
+    "adresa": "Adresa 12-3",
+    "mesto": "Vranje"
+}
+
+###
+
+DELETE {{WebAPI_HostAddress}}/api/ProdajnoMesto/obrisiProdajnoMestoAsync/PM011
+Accept: application/json
+
+### Lekovi
+
+GET {{WebAPI_HostAddress}}/api/Lek/vratiSveLekove
+Accept: application/json
+
+###
+
+GET {{WebAPI_HostAddress}}/api/Lek/vratiLekoveZaProdajnoMesto/{{WebAPI_idProdajnogMesta}}
+Accept: application/json
+
+###
+
+POST {{WebAPI_HostAddress}}/api/Lek/dodajLek/{{WebAPI_idProdajnogMesta}}/{{WebAPI_idGrupeLekova}}
+Content-Type: application/json
+Accept: application/json
+
+{
+    "komercijalniNaziv": "TestNazivLeka",
+    "hemijskiNaziv": "TestHemijskiNazivLeka",
+    "nacinDoziranjaOdrasli": "odrasli",
+    "nacinDoziranjaDeca": "deca",
+    "nacinDoziranjaTrudnice": "trudnice",
+    "izdajeSeNaRecept": true,
+    "procenatParticipacije": 15,
+    "cena": 123321
+}
+
+###
+
+GET {{WebAPI_HostAddress}}/api/Lek/vratiLekAsync/TestNazivLeka
+Accept: application/json
+
+###
+
+PUT {{WebAPI_HostAddress}}/api/Lek/izmeniLek
+Content-Type: application/json
+Accept: application/json
+
+{
+    "komercijalniNaziv": "TestNazivLeka",
+    "hemijskiNaziv": "IzmenjenHemijskiNazivLeka",
+    "nacinDoziranjaOdrasli": "odrasli123",
+    "nacinDoziranjaDeca": "deca123",
+    "nacinDoziranjaTrudnice": "trudnice123",
+    "izdajeSeNaRecept": false,
+    "procenatParticipacije": 25,
+    "cena": 123
+}
+
+###
+
+DELETE {{WebAPI_HostAddress}}/api/Lek/obrisiLekAsync/TestNazivLeka
+Accept: application/json
+
+### Bolest
+
+GET {{WebAPI_HostAddress}}/api/Bolest/vratiBolestAsync/1
+Accept: application/json
+
+###
+
+GET {{WebAPI_HostAddress}}/api/Bolest/vratiSveBolestiAsync
+Accept: application/json
+
+###
+
+POST {{WebAPI_HostAddress}}/api/Bolest/dodajBolest
+Content-Type: application/json
+Accept: application/json
+
+{
+    "naziv": "TestBolest"
+}
+
+###
+
+PUT {{WebAPI_HostAddress}}/api/Bolest/izmeniBolest
+Content-Type: application/json
+Accept: application/json
+
+{
+    "bolestId": 42,
+    "naziv": "IzmenjenNazivBolesti"
+}
+
+###
+
+DELETE {{WebAPI_HostAddress}}/api/Bolest/obrisiBolestAsync/21
+Accept: application/json
+
+### Zaposleni
+
+GET {{WebAPI_HostAddress}}/api/Zaposleni/vratiSveZaposlene
+Accept: application/json
+
+###
+
+GET {{WebAPI_HostAddress}}/api/Zaposleni/vratiZaposleneProdajnogMesta/{{WebAPI_idProdajnogMesta}}
+Accept: application/json
+
+###
+
+GET {{WebAPI_HostAddress}}/api/Zaposleni/vratiZaposlenog/Z002
+Accept: application/json
+
+###
+
+POST {{WebAPI_HostAddress}}/api/Zaposleni/dodajZaposlenog/{{WebAPI_idProdajnogMesta}}
+Content-Type: application/json
+Accept: application/json
+
+{
+    "jedinstveniBroj": "Z011",
+    "ime": "petar",
+    "prezime": "petrovic",
+    "datumRodjenja": "2000-05-28T17:02:30.152Z",
+    "adresa": "Aleksandra Medvedeva 14",
+    "brojTelefona": "0611231234"
+}
+
+###
+
+PUT {{WebAPI_HostAddress}}/api/Zaposleni/izmeniZaposlenog
+Content-Type: application/json
+Accept: application/json
+
+{
+    "jedinstveniBroj": "Z011",
+    "ime": "marko",
+    "prezime": "markovic",
+    "datumRodjenja": "2000-05-28T17:02:30.152Z",
+    "adresa": "Aleksandra Medvedeva 14a",
+    "brojTelefona": "0655125123"
+}
+
+###
+
+DELETE {{WebAPI_HostAddress}}/api/Zaposleni/obrisiZaposlenog/Z011
+Accept: application/json
+
+### Pakovanja
+
+GET {{WebAPI_HostAddress}}/api/Pakovanja/vratiPakovanjaZaLek/Brufen
+Accept: application/json
+
+###
+
+POST {{WebAPI_HostAddress}}/api/Pakovanja/dodajPakovanje/Brufen
+Content-Type: application/json
+Accept: application/json
+
+{
+    "oblik": "Kapsula",
+    "kolicina": 12,
+    "sastav": "225mg Ibuprofena"
+}
+
+###
+
+GET {{WebAPI_HostAddress}}/api/Pakovanja/vratiPakovanjeAsync/42
+Accept: application/json
+
+###
+
+PUT {{WebAPI_HostAddress}}/api/Pakovanja/izmeniPakovanje
+Content-Type: application/json
+Accept: application/json
+
+{
+    "id": 42,
+    "oblik": "Injekcija",
+    "kolicina": 1,
+    "sastav": "500mg Ibuprofena"
+}
+
+###
+
+DELETE {{WebAPI_HostAddress}}/api/Pakovanja/obrisiPakovanjeAsync/41
+Accept: application/json
+
+### Grupa lekova
+
+GET {{WebAPI_HostAddress}}/api/GrupaLekova/vratiSveGrupeLekovaAsync
+Accept: application/json
+
+###
+
+GET {{WebAPI_HostAddress}}/api/GrupaLekova/vratiGrupuLekovaAsync/1
+Accept: application/json
+
+### Indikacije
+GET {{WebAPI_HostAddress}}/api/Indikacije/vratiIndikacijeZaLek/Prozac
+Accept: application/json
+
+###
+
+POST {{WebAPI_HostAddress}}/api/Indikacije/dodajIndikacijuAsync/Prozac/2
+Content-Type: application/json
+Accept: application/json
+
+###
+
+DELETE {{WebAPI_HostAddress}}/api/Indikacije/obrisiIndikacijuAsync/Prozac/2
+Accept: application/json
+
+### Kontraindikacije
+GET {{WebAPI_HostAddress}}/api/Kontraindikacije/vratiKontraindikacijeZaLek/Prozac
+Accept: application/json
+
+###
+
+POST {{WebAPI_HostAddress}}/api/Kontraindikacije/dodajKontraindikacijuAsync/Prozac/2
+Content-Type: application/json
+Accept: application/json
+
+###
+
+DELETE {{WebAPI_HostAddress}}/api/Kontraindikacije/obrisiKontrandikacijuAsync/Prozac/2
+Accept: application/json
+
+### Farmaceut
+
+GET {{WebAPI_HostAddress}}/api/Farmaceut/vratiFarmaceutaAsync/Z002
+Accept: application/json
+
+###
+
+GET {{WebAPI_HostAddress}}/api/Farmaceut/vratiFarmaceuteProdajnogMesta/PM001
+Accept: application/json
+
+###
+
+POST {{WebAPI_HostAddress}}/api/Farmaceut/dodajFarmaceutaAsync/PM001
+Content-Type: application/json
+Accept: application/json
+
+{
+    "jedinstveniBroj": "Z033",
+    "ime": "Petar",
+    "prezime": "Peric",
+    "datumRodjenja": "1989-05-28T19:22:06.816Z",
+    "adresa": "TestAdresa",
+    "brojTelefona": "0651235123",
+    "datumDiplomiranja": "2019-05-28T19:22:06.821Z",
+    "datumObnoveLicence": "2023-05-28T19:22:06.821Z"
+}
+
+###
+
+PUT {{WebAPI_HostAddress}}/api/Farmaceut/izmeniFarmaceuta
+Content-Type: application/json
+Accept: application/json
+
+{
+    "jedinstveniBroj": "Z023",
+    "ime": "Ceda",
+    "prezime": "Cedic",
+    "datumRodjenja": "1989-05-28T19:22:06.816Z",
+    "adresa": "TestAdresa",
+    "brojTelefona": "0651235123",
+    "datumDiplomiranja": "2019-05-28T19:22:06.821Z",
+    "datumObnoveLicence": "2023-05-28T19:22:06.821Z"
+}
+
+###
+
+DELETE {{WebAPI_HostAddress}}/api/Farmaceut/obrisiFarmaceuta/ZAP023
+Accept: application/json
+
+### Recept
+
+GET {{WebAPI_HostAddress}}/api/Recept/vratiRecepteProdajnogMestaAsync/PM001
+Accept: application/json
+
+###
+
+GET {{WebAPI_HostAddress}}/api/Recept/vratiRecepteFarmaceutaAsync/Z002
+Accept: application/json
+
+###
+
+DELETE {{WebAPI_HostAddress}}/api/Recept/obrisiRecept/2
+Accept: application/json
+
+###
+
+POST {{WebAPI_HostAddress}}/api/Recept/dodajReceptAsync/Z002/42
+Content-Type: application/json
+Accept: application/json
+
+{
+    "sifraLekara": "L015",
+    "tip": "Specijalisticki",
+    "kolicina": 1,
+    "datumIzdavanja": "2024-05-28T00:00:00",
+    "datumRealizacije": null
+}
+
+###
+
+GET {{WebAPI_HostAddress}}/api/Recept/vratiReceptAsync/2
+Accept: application/json
+
+###
+
+PUT {{WebAPI_HostAddress}}/api/Recept/izmeniRecept
+Content-Type: application/json
+Accept: application/json
+
+{
+    "serijskiBroj": "21",
+    "sifraLekara": "L016",
+    "tip": "Specijalisticki",
+    "kolicina": 1,
+    "datumIzdavanja": "2024-05-28T00:00:00",
+    "datumRealizacije": null
+}
+
+
+
+
+
+
+
+
+

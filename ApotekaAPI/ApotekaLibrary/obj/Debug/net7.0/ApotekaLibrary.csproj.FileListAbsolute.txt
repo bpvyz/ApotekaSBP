@@ -1,0 +1,25 @@
+C:\Users\B\Desktop\SBP18823-18922\III deo\ApotekaAPI\ApotekaLibrary\obj\Debug\net7.0\ApotekaLibrary.csproj.AssemblyReference.cache
+C:\Users\B\Desktop\SBP18823-18922\III deo\ApotekaAPI\ApotekaLibrary\obj\Debug\net7.0\ApotekaLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\B\Desktop\SBP18823-18922\III deo\ApotekaAPI\ApotekaLibrary\obj\Debug\net7.0\ApotekaLibrary.AssemblyInfoInputs.cache
+C:\Users\B\Desktop\SBP18823-18922\III deo\ApotekaAPI\ApotekaLibrary\obj\Debug\net7.0\ApotekaLibrary.AssemblyInfo.cs
+C:\Users\B\Desktop\SBP18823-18922\III deo\ApotekaAPI\ApotekaLibrary\obj\Debug\net7.0\ApotekaLibrary.csproj.CoreCompileInputs.cache
+C:\Users\B\Desktop\SBP18823-18922\III deo\ApotekaAPI\ApotekaLibrary\obj\Debug\net7.0\ApotekaLibrary.sourcelink.json
+C:\Users\B\Desktop\SBP18823-18922\III deo\ApotekaAPI\ApotekaLibrary\bin\Debug\net7.0\ApotekaLibrary.deps.json
+C:\Users\B\Desktop\SBP18823-18922\III deo\ApotekaAPI\ApotekaLibrary\bin\Debug\net7.0\ApotekaLibrary.dll
+C:\Users\B\Desktop\SBP18823-18922\III deo\ApotekaAPI\ApotekaLibrary\bin\Debug\net7.0\ApotekaLibrary.pdb
+C:\Users\B\Desktop\SBP18823-18922\III deo\ApotekaAPI\ApotekaLibrary\obj\Debug\net7.0\ApotekaLibrary.dll
+C:\Users\B\Desktop\SBP18823-18922\III deo\ApotekaAPI\ApotekaLibrary\obj\Debug\net7.0\refint\ApotekaLibrary.dll
+C:\Users\B\Desktop\SBP18823-18922\III deo\ApotekaAPI\ApotekaLibrary\obj\Debug\net7.0\ApotekaLibrary.pdb
+C:\Users\B\Desktop\SBP18823-18922\III deo\ApotekaAPI\ApotekaLibrary\obj\Debug\net7.0\ref\ApotekaLibrary.dll
+C:\Users\boki\Desktop\Apoteka3\ApotekaAPI\ApotekaLibrary\bin\Debug\net7.0\ApotekaLibrary.deps.json
+C:\Users\boki\Desktop\Apoteka3\ApotekaAPI\ApotekaLibrary\bin\Debug\net7.0\ApotekaLibrary.dll
+C:\Users\boki\Desktop\Apoteka3\ApotekaAPI\ApotekaLibrary\bin\Debug\net7.0\ApotekaLibrary.pdb
+C:\Users\boki\Desktop\Apoteka3\ApotekaAPI\ApotekaLibrary\obj\Debug\net7.0\ApotekaLibrary.csproj.AssemblyReference.cache
+C:\Users\boki\Desktop\Apoteka3\ApotekaAPI\ApotekaLibrary\obj\Debug\net7.0\ApotekaLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\boki\Desktop\Apoteka3\ApotekaAPI\ApotekaLibrary\obj\Debug\net7.0\ApotekaLibrary.AssemblyInfoInputs.cache
+C:\Users\boki\Desktop\Apoteka3\ApotekaAPI\ApotekaLibrary\obj\Debug\net7.0\ApotekaLibrary.AssemblyInfo.cs
+C:\Users\boki\Desktop\Apoteka3\ApotekaAPI\ApotekaLibrary\obj\Debug\net7.0\ApotekaLibrary.csproj.CoreCompileInputs.cache
+C:\Users\boki\Desktop\Apoteka3\ApotekaAPI\ApotekaLibrary\obj\Debug\net7.0\ApotekaLibrary.dll
+C:\Users\boki\Desktop\Apoteka3\ApotekaAPI\ApotekaLibrary\obj\Debug\net7.0\refint\ApotekaLibrary.dll
+C:\Users\boki\Desktop\Apoteka3\ApotekaAPI\ApotekaLibrary\obj\Debug\net7.0\ApotekaLibrary.pdb
+C:\Users\boki\Desktop\Apoteka3\ApotekaAPI\ApotekaLibrary\obj\Debug\net7.0\ref\ApotekaLibrary.dll
